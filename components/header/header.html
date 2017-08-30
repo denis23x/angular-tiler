@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#" ui-sref="home">dev project: tiler</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        <!--<ul class="navbar-nav mr-auto" ng-show="'home' | includedByState">-->
+            <li class="nav-item"><a class="nav-link" href="#">the newest</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">most popular</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">or</a></li>
+            <li class="nav-item">
+                <input class="form-control mr-sm-2 header-input" type="text" placeholder="Search by title" aria-label="Search" ng-model="header.searchText" ng-model-options="{debounce : 300}" ng-change="header.startSearch()">
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#">in category</a></li>
+            <li class="nav-item">
+                <div class="nav-link dropdown">
+                    <span class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">all</span>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">games</a>
+                        <a class="dropdown-item" href="#">sports</a>
+                        <a class="dropdown-item" href="#">politics</a>
+                        <h6 class="dropdown-header">My collections</h6>
+                        <a class="dropdown-item" href="#">my games</a>
+                        <a class="dropdown-item" href="#">my cars</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal">Sign in</a></li>
+            <li class="nav-item" ui-sref-active="active"><a class="nav-link" href="#" ui-sref="about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" ui-sref="users">Log out</a></li>
+        </ul>
+    </div>
+</nav>

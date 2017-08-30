@@ -1,0 +1,18 @@
+<div class="grid-wrap" custom-scroll on-scroll="grid.onScroll()">
+    <div class="dynamic-grid" angular-grid="grid.posts" ag-grid-width="grid.gridWidth" ag-gutter-size="grid.gutterSize"  ag-id="gallery" ag-refresh-on-img-load="true" ag-infinite-scroll="grid.loadMore()">
+        <div class="card grid" data-ng-repeat="post in grid.posts track by $index">
+            <a href="" ui-sref="home.post({id:post.id})">
+                <img class="card-img-top" ng-src="{{post.images.teaser}}" alt="">
+            </a>
+            <div class="card-body">
+                <p class="card-text mb-0">{{post.title}}</p>
+                <p class="card-text mb-0" ng-bind-html="::post.description | unsafe"></p>
+                <p class="card-text mb-0">
+                    <small class="text-muted">{{post.fromNow}}</small>
+                    <!--<small class="text-muted">Posted on : {{post.fromNow}}</small>-->
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<ui-view name="modal" />

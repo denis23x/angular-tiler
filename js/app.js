@@ -3,14 +3,16 @@
     angular.module('app',[
         'ui.router',
         'angularGrid',
-        'ngAnimate'
+        'ngAnimate',
+        'ngSanitize',
+        'pascalprecht.translate'
     ])
     .config(MainConfig)
     .run(MainRun)
     .controller('MainController', MainController);
 
-    MainConfig.$inject = ['$sceDelegateProvider', 'RouterServiceProvider', '$stateProvider', '$locationProvider', '$urlRouterProvider'];
-    function MainConfig($sceDelegateProvider, RouterServiceProvider, $stateProvider, $locationProvider, $urlRouterProvider) {
+    MainConfig.$inject = ['$sceDelegateProvider', 'RouterServiceProvider', '$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', 'TranslateServiceProvider'];
+    function MainConfig($sceDelegateProvider, RouterServiceProvider, $stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, TranslateServiceProvider) {
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode({
             enabled: true,
@@ -28,6 +30,11 @@
             $stateProvider.state(state);
         });
 
+        //  Register languages
+        $translateProvider.useSanitizeValueStrategy('sanitize');
+        $translateProvider.preferredLanguage('en');
+        $translateProvider.translations('ru', TranslateServiceProvider.$get().russianLanguage());
+        $translateProvider.translations('en', TranslateServiceProvider.$get().englishLanguage());
     }
 
     MainRun.$inject = ['$rootScope'];

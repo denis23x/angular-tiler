@@ -8,8 +8,9 @@
                 <p class="card-text mb-0">{{post.title}}</p>
                 <p class="card-text mb-0" ng-bind-html="::post.description | unsafe"></p>
                 <p class="card-text mb-0">
-                    <small class="text-muted">{{post.fromNow}}</small>
-                    <!--<small class="text-muted">Posted on : {{post.fromNow}}</small>-->
+                    <small class="text-muted">Posted on : {{post.created}}</small>
+                    <br>
+                    <small class="text-muted" ng-show="post.created !== post.updated">Updated on : {{post.updated}}</small>
                 </p>
             </div>
         </div>

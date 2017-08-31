@@ -25,7 +25,8 @@
                 obj.actualHeight = 150;
                 obj.actualWidth = 150;
 
-                obj.fromNow = moment(obj.created_at).calendar();
+                obj.created = moment(obj.created_at).calendar();
+                obj.updated = moment(obj.updated_at).calendar();
                 // obj.fromNow = moment(obj.created_at).from();
             });
 

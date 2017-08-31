@@ -29,3 +29,42 @@ body::-webkit-scrollbar-thumb {
 .header-input:-moz-placeholder           {color:#78bdff !important;}/* Firefox 18- */
 .header-input:-ms-input-placeholder      {color:#78bdff !important;}
 
+.auth-input-icon {
+    position: absolute;
+    z-index: 10;
+    padding-top: 0.25rem;
+    padding-left: 0.5rem;
+    color: #868e96;
+}
+.auth-input {
+    font-size: 0.8rem !important;
+    border-radius: .25rem !important;
+    padding-left: 2rem !important;
+}
+.auth-input:focus ~ .auth-input-icon {
+    color: #80bdff;
+}
+.auth-input-error {
+    border-color: #ff717f !important;
+    color: #ff717f !important;
+}
+.auth-input-error ~ .auth-input-icon {
+    color: #ff717f !important;
+}
+.auth-social-icon {
+    padding: 0.25rem;
+    width: 100%;
+    cursor: pointer;
+}
+.auth-required-field {
+    font-size: 0.8rem;
+    padding-right: 0.25rem;
+    opacity: 0.75;
+}
+.auth-required-error {
+    font-size: 0.8rem;
+    opacity: 0.75;
+}
+.auth-agree-rules {
+    font-size: 0.9rem;
+}

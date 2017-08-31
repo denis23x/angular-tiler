@@ -17,6 +17,7 @@
     "angulargrid": "^0.6.5",
     "bootstrap": "^4.0.0-beta",
     "jquery": "^3.2.1",
+    "mdi": "^2.0.46",
     "moment": "^2.18.1",
     "popper.js": "^1.12.5"
   },

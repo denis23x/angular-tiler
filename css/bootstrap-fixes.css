@@ -1,3 +1,11 @@
+.mdi-account-circle:before {
+    font-size: 7rem !important;
+    line-height: normal !important;
+    color: #868e96 !important;
+}
+.btn {
+    cursor: pointer;
+}
 .card {
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
 }

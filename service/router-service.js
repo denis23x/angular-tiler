@@ -15,6 +15,9 @@
             },{
                 name: 'home.post',
                 url: 'post/:id',
+                params: {
+                    type: 'post'
+                },
                 resolve: {
                     post: function (APIService, $stateParams) {
                         return APIService.loadPost($stateParams.id);
@@ -26,6 +29,17 @@
                         bindings: {
                             post: 'post'
                         }
+                    }
+                }
+            },{
+                name: 'home.auth',
+                url: 'auth',
+                params: {
+                    type: 'auth'
+                },
+                views: {
+                    'modal@home': {
+                        component: 'modalComponent'
                     }
                 }
             }

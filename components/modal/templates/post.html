@@ -4,11 +4,11 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="modalWindowTitle">{{modal.post.title}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <img class="modal-close-button" src="../../../img/interface/close-cross.svg" aria-hidden="true">
                 </button>
             </div>
             <div class="modal-body">
-                <img src="{{modal.post.images.normal}}">
+                <img class="post-image" src="{{modal.post.images.normal}}">
                 <p ng-bind-html="::modal.post.description | unsafe"></p>
             </div>
             <div class="modal-footer">

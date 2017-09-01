@@ -5,7 +5,7 @@
         this.getStates = function () {
             var states = [{
                 name: 'home',
-                url: '/',
+                url: '/asd',
                 component: 'gridComponent',
                 resolve: {
                     posts: function (APIService) {
@@ -42,6 +42,14 @@
                         component: 'modalComponent'
                     }
                 }
+            },{
+                name: 'settings',
+                url: '/settings',
+                templateUrl: 'templates/pages/settings.html'
+            },{
+                name: 'about',
+                url: '/',
+                templateUrl: 'templates/pages/about.html'
             }
 
             ];

@@ -1,6 +1,9 @@
 @import "grid-style.css";
 @import "bootstrap-fixes.css";
 
+* {
+    outline: none !important;
+}
 body::-webkit-scrollbar {
     width: 5px;
     background-color: #F7F7F7;
@@ -67,4 +70,43 @@ body::-webkit-scrollbar-thumb {
 }
 .auth-agree-rules {
     font-size: 0.9rem;
+}
+.modal-close-button {
+    width: 1.5rem;
+    cursor: pointer;
+}
+.post-image {
+    width: 100%;
+    padding: 1rem 0rem;
+}
+.about-nav-block {
+    border-right: 1px solid #ddd;
+    background-color: #f8f9fa;
+}
+.about-nav-block .sticky-top {
+    top: 56px;
+}
+.about-nav {
+    padding-right: 0px !important;
+    padding-left: 3rem !important;
+    padding-top: 1.3rem !important;
+}
+.about-nav .nav-link {
+    padding: 0.4rem 0rem;
+    font-size: 0.9rem;
+    color: #818182 !important;
+    transition: all 0.1s ease-out;
+}
+.about-nav .nav-link.active {
+    color: #111 !important;
+}
+.about-text-block {
+    padding: 1.5rem 0rem;
+}
+.about-dev-icons {
+    padding: 1rem 0rem;
+}
+.about-dev-icons img {
+    max-height: 55px;
+    padding: 0.25rem;
 }

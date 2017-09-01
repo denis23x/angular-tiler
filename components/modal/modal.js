@@ -19,45 +19,65 @@
         var modal = this,
             modalElement = jQuery('#modalWindow');
 
-        modal.authView = true;
-        modal.regView = false;
-
-        modal.auth = {
-            email: '',
-            password: ''
-        };
-
-        modal.reg = {
-            name: '',
-            surname: '',
-            email: '',
-            password: '',
-            password_confirmation: '',
-            terms: true
-        };
-
+        //  Show modal on init
         modal.$onInit = function() {
             modalElement.modal('show');
+            console.log(this);
         };
 
+        //  Back state on hidden modal
         modalElement.on('hidden.bs.modal', function (e) {
             $state.go('^');
         });
 
-        modal.authSwitch = function () {
-            modal.authView === true ? modal.authView = false : modal.authView = true;
-            modal.regView === true ? modal.regView = false : modal.regView = true;
+        modal.postHandler = function () {
+
         };
 
-        modal.authUser = function (isValid) {
-            modal.authFormSubmitted = true;
-            console.log(this);
+        modal.authHandler = function () {
+            modal.authView = true;
+            modal.regView = false;
+
+            modal.auth = {
+                email: '',
+                password: ''
+            };
+
+            modal.reg = {
+                name: '',
+                surname: '',
+                email: '',
+                password: '',
+                password_confirmation: '',
+                terms: true
+            };
+
+            modal.authSwitch = function () {
+                modal.authView === true ? modal.authView = false : modal.authView = true;
+                modal.regView === true ? modal.regView = false : modal.regView = true;
+            };
+
+            modal.authUser = function (isValid) {
+                modal.authFormSubmitted = true;
+                // console.log(this);
+            };
+
+            modal.regUser = function(isValid) {
+                modal.regFormSubmitted = true;
+                // console.log(this);
+            };
+
         };
 
-        modal.regUser = function(isValid) {
-            modal.regFormSubmitted = true;
-            console.log(this);
-        };
+        //  Handler division of work by type
+        switch($state.params.type) {
+            case 'post': modal.postHandler();
+                break;
+            case 'auth': modal.authHandler();
+                break;
+            default:
+                break
+        }
 
     }
 

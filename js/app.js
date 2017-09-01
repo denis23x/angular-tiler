@@ -31,7 +31,7 @@
         });
 
         //  Register languages
-        $translateProvider.useSanitizeValueStrategy('sanitize');
+        $translateProvider.useSanitizeValueStrategy('sce');
         $translateProvider.preferredLanguage('en');
         $translateProvider.translations('ru', TranslateServiceProvider.$get().russianLanguage());
         $translateProvider.translations('en', TranslateServiceProvider.$get().englishLanguage());

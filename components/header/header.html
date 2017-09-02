@@ -6,8 +6,14 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
         <!--<ul class="navbar-nav mr-auto" ng-show="'home' | includedByState">-->
-            <li class="nav-item"><a class="nav-link" href="#" translate="header.newest">the newest</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" translate="header.popular">most popular</a></li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" ng-show="!header.reverseNewest" ng-click="header.mostWatches()" translate="header.newest">the newest</a>
+                <a class="nav-link" href="#" ng-show="header.reverseNewest" ng-click="header.mostWatches()" translate="header.oldest">the oldest</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" ng-show="!header.reversePopular" ng-click="header.mostPopular()" translate="header.popular">most popular</a>
+                <a class="nav-link" href="#" ng-show="header.reversePopular" ng-click="header.mostPopular()" translate="header.unpopular">most unpopular</a>
+            </li>
             <li class="nav-item"><a class="nav-link" href="#" translate="header.or">or</a></li>
             <li class="nav-item">
                 <input class="form-control mr-sm-2 header-input" type="text" placeholder="{{ 'header.searchBy' | translate }}" aria-label="Search" ng-model="header.searchText" ng-model-options="{debounce : 300}" ng-change="header.startSearch()">

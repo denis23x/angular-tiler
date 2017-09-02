@@ -38,8 +38,11 @@
     function SettingsController($translate) {
         var settings = this;
 
-        settings.changeLanguage = function (language) {
-            $translate.use(language);
+        settings.availableLang = $translate.getAvailableLanguageKeys();
+        settings.currentLang = $translate.use();
+
+        settings.changeLanguage = function () {
+            $translate.use(settings.currentLang);
         }
 
     }

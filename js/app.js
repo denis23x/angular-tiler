@@ -32,6 +32,7 @@
 
         //  Register languages
         $translateProvider.useSanitizeValueStrategy('sce');
+        $translateProvider.registerAvailableLanguageKeys(['en', 'ru']);
         $translateProvider.preferredLanguage('en');
         $translateProvider.translations('ru', TranslateServiceProvider.$get().russianLanguage());
         $translateProvider.translations('en', TranslateServiceProvider.$get().englishLanguage());

@@ -2,12 +2,14 @@
     <div class="dynamic-grid" angular-grid="grid.posts" ag-grid-width="grid.gridWidth" ag-gutter-size="grid.gutterSize"  ag-id="gallery" ag-refresh-on-img-load="true" ag-infinite-scroll="grid.loadMore()">
         <div class="card grid" data-ng-repeat="post in grid.posts track by $index">
             <a href="" ui-sref="home.post({id:post.id})">
-                <img class="card-img-top" ng-src="{{post.images.teaser}}" alt="">
+                <img class="card-img-top grid-img" ng-src="{{post.images.teaser}}" alt="">
             </a>
             <div class="card-body">
                 <p class="card-text mb-0">{{post.title}}</p>
                 <p class="card-text mb-0" ng-bind-html="::post.description | unsafe"></p>
                 <p class="card-text mb-0">
+                    <p>likes {{post.likes_count}}</p>
+                    <p>views {{post.views_count}}</p>
                     <small class="text-muted">Posted on : {{post.created}}</small>
                     <br>
                     <small class="text-muted" ng-show="post.created !== post.updated">Updated on : {{post.updated}}</small>

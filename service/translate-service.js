@@ -70,9 +70,9 @@
                     header: {
                         logoDesc    : 'dev project: tiler',
                         newest      : 'the newest',
-                        oldest      : 'oldest',
+                        oldest      : 'the oldest',
                         popular     : 'most popular',
-                        unpopular   : 'unpopular',
+                        unpopular   : 'most unpopular',
                         or          : 'or',
                         searchBy    : 'search by title',
                         inCategory  : 'in category',

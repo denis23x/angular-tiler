@@ -1,13 +1,12 @@
-<div class="container-fluid" ng-controller="SettingsController as settings">
+<div class="container" ng-controller="SettingsController as settings">
     <div class="row">
-        <div class="col-3">
-            <h3>Account settings</h3>
-            <li class="nav-item"><a class="nav-link" href="#" ng-click="settings.changeLanguage('ru')">RU</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" ng-click="settings.changeLanguage('en')">ENG</a></li>
-            <select class="custom-select">
-                <option selected="selected">Select language</option>
-                <option value="en">English</option>
-                <option value="ru">Russian</option>
+        <div class="col-12 mt-5">
+            <h3 class="mb-5">Account settings</h3>
+            <span class="mr-4">Interface language: </span>
+            <select class="custom-select" ng-model="settings.currentLang" ng-click="settings.changeLanguage()">
+                <option ng-repeat="language in settings.availableLang" value="{{language}}">
+                    {{language}}
+                </option>
             </select>
         </div>
     </div>

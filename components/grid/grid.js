@@ -25,9 +25,9 @@
                 obj.actualHeight = 150;
                 obj.actualWidth = 150;
 
+                //  TODO: review data output
                 obj.created = moment(obj.created_at).calendar();
                 obj.updated = moment(obj.updated_at).calendar();
-                // obj.fromNow = moment(obj.created_at).from();
             });
 
             imageList = grid.posts;
@@ -37,10 +37,23 @@
         grid.gridWidth = 300;
         grid.gutterSize = 10;
 
+        //  Sorting grid functions
         $rootScope.$on('startSearch', function (event, val) {
             val = val.toLowerCase();
             grid.posts = imageList.filter(function (post) {
                 return post.title.toLowerCase().indexOf(val) != -1;
+            });
+        });
+
+        $rootScope.$on('mostPopular', function (event, reverse) {
+            grid.posts = imageList.sort(function (a, b) {
+                return reverse ? a.likes_count - b.likes_count : b.likes_count - a.likes_count;
+            });
+        });
+
+        $rootScope.$on('mostWatches', function (event, reverse) {
+            grid.posts = imageList.sort(function (a, b) {
+                return reverse ? a.views_count - b.views_count : b.views_count - a.views_count;
             });
         });
 

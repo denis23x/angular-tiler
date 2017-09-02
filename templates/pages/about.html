@@ -1,31 +1,4 @@
-<script>
-    $('body').scrollspy({
-        target: '.about-nav',
-        offset: 75
-    });
-
-    $('.navbar a, .about-dev-icons a').click(function(e) {
-        e.preventDefault();
-        var hash = this.hash;
-        $('html, body').animate({
-            scrollTop: $(hash).offset().top -75
-        }, 300, function () {
-            history.pushState(null, null, hash);
-        });
-    });
-
-    $(document).ready(function() {
-        var hash = window.location.hash;
-        if (hash) {
-            $('html, body').animate({
-                scrollTop: $(hash).offset().top -75
-            }, 300, function () {
-                history.pushState(null, null, hash);
-            });
-        }
-    });
-</script>
-<div class="container-fluid">
+<div class="container-fluid" ng-controller="AboutController as about">
     <div class="row">
         <div class="col col-md-auto about-nav-block d-none d-md-block">
             <div class="sticky-top">
@@ -82,7 +55,7 @@
                     <small class="text-muted">Superheroic JavaScript MVW Framework</small>
                 </h5>
                 <i class="mdi mdi-github-circle"></i>
-                <a href="https://github.com/angular/angular.js">https://github.com/angular/angular.js</a>
+                <a target="_blank" href="https://github.com/angular/angular.js">https://github.com/angular/angular.js</a>
                 <hr>
                 <p>AngularJS lets you write client-side web applications as if you had a smarter browser. It lets you use good old HTML (or HAML, Jade/Pug and friends!) as your template language and lets you extend HTML’s syntax to express your application’s components clearly and succinctly. It automatically synchronizes data from your UI (view) with your JavaScript objects (model) through 2-way data binding. To help you structure your application better and make it easy to test, AngularJS teaches the browser how to do dependency injection and inversion of control.</p>
                 <p>It also helps with server-side communication, taming async callbacks with promises and deferred objects, and it makes client-side navigation and deep linking with hashbang urls or HTML5 pushState a piece of cake. Best of all? It makes development fun!</p>
@@ -106,7 +79,7 @@
                     <small class="text-muted">Most popular framework for building responsive sites</small>
                 </h5>
                 <i class="mdi mdi-github-circle"></i>
-                <a href="https://github.com/twbs/bootstrap">https://github.com/twbs/bootstrap</a>
+                <a target="_blank" href="https://github.com/twbs/bootstrap">https://github.com/twbs/bootstrap</a>
                 <hr>
                 <p>Build responsive, mobile-first projects on the web with the world's most popular front-end component library.</p>
                 <p>Bootstrap is an open source toolkit for developing with HTML, CSS, and JS. Quickly prototype your ideas or build your entire app with our Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful plugins built on jQuery.</p>
@@ -117,7 +90,7 @@
                     <small class="text-muted">The streaming build system</small>
                 </h5>
                 <i class="mdi mdi-github-circle"></i>
-                <a href="https://github.com/gulpjs/gulp/">https://github.com/gulpjs/gulp</a>
+                <a target="_blank" href="https://github.com/gulpjs/gulp/">https://github.com/gulpjs/gulp</a>
                 <hr>
                 <p><b>Automation</b> - gulp is a toolkit that helps you automate painful or time-consuming tasks in your development workflow.</p>
                 <p><b>Platform-agnostic</b> - Integrations are built into all major IDEs and people are using gulp with PHP, .NET, Node.js, Java, and other platforms.</p>

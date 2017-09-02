@@ -5,7 +5,7 @@
         this.getStates = function () {
             var states = [{
                 name: 'home',
-                url: '/asd',
+                url: '/',
                 component: 'gridComponent',
                 resolve: {
                     posts: function (APIService) {
@@ -45,10 +45,12 @@
             },{
                 name: 'settings',
                 url: '/settings',
+                controller: 'SettingsController',
                 templateUrl: 'templates/pages/settings.html'
             },{
                 name: 'about',
-                url: '/',
+                url: '/about',
+                controller: 'AboutController',
                 templateUrl: 'templates/pages/about.html'
             }
 

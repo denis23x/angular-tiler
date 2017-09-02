@@ -52,3 +52,6 @@
     visibility: visible;
     opacity: 1;
 }
+.grid-wrap {
+    padding: 0.5rem;
+}

@@ -1,3 +1,9 @@
+.dropdown-toggle::after {
+    vertical-align: .155em !important;
+}
+.dropdown-toggle {
+    cursor: pointer;
+}
 .mdi-account-circle:before {
     font-size: 7rem !important;
     line-height: normal !important;
@@ -8,4 +14,7 @@
 }
 .card {
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+}
+h6 {
+    font-weight: 400 !important;
 }

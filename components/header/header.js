@@ -8,18 +8,14 @@
     });
 
     // Start header component
-    HeaderController.$inject = ['$rootScope', '$translate'];
-    function HeaderController($rootScope, $translate) {
+    HeaderController.$inject = ['$rootScope'];
+    function HeaderController($rootScope) {
         var header = this;
 
         //  Header search input broadcast value
         header.startSearch = function () {
             $rootScope.$broadcast('startSearch', header.searchText);
         };
-
-        header.change = function (key) {
-            $translate.use(key);
-        }
 
     }
 

@@ -14,10 +14,6 @@ body::-webkit-scrollbar-thumb {
     background-color: #BFBFBF;
 }
 
-.grid-wrap {
-    padding: 0.5rem;
-}
-
 .header-input {
     background: none !important;
     color: white !important;

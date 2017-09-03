@@ -11,6 +11,9 @@
             },
             currentSite: function () {
                 return currentAdress + '/';
+            },
+            apiRoot: function () {
+                return 'http://api.tiler.com/api/' + version + '/';
             }
         };
     }])

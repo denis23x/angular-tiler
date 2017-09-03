@@ -14,8 +14,8 @@
     });
 
     // Start modal component
-    ModalController.$inject = ['$state'];
-    function ModalController($state) {
+    ModalController.$inject = ['$state', 'APIService'];
+    function ModalController($state, APIService) {
 
         var modal = this,
             modalElement = jQuery('#modalWindow');
@@ -73,6 +73,18 @@
 
             modal.regUser = function(isValid) {
                 modal.regFormSubmitted = true;
+
+                if (isValid) {
+                    APIService.registrationUser(modal.reg);
+                } else {
+                    console.log('valid false');
+                }
+
+            };
+
+
+            modal.check = function() {
+                APIService.getUser();
             };
 
         };

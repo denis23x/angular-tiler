@@ -11,18 +11,23 @@
     .run(MainRun)
     .controller('MainController', MainController);
 
-    MainConfig.$inject = ['$sceDelegateProvider', 'RouterServiceProvider', '$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', 'TranslateServiceProvider'];
-    function MainConfig($sceDelegateProvider, RouterServiceProvider, $stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, TranslateServiceProvider) {
+    MainConfig.$inject = ['$sceDelegateProvider', 'RouterServiceProvider', '$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', 'TranslateServiceProvider', '$httpProvider'];
+    function MainConfig($sceDelegateProvider, RouterServiceProvider, $stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, TranslateServiceProvider, $httpProvider) {
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode({
             enabled: true,
             requireBase: true
         });
 
+        // $httpProvider.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8';
+        // $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+        // $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+
         //  Allowed links for API
         $sceDelegateProvider.resourceUrlWhitelist([
             'self',
-            'https://api.dribbble.com/**'
+            'https://api.dribbble.com/**',
+            'http://api.tiler.com/**'
         ]);
 
         //  Register app states

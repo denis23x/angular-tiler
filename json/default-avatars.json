@@ -1,0 +1,15 @@
+[
+  { "name": "Captain America", "image": "captainamerica.png" },
+  { "name": "Batman", "image": "batman.png" },
+  { "name": "Aquaman", "image": "aquaman.png" },
+  { "name": "Captain Marvel", "image": "captainmarvel.png" },
+  { "name": "Dead Pool", "image": "deadpool.png" },
+  { "name": "Flash", "image": "flash.png" },
+  { "name": "Green Lantern", "image": "greenlantern.png" },
+  { "name": "Iron Man", "image": "ironman.png" },
+  { "name": "Robin", "image": "robin.png" },
+  { "name": "Spiderman", "image": "spiderman.png" },
+  { "name": "Superman", "image": "superman.png" },
+  { "name": "Wonder Woman", "image": "wonderwoman.png" },
+  { "name": "The Punisher", "image": "thepunisher.png" }
+]

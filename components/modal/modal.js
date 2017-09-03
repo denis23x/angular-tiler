@@ -6,7 +6,8 @@
             return 'components/modal/templates/' + $stateParams.type + ".html";
         }],
         bindings: {
-            post: '<'
+            post: '<',
+            avatars: '<'
         },
         controller: ('ModalController', ModalController),
         controllerAs: 'modal'
@@ -22,7 +23,6 @@
         //  Show modal on init
         modal.$onInit = function() {
             modalElement.modal('show');
-            console.log(this);
         };
 
         //  Back state on hidden modal
@@ -38,14 +38,24 @@
             modal.authView = true;
             modal.regView = false;
 
+            //  Disable carousel sliding
+            angular.element('#carouselDefaultAvatars').carousel({
+                interval: 0
+            });
+
+            //  Get selected avatar of user
+            angular.element('#carouselDefaultAvatars').on('slide.bs.carousel', function (e) {
+                modal.reg.avatar = e.relatedTarget.attributes.index.value;
+            });
+
             modal.auth = {
                 email: '',
                 password: ''
             };
 
             modal.reg = {
+                avatar: '0',
                 name: '',
-                surname: '',
                 email: '',
                 password: '',
                 password_confirmation: '',
@@ -59,12 +69,10 @@
 
             modal.authUser = function (isValid) {
                 modal.authFormSubmitted = true;
-                // console.log(this);
             };
 
             modal.regUser = function(isValid) {
                 modal.regFormSubmitted = true;
-                // console.log(this);
             };
 
         };

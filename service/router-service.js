@@ -37,9 +37,17 @@
                 params: {
                     type: 'auth'
                 },
+                resolve: {
+                    avatars: function (APIService) {
+                        return APIService.loadDefaultAvatars();
+                    }
+                },
                 views: {
                     'modal@home': {
-                        component: 'modalComponent'
+                        component: 'modalComponent',
+                        bindings: {
+                            post: 'avatars'
+                        }
                     }
                 }
             },{

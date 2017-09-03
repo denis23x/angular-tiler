@@ -39,6 +39,8 @@
                         reg: {
                             header          : 'Регистрация',
                             title           : 'Присоединяйтесь к нам',
+                            isFree          : 'Регистрация бесплатна',
+                            canChange       : 'Вы сможете изменить аватар после регистрации',
                             desc            : 'Введите информацию об учетной записи:',
                             signUp          : 'Зарегистрироваться',
                             getBack         : 'Вернуться к',
@@ -99,6 +101,8 @@
                         reg: {
                             header          : 'Registration',
                             title           : 'Join us!',
+                            isFree          : 'Registration is free',
+                            canChange       : 'you can change default avatar after registration',
                             desc            : 'Enter your account information here:',
                             signUp          : 'Sign Up',
                             getBack         : 'Get back to',

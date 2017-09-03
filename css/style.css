@@ -28,6 +28,23 @@ body::-webkit-scrollbar-thumb {
 .header-input:-moz-placeholder           {color:#78bdff !important;}/* Firefox 18- */
 .header-input:-ms-input-placeholder      {color:#78bdff !important;}
 
+
+.auth-avatar-chevron-prev {
+    color: #868e96 !important;
+    left: -30px !important;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+.auth-avatar-chevron-next {
+    color: #868e96 !important;
+    right: -30px !important;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+.auth-avatar-name {
+    font-size: 0.8rem;
+}
 .auth-input-icon {
     position: absolute;
     z-index: 10;

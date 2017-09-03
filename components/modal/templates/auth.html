@@ -44,22 +44,37 @@
                     <a href="" ng-click="modal.authSwitch()" translate="modal.auth.signUp">Sign up.</a>
                 </div>
                 <div class="col-12 text-center" ng-show="modal.regView">
-                    <i class="mdi mdi-account-circle"></i>
                     <h5 translate="modal.reg.title">Join us!</h5>
-                    <h6 class="text-muted" translate="modal.reg.desc">Enter your account information here:</h6>
-                    <form name="regForm" class="mt-4 w-75 d-inline-block" novalidate>
+                    <h6 class="text-muted mb-4" translate="modal.reg.isFree">Registration is free</h6>
+                    <div class="row justify-content-center">
+                        <div class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                            <div id="carouselDefaultAvatars" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item" ng-class="{'active' : $first}" ng-repeat="avatar in modal.avatars" index={{$index}}>
+                                        <img class="d-block w-100" src="../img/default-avatars/{{avatar.image}}" alt="{{avatar.name}}">
+                                        <span class="auth-avatar-name">{{avatar.name}}</span>
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev auth-avatar-chevron-prev" data-target="#carouselDefaultAvatars" role="button" data-slide="prev">
+                                    <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next auth-avatar-chevron-next" data-target="#carouselDefaultAvatars" role="button" data-slide="next">
+                                    <i class="mdi mdi-chevron-right" aria-hidden="true"></i>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="text-muted d-block auth-required-field"><span class="text-success">*</span> <span translate="modal.reg.canChange">you can change default avatar after registration</span></span>
+                    <h6 class="text-muted mt-5" translate="modal.reg.desc">Enter your account information here:</h6>
+                    <form name="regForm" class="mt-2 w-75 d-inline-block" novalidate>
                         <div class="input-group">
                             <input type="text" class="form-control auth-input" ng-class="{'auth-input-error' : regForm.name.$invalid && regForm.name.$dirty || regForm.name.$invalid && modal.regFormSubmitted}" placeholder="{{ 'modal.reg.inputName' | translate }}" aria-label="Name" name="name" ng-model="modal.reg.name" ng-minlength="2" ng-maxlength="15" required >
                             <i class="auth-input-icon mdi mdi-account"></i>
                         </div>
                         <span ng-show="regForm.name.$invalid && regForm.name.$dirty || regForm.name.$invalid && modal.regFormSubmitted" class="text-danger auth-required-error" translate="modal.reg.inputNameErr">The name field can contain from 2 to 10 characters</span>
                         <span class="text-right text-muted d-block auth-required-field"><span class="text-danger">*</span> <span translate="modal.reg.requiredField">required field</span></span>
-                        <div class="input-group mt-3">
-                            <input type="text" class="form-control auth-input" ng-class="{'auth-input-error' : regForm.surname.$invalid && regForm.surname.$dirty}" placeholder="{{ 'modal.reg.inputSurname' | translate }}" aria-label="Surname or Nickname" name="surname" ng-model="modal.reg.surname" ng-minlength="3" ng-maxlength="20" >
-                            <i class="auth-input-icon mdi mdi-account"></i>
-                        </div>
-                        <span ng-show="regForm.surname.$invalid && regForm.surname.$dirty" class="text-danger auth-required-error" translate="modal.reg.inputSurnameErr">The surname field can contain from 3 to 20 characters</span>
-                        <span class="text-right text-muted d-block auth-required-field"><span class="text-success">*</span> <span translate="modal.reg.optionalField">optional field</span></span>
                         <div class="input-group mt-3">
                             <input type="email" class="form-control auth-input" ng-class="{'auth-input-error' : regForm.email.$invalid && regForm.email.$dirty || regForm.email.$invalid && modal.regFormSubmitted}" placeholder="{{ 'modal.reg.inputEmail' | translate }}" aria-label="Email address" name="email" ng-model="modal.reg.email" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" required >
                             <i class="auth-input-icon mdi mdi-email"></i>

@@ -13,7 +13,7 @@
                 return CommonService.get(EnvironmentService.currentSite() + 'json/default-avatars.json');
             },
             registrationUser: function (data) {
-                return CommonService.post(EnvironmentService.apiRoot() + 'users/', data);
+                return CommonService.post(EnvironmentService.apiRoot() + 'users', data);
             },
             getUser: function () {
                 return CommonService.get('http://api.tiler.com/api/v1/posts');

@@ -4,11 +4,6 @@
 .dropdown-toggle {
     cursor: pointer;
 }
-.mdi-account-circle:before {
-    font-size: 7rem !important;
-    line-height: normal !important;
-    color: #868e96 !important;
-}
 .btn {
     cursor: pointer;
 }
@@ -17,4 +12,7 @@
 }
 h6 {
     font-weight: 400 !important;
+}
+.close:focus, .close:hover {
+    opacity: 1 !important;
 }

@@ -1,0 +1,46 @@
+.animation-fade.ng-hide-add,
+.animation-fade.ng-hide-remove {
+    -webkit-transition:all .5s ease-in-out;
+    -moz-transition:all .5s ease-in-out;
+    -o-transition:all .5s ease-in-out;
+    transition:all .5s ease-in-out;
+}
+
+.animation-fade.ng-hide-add {
+    opacity: 1;
+}
+.animation-fade.ng-hide-add.ng-hide-add-active {
+    opacity: 0;
+    display: none;
+}
+.animation-fade.ng-hide-remove {
+    opacity: 0;
+}
+.animation-fade.ng-hide-remove.ng-hide-remove-active {
+    opacity: 1;
+}
+
+
+[ui-view].ng-enter, [ui-view].ng-leave {
+    -webkit-transition:all .5s ease-in-out;
+    -moz-transition:all .5s ease-in-out;
+    -o-transition:all .5s ease-in-out;
+    transition:all .5s ease-in-out;
+}
+
+[ui-view].ng-enter {
+    opacity: 0;
+}
+
+[ui-view].ng-enter-active {
+    opacity: 1;
+}
+
+[ui-view].ng-leave {
+    opacity: 1;
+}
+
+[ui-view].ng-leave-active {
+    opacity: 0;
+    display: none;
+}

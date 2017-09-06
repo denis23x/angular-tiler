@@ -26,8 +26,7 @@
                 obj.actualWidth = 150;
 
                 //  TODO: review data output
-                obj.created = moment(obj.created_at).calendar();
-                obj.updated = moment(obj.updated_at).calendar();
+                obj.created = moment(obj.created_at).startOf('hour').from();
             });
 
             imageList = grid.posts;

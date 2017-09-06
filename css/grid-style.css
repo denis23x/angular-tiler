@@ -55,3 +55,66 @@
 .grid-wrap {
     padding: 0.5rem;
 }
+.grid-img-wrap {
+    position:relative;
+    cursor: pointer;
+}
+.grid-img-wrap img {
+    width:100%;
+    vertical-align:top;
+}
+.grid-img-wrap:after, .image:before {
+    position:absolute;
+    opacity:0;
+    transition: all 0.5s;
+}
+.grid-img-wrap:after {
+    content:'\A';
+    width:100%; height:100%;
+    top:0; left:0;
+    background:rgba(0,0,0,0.5);
+}
+.grid-author {
+    width: 100%;
+    color: #fff;
+    z-index: 1;
+    top: 0;
+    padding: 4px 10px;
+    text-align: left;
+    position: absolute;
+    opacity: 0;
+    transition: all 0.5s;
+}
+.grid-tags {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    font-size: 0.8rem;
+    padding: 0.5rem;
+}
+.grid-tags-item {
+    color: #fff;
+    z-index: 1;
+    padding: 3px;
+    position: relative;
+    opacity: 0;
+    transition: all 0.5s;
+    display: inline-block;
+    line-height: 1;
+}
+.grid-tags-item:before {
+    content: '#';
+}
+.grid-img-wrap:hover:after, .image:hover:before {
+    opacity:1;
+}
+.grid-img-wrap:hover .grid-author,
+.grid-img-wrap:hover .grid-tags-item {
+    opacity:0.85;
+}
+.grid-title {
+    font-weight: 600;
+}
+.grid-desc {
+    font-weight: 100;
+}

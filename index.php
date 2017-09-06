@@ -33,7 +33,7 @@
 <body ng-app="app">
     <div ng-controller="MainController as main">
         <header-component></header-component>
-        <ui-view ></ui-view>
+        <div ui-view></div>
     </div>
 </body>
 
@@ -51,5 +51,6 @@
 
 <script src="controllers/pages-controllers.js"></script>
 
+<script src="directives/material-ripple-directive.js"></script>
 
 </html>

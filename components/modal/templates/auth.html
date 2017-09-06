@@ -3,15 +3,15 @@
         <div class="modal-content" >
             <div class="modal-header">
                 <h5 class="modal-title" id="modalWindowTitle">
-                    <span ng-show="modal.authView" translate="modal.auth.header">Authorization</span>
-                    <span ng-show="modal.regView" translate="modal.reg.header">Registration</span>
+                    <span class="animation-fade" ng-show="modal.authView" translate="modal.auth.header">Authorization</span>
+                    <span class="animation-fade" ng-show="modal.regView" translate="modal.reg.header">Registration</span>
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <img class="modal-close-button" src="../../../img/interface/close-cross.svg" aria-hidden="true">
                 </button>
             </div>
             <div class="modal-body">
-                <div class="col-12 text-center" ng-show="modal.authView">
+                <div class="col-12 text-center animation-fade" ng-show="modal.authView">
                     <h5 translate="modal.auth.title">Good evening! Welcome back.</h5>
                     <h6 class="text-muted" translate="modal.auth.desc">Sign into your account here:</h6>
                     <form name="authForm" class="mt-4 w-75 d-inline-block">
@@ -27,7 +27,7 @@
                         <span ng-show="authForm.password.$invalid && authForm.password.$dirty || authForm.password.$invalid && modal.authFormSubmitted" class="text-danger auth-required-error" translate="modal.auth.inputPassErr">Incorrect password</span>
                     </form>
                     <h6 class="text-muted mt-4" translate="modal.auth.forgotPass">Forgotten password?</h6>
-                    <button class="mt-3 w-50 btn btn-success" ng-click="modal.authUser(authForm.$valid)" translate="modal.auth.signIn">Sign in</button>
+                    <button class="mt-3 w-50 btn btn-success" material-ripple ng-click="modal.authUser(authForm.$valid)" translate="modal.auth.signIn">Sign in</button>
                     <h6 class="text-muted mt-4">&mdash; <span translate="modal.auth.orContinue">Or continue with</span> &mdash;</h6>
                     <div class="row mt-3">
                         <div class="col-3 col-sm-2 col-md-2 col-lg-2 col-xl-2 ml-auto">
@@ -43,7 +43,7 @@
                     <h6 class="text-muted mt-3 d-inline-block" translate="modal.auth.dontHaveAcc">Don't have an account?</h6>
                     <a href="" ng-click="modal.authSwitch()" translate="modal.auth.signUp">Sign up.</a>
                 </div>
-                <div class="col-12 text-center" ng-show="modal.regView">
+                <div class="col-12 text-center animation-fade" ng-show="modal.regView">
                     <h5 translate="modal.reg.title">Join us!</h5>
                     <h6 class="text-muted mb-4" translate="modal.reg.isFree">Registration is free</h6>
                     <div class="row justify-content-center">
@@ -102,7 +102,7 @@
                             </label>
                         </div>
                     </form>
-                    <button class="mt-4 w-50 btn btn-primary" ng-click="modal.regUser(regForm.$valid)" translate="modal.reg.signUp">Sign up</button>
+                    <button class="mt-4 w-50 btn btn-primary" material-ripple ng-click="modal.regUser(regForm.$valid)" translate="modal.reg.signUp">Sign up</button>
                     <button class="mt-4 w-50 btn btn-primary" ng-click="modal.check()">check it</button>
                     <div>
                         <h6 class="text-muted mt-3 d-inline-block" translate="modal.reg.getBack">Get back to </h6>

@@ -11,17 +11,13 @@
     .run(MainRun)
     .controller('MainController', MainController);
 
-    MainConfig.$inject = ['$sceDelegateProvider', 'RouterServiceProvider', '$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', 'TranslateServiceProvider', '$httpProvider'];
-    function MainConfig($sceDelegateProvider, RouterServiceProvider, $stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, TranslateServiceProvider, $httpProvider) {
+    MainConfig.$inject = ['$sceDelegateProvider', 'RouterServiceProvider', '$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', 'TranslateServiceProvider'];
+    function MainConfig($sceDelegateProvider, RouterServiceProvider, $stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, TranslateServiceProvider) {
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode({
             enabled: true,
             requireBase: true
         });
-
-        // $httpProvider.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8';
-        // $httpProvider.defaults.xsrfCookieName = 'csrftoken';
-        // $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 
         //  Allowed links for API
         $sceDelegateProvider.resourceUrlWhitelist([

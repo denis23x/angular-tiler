@@ -16,13 +16,36 @@
 
                 return w+'x'+h+' > '+size;
             },
+            getBase64: function (url) {
+                var xhr = new XMLHttpRequest();
+                var deferred = $q.defer();
+
+                xhr.open('GET', url, true);
+                xhr.responseType = 'blob';
+                xhr.onload = function (e) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(event) {
+                        deferred.resolve(event.target.result);
+                    };
+
+                    reader.onerror = function() {
+                        deferred.reject(this);
+                    };
+
+                    reader.readAsDataURL(this.response);
+                };
+                xhr.send();
+
+                return deferred.promise;
+            },
             post: function(url, req, cfg) {
                 var deferred = $q.defer();
 
                 $http.post(url, req ? req : {}, cfg ? cfg : {}).then(function(data) {
                     deferred.resolve(data.data);
                 }, function (reason) {
-                    deferred.resolve(reason);
+                    deferred.reject(reason);
                 });
 
                 return deferred.promise;

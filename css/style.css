@@ -14,7 +14,6 @@ body::-webkit-scrollbar {
     width: 5px;
     background-color: #F7F7F7;
 }
-
 body::-webkit-scrollbar-thumb {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #BFBFBF;
@@ -34,6 +33,19 @@ body::-webkit-scrollbar-thumb {
 .header-input:-moz-placeholder           {color:#78bdff !important;}/* Firefox 18- */
 .header-input:-ms-input-placeholder      {color:#78bdff !important;}
 
+.header-user-avatar {
+    width: 36px;
+}
+.header-user-list {
+    display: inline-block;
+    list-style-type: none;
+    padding-left: 0px;
+    font-size: 0.8rem;
+}
+#userDropdown:after {
+    vertical-align: .75em !important;
+    margin-left: 0.5rem !important;
+}
 .auth-avatar-chevron-prev {
     color: #868e96 !important;
     left: -30px !important;
@@ -85,6 +97,15 @@ body::-webkit-scrollbar-thumb {
 .auth-required-error {
     font-size: 0.8rem;
     opacity: 0.75;
+}
+.auth-required-error-server {
+    font-size: 0.8rem;
+    opacity: 0.75;
+}
+.auth-required-error-server > i {
+    font-size: 1.2rem;
+    transform: translate(0px,3px);
+    display: inline-block;
 }
 .auth-agree-rules {
     font-size: 0.9rem;

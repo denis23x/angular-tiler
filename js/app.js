@@ -11,8 +11,8 @@
     .run(MainRun)
     .controller('MainController', MainController);
 
-    MainConfig.$inject = ['$sceDelegateProvider', 'RouterServiceProvider', '$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', 'TranslateServiceProvider'];
-    function MainConfig($sceDelegateProvider, RouterServiceProvider, $stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, TranslateServiceProvider) {
+    MainConfig.$inject = ['$sceDelegateProvider', 'RouterServiceProvider', '$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', 'TranslateServiceProvider', '$httpProvider', 'AuthServiceProvider'];
+    function MainConfig($sceDelegateProvider, RouterServiceProvider, $stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, TranslateServiceProvider, $httpProvider, AuthServiceProvider) {
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode({
             enabled: true,
@@ -31,6 +31,14 @@
             $stateProvider.state(state);
         });
 
+        //  Cache http queries
+        $httpProvider.defaults.cache = true;
+
+        //  Set auth token
+        if (AuthServiceProvider.$get().authenticatedUser()) {
+            $httpProvider.defaults.headers.common['Authorization'] = 'Bearer ' + JSON.parse(localStorage.getItem('auth-token'));
+        }
+
         //  Register languages
         $translateProvider.useSanitizeValueStrategy('sce');
         $translateProvider.registerAvailableLanguageKeys(['en', 'ru']);
@@ -46,9 +54,20 @@
     }
 
     //  TRUE = only if have html directive: ng-controller="mainController as main" - in index.php
-    MainController.$inject = ['$http', '$scope', '$rootScope'];
-    function MainController($http, $scope, $rootScope) {
-        var main = this;
+    MainController.$inject = ['$transitions'];
+    function MainController($transitions) {
+        var main = this,
+            restrictedArea = [
+                'settings'
+            ];
+
+        //  Watch on user auth condition
+        $transitions.onStart({ to: restrictedArea }, function(transition) {
+            var auth = transition.injector().get('AuthService');
+            if (!auth.authenticatedUser()) {
+                return transition.router.stateService.target('home.auth');
+            }
+        });
 
     }
 

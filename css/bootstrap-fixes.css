@@ -1,5 +1,6 @@
 .dropdown-toggle::after {
     vertical-align: .155em !important;
+    margin-left: 0.5rem !important;
 }
 .dropdown-toggle {
     cursor: pointer;
@@ -15,4 +16,7 @@ h6 {
 }
 .close:focus, .close:hover {
     opacity: 1 !important;
+}
+.dropdown-item {
+    font-size: 0.9rem;
 }

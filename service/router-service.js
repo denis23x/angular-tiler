@@ -1,7 +1,6 @@
 (function () {
     'use strict';
     angular.module('app').service('RouterService', function () {
-
         this.getStates = function () {
             var states = [{
                 name: 'home',

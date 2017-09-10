@@ -34,10 +34,25 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a class="nav-link" href="#" translate="header.signIn" ui-sref="home.auth">Sign in</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" ui-sref="settings">Settings</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" ui-sref="about" translate="header.about">About</a></li>
-            <!--<li class="nav-item"><a class="nav-link" href="#" translate="header.logOut">Log out</a></li>-->
+            <li class="nav-item" ng-show="!header.userData"><a class="nav-link" href="#" translate="header.signIn" ui-sref="home.auth">Sign in</a></li>
+            <li class="nav-item" ng-show="!header.userData"><a class="nav-link" href="#" ui-sref="about" translate="header.about">About</a></li>
+            <li class="nav-item dropdown" ng-show="header.userData">
+                <a class="nav-link dropdown-toggle d-inline-block p-0" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="d-inline-block align-text-bottom mr-2 header-user-avatar" ng-src="{{header.userData.avatar}}" alt="{{header.userData.name}}">
+                    <ul class="header-user-list">
+                        <li>{{header.userData.name}}</li>
+                        <li>{{header.userData.email}}</li>
+                    </ul>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right mt-2" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="#" ui-sref="" translate="header.myProfile">My profile</a>
+                    <a class="dropdown-item" href="#" ui-sref="" translate="header.collections">Collections</a>
+                    <a class="dropdown-item" href="#" ui-sref="" translate="header.users">Users</a>
+                    <a class="dropdown-item" href="#" ui-sref="settings" translate="header.settings">Settings</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#" ng-click="header.logOut()" translate="header.logOut">Log out</a>
+                </div>
+            </li>
         </ul>
     </div>
 </nav>

@@ -24,7 +24,6 @@
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <script src="node_modules/moment/min/moment.min.js"></script>
-    <script src="node_modules/moment/locale/ru.js"></script>
 
     <script src="node_modules/angular-translate/dist/angular-translate.min.js"></script>
 
@@ -44,6 +43,7 @@
 <script src="service/environment-service.js"></script>
 <script src="service/router-service.js"></script>
 <script src="service/translate-service.js"></script>
+<script src="service/auth-service.js"></script>
 
 <script src="components/header/header.js"></script>
 <script src="components/grid/grid.js"></script>

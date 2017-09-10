@@ -14,8 +14,8 @@
     });
 
     // Start modal component
-    ModalController.$inject = ['$state', 'APIService'];
-    function ModalController($state, APIService) {
+    ModalController.$inject = ['$state', 'AuthService', 'CommonService'];
+    function ModalController($state, AuthService, CommonService) {
 
         var modal = this,
             modalElement = jQuery('#modalWindow');
@@ -38,14 +38,21 @@
             modal.authView = true;
             modal.regView = false;
 
-            //  Disable carousel sliding
+            //  Disable avatar carousel sliding
             angular.element('#carouselDefaultAvatars').carousel({
                 interval: 0
             });
 
+            //  Convert default avatar to base64
+            CommonService.getBase64(window.location.origin + '/img/default-avatars/captainamerica.png').then(function (response) {
+                modal.reg.avatar = response;
+            });
+
             //  Get selected avatar of user
             angular.element('#carouselDefaultAvatars').on('slide.bs.carousel', function (e) {
-                modal.reg.avatar = e.relatedTarget.attributes.index.value;
+                CommonService.getBase64(angular.element(e.relatedTarget).find('img')[0].src).then(function (response) {
+                    modal.reg.avatar = response;
+                });
             });
 
             modal.auth = {
@@ -54,7 +61,6 @@
             };
 
             modal.reg = {
-                avatar: '0',
                 name: '',
                 email: '',
                 password: '',
@@ -67,24 +73,44 @@
                 modal.regView === true ? modal.regView = false : modal.regView = true;
             };
 
+            modal.authSuccess = function () {
+                modalElement.modal('hide');
+
+                //  TODO: this retrieve transition error
+                modalElement.on('hidden.bs.modal', function (e) {
+                    $state.go('settings');
+                });
+            };
+
             modal.authUser = function (isValid) {
                 modal.authFormSubmitted = true;
+
+                if (isValid) {
+                    AuthService.authorizationUser(modal.auth).then(function (response) {
+                        response.success ? modal.authSuccess() : modal.authFormServerError = response.data;
+                    })
+                }
             };
 
             modal.regUser = function(isValid) {
                 modal.regFormSubmitted = true;
 
                 if (isValid) {
-                    APIService.registrationUser(modal.reg);
-                } else {
-                    console.log('valid false');
+                    AuthService.registrationUser(modal.reg).then(function (response) {
+                        if (response.success) {
+                            modal.firstAuth = {
+                                email : modal.reg.email,
+                                password : modal.reg.password
+                            };
+                            AuthService.authorizationUser(modal.firstAuth).then(function (response) {
+                                response.success ? modal.authSuccess() : $state.go('error');
+                            });
+                        } else {
+                            modal.regFormServerError = response.data.errors;
+                            modal.regFormServerError.takenEmail = modal.reg.email;
+                        }
+                    })
                 }
-
-            };
-
-
-            modal.check = function() {
-                APIService.getUser();
             };
 
         };

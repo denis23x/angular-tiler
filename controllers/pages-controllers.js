@@ -34,17 +34,51 @@
 
     }
 
-    SettingsController.$inject = ['$translate'];
-    function SettingsController($translate) {
+    SettingsController.$inject = ['$translate', 'AuthService', 'CommonService'];
+    function SettingsController($translate, AuthService, CommonService) {
         var settings = this;
+
+        settings.update = JSON.parse(localStorage.getItem('auth-data'));
 
         settings.availableLang = $translate.getAvailableLanguageKeys();
         settings.currentLang = $translate.use();
 
         settings.changeLanguage = function () {
             $translate.use(settings.currentLang);
-        }
+        };
 
+        angular.element('#file2').on('change', function (fileInput) {
+            console.log(fileInput.currentTarget.files[0]);
+            settings.update.avatar = fileInput.currentTarget.files[0];
+        });
+
+        settings.setLinkAvatar = function () {
+            CommonService.getBase64(settings.update.linkAvatar).then(function (response) {
+                settings.update.avatar = response;
+            })
+        };
+
+        settings.updateSettings = function (isValid) {
+            settings.settingsFormSubmitted = true;
+
+            if (isValid) {
+                angular.forEach(settings.update, function(value, key) {
+                    if (value === '' || value === null || value === undefined) {
+                        delete settings.update[key];
+                    }
+                });
+
+                AuthService.updateUserSettings(settings.update.id, settings.update).then(function (response) {
+                    if (response.success) {
+                        settings.updateFormServerSuccess = true;
+                        settings.update = JSON.parse(localStorage.getItem('auth-data'));
+                    } else {
+                        console.log(response);
+                        settings.updateFormServerError = response.data;
+                    }
+                })
+            }
+        }
     }
 
 })();

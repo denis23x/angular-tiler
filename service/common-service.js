@@ -16,28 +16,46 @@
 
                 return w+'x'+h+' > '+size;
             },
-            getBase64: function (url) {
-                var xhr = new XMLHttpRequest();
-                var deferred = $q.defer();
+            getBase64: function (url, file) {
+                if (file) {
+                    var deferred = $q.defer(),
+                        reader = new FileReader();
 
-                xhr.open('GET', url, true);
-                xhr.responseType = 'blob';
-                xhr.onload = function (e) {
-                    var reader = new FileReader();
-
-                    reader.onload = function(event) {
-                        deferred.resolve(event.target.result);
+                    reader.onload = function(file) {
+                        deferred.resolve(file.target.result);
                     };
 
                     reader.onerror = function() {
-                        deferred.reject(this);
+                        deferred.reject(file);
                     };
 
-                    reader.readAsDataURL(this.response);
-                };
-                xhr.send();
+                    reader.readAsDataURL(file);
 
-                return deferred.promise;
+                    return deferred.promise;
+                } else {
+                    var xhr = new XMLHttpRequest(),
+                        deferred = $q.defer(),
+                        proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+
+                    xhr.open('GET', proxyUrl + url, true);
+                    xhr.responseType = 'blob';
+                    xhr.onload = function (e) {
+                        var reader = new FileReader();
+
+                        reader.onload = function(event) {
+                            deferred.resolve(event.target.result);
+                        };
+
+                        reader.onerror = function() {
+                            deferred.reject(this);
+                        };
+
+                        reader.readAsDataURL(this.response);
+                    };
+                    xhr.send();
+
+                    return deferred.promise;
+                }
             },
             post: function(url, req, cfg) {
                 var deferred = $q.defer();

@@ -25,7 +25,7 @@
             </div>
 
             <div class="input-group mt-3">
-                <input type="text" class="form-control auth-input" ng-class="{'auth-input-error' : settingsForm.name.$invalid && settingsForm.name.$dirty || settingsForm.name.$invalid && settings.settingsFormSubmitted}" placeholder="{{ 'settings.linkAvatar' | translate }}" aria-label="Avatar" name="avatar" ng-change="settings.setLinkAvatar()" ng-model="settings.update.linkAvatar" >
+                <input type="text" class="form-control auth-input" ng-class="{'auth-input-error' : ''}" placeholder="{{ 'settings.linkAvatar' | translate }}" aria-label="Avatar" name="avatar" ng-change="settings.setAvatarByLink()" ng-model="settings.avatarLink" >
                 <i class="auth-input-icon mdi mdi-link"></i>
             </div>
 

@@ -48,12 +48,13 @@
         };
 
         angular.element('#file2').on('change', function (fileInput) {
-            console.log(fileInput.currentTarget.files[0]);
-            settings.update.avatar = fileInput.currentTarget.files[0];
+            CommonService.getBase64(false, fileInput.currentTarget.files[0]).then(function (response) {
+                settings.update.avatar = response;
+            });
         });
 
-        settings.setLinkAvatar = function () {
-            CommonService.getBase64(settings.update.linkAvatar).then(function (response) {
+        settings.setAvatarByLink = function () {
+            CommonService.getBase64(settings.avatarLink).then(function (response) {
                 settings.update.avatar = response;
             })
         };

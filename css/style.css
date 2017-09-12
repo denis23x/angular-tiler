@@ -152,7 +152,21 @@ body::-webkit-scrollbar-thumb {
 }
 
 
-
+.settings-page-header {
+    font-size: 2rem !important;
+}
+.settings-avatar {
+    max-width: 50px;
+    margin-right: 1rem;
+}
+.settings-item-title {
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+}
+.settings-item-description {
+    font-size: 0.75rem !important;
+    font-weight: 400 !important;
+}
 
 
 

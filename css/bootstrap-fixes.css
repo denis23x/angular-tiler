@@ -20,3 +20,6 @@ h6 {
 .dropdown-item {
     font-size: 0.9rem;
 }
+.lead {
+    font-size: x-large !important;
+}

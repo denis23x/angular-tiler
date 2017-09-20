@@ -14,6 +14,9 @@
             },
             apiRoot: function () {
                 return 'http://api.tiler.com/api/' + version + '/';
+            },
+            socialRegistrationPath: function (key) {
+                return 'http://api.tiler.com/api/' + version + '/auth/' + key + '?callback_url=http://tiler/auth';
             }
         };
     }])

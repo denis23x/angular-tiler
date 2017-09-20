@@ -42,7 +42,7 @@
         //  Register languages
         $translateProvider.useSanitizeValueStrategy('sce');
         $translateProvider.registerAvailableLanguageKeys(['en', 'ru']);
-        $translateProvider.preferredLanguage('en');
+        $translateProvider.preferredLanguage('ru');
         $translateProvider.translations('ru', TranslateServiceProvider.$get().russianLanguage());
         $translateProvider.translations('en', TranslateServiceProvider.$get().englishLanguage());
     }
@@ -54,8 +54,8 @@
     }
 
     //  TRUE = only if have html directive: ng-controller="mainController as main" - in index.php
-    MainController.$inject = ['$transitions'];
-    function MainController($transitions) {
+    MainController.$inject = ['$transitions', '$rootScope', '$http'];
+    function MainController($transitions, $rootScope, $http) {
         var main = this,
             restrictedArea = [
                 'settings'
@@ -69,6 +69,10 @@
             }
         });
 
+        //  Catch if user login and set headers
+        $rootScope.$on('userAuthenticated', function () {
+            $http.defaults.headers.common['Authorization'] = 'Bearer ' + JSON.parse(localStorage.getItem('auth-token'));
+        });
     }
 
 

@@ -1,46 +1,28 @@
-.animation-fade.ng-hide-add,
-.animation-fade.ng-hide-remove {
-    -webkit-transition:all .5s ease-in-out;
-    -moz-transition:all .5s ease-in-out;
-    -o-transition:all .5s ease-in-out;
-    transition:all .5s ease-in-out;
-}
+/* Animation for forms input */
 
-.animation-fade.ng-hide-add {
-    opacity: 1;
+.invalid-feedback.ng-hide-remove,
+.auth-error-server.ng-hide-remove,
+.reg-error-server.ng-hide-remove {
+    animation: bounceIn 0.7s;
 }
-.animation-fade.ng-hide-add.ng-hide-add-active {
-    opacity: 0;
+.invalid-feedback.ng-hide-add,
+.auth-error-server.ng-hide-add,
+.reg-error-server.ng-hide-add {
+    animation: zoomOut 0.5s;
+}
+.modal-view.ng-hide-remove,
+.modal-view-header.ng-hide-remove,
+.settings-view.ng-hide-remove {
+    animation: fadeIn 0.5s;
+}
+.modal-view.ng-hide-add,
+.modal-view-header.ng-hide-add,
+.settings-view.ng-hide-add {
     display: none;
 }
-.animation-fade.ng-hide-remove {
-    opacity: 0;
-}
-.animation-fade.ng-hide-remove.ng-hide-remove-active {
-    opacity: 1;
-}
-
-
-[ui-view].ng-enter, [ui-view].ng-leave {
-    -webkit-transition:all .5s ease-in-out;
-    -moz-transition:all .5s ease-in-out;
-    -o-transition:all .5s ease-in-out;
-    transition:all .5s ease-in-out;
-}
-
 [ui-view].ng-enter {
-    opacity: 0;
+    animation: fadeIn 0.5s;
 }
-
-[ui-view].ng-enter-active {
-    opacity: 1;
-}
-
 [ui-view].ng-leave {
-    opacity: 1;
-}
-
-[ui-view].ng-leave-active {
-    opacity: 0;
     display: none;
 }

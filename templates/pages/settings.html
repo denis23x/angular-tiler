@@ -7,227 +7,173 @@
                 </div>
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center">
                     <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-light active">
-                            <input type="radio" name="options" id="option1" autocomplete="off" checked>
-                            General
+                        <label class="btn btn-light active" ng-click="settings.utils.view = 'general'">
+                            <input type="radio" name="options" id="option1" autocomplete="off" checked >
+                            <span translate="settings.tabGeneral">General</span>
                         </label>
-                        <label class="btn btn-light">
+                        <label class="btn btn-light" ng-click="settings.utils.view = 'privacy'">
                             <input type="radio" name="options" id="option2" autocomplete="off">
-                            Privacy
+                            <span translate="settings.tabPrivacy">Privacy</span>
                         </label>
                     </div>
                 </div>
             </div>
-            <hr>
-            <div class="row px-3">
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <img class="d-inline-block settings-avatar" ng-src="{{settings.update.avatar}}" alt="{{settings.update.name}}">
-                    <div class="d-inline-block align-middle">
-                        <div class="lead settings-item-title">Profile avatar</div>
-                        <div class="lead text-muted settings-item-description">You can change avatar by link or from file</div>
+            <form class="container settings-view" name="settingsForm" ng-show="settings.utils.view === 'general'">
+                <hr>
+                <div class="row px-3">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="base64-image-wrapper">
+                            <img class="img-thumbnail d-inline-block settings-avatar" ng-src="{{settings.update.avatar}}" alt="{{settings.update.name}}">
+                            <div class="base64-image-wrapper-loader animation-fade" ng-show="settings.utils.base64Loader">
+                                <div class="base64-image-wrapper-loader-inside">
+                                    <i class="mdi mdi-loading rotating-spinner"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-inline-block align-middle">
+                            <div class="lead settings-item-title" translate="settings.titleAvatar">User avatar</div>
+                            <div class="lead text-muted settings-item-description" translate="settings.descAvatar">You can change avatar by link or from file</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="row px-3 mt-3">
+                            <input image-base64 type="text" class="form-control default-input col-xl-7" ng-class="{'is-invalid' : settings.utils.base64Error}" placeholder="{{ 'settings.linkAvatar' | translate }}" aria-label="Avatar Link" name="avatarLink" ng-model="settings.utils.linkAvatar" result="settings.update.avatar" loader="settings.utils.base64Loader" error="settings.utils.base64Error" ng-disabled="settings.utils.base64Loader">
+                            <i class="default-input-icon mdi mdi-link"></i>
+                            <button type="button" class="col-xl-5 btn btn-sm btn-link" onclick="document.getElementById('inputFileImg').click()" translate="settings.fileAvatar">Select file</button>
+                            <input image-base64 type="file" id="inputFileImg" accept="image/x-png,image/gif,image/jpeg" aria-label="Avatar File" name="avatarFile" ng-model="settings.utils.base64File" result="settings.update.avatar" error="settings.utils.base64Error" hidden>
+                            <div ng-show="settings.utils.base64Error" class="invalid-feedback ml-3">{{settings.utils.base64Error}}</div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center">
-                    <div class="input-group mt-3">
-                        <input type="text" class="form-control auth-input" ng-class="{'auth-input-error' : ''}" placeholder="{{ 'settings.linkAvatar' | translate }}" aria-label="Avatar" name="avatar" ng-change="settings.setAvatarByLink()" ng-model="settings.avatarLink" >
-                        <i class="auth-input-icon mdi mdi-link"></i>
-                        <button class="btn btn-sm btn-link ml-3">Select file</button>
+                <hr>
+                <div class="row px-3">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="lead settings-item-title" translate="settings.titleRegion">Region: </div>
+                        <div class="lead text-muted settings-item-description" translate="settings.descRegion">Changes search results to be region specific</div>
                     </div>
-                    <!--<div class="input-group">-->
-                        <!--<label class="custom-file">-->
-                            <!--<input type="file" id="file2" class="custom-file-input" ng-model="settings.update.fileAvatar">-->
-                            <!--<span class="custom-file-control"></span>-->
-                        <!--</label>-->
-                    <!--</div>-->
-                </div>
-            </div>
-            <hr>
-            <div class="row px-3">
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="lead settings-item-title">Region: </div>
-                    <div class="lead text-muted settings-item-description">Changes results to be region specific</div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center">
-                    <div class="input-group mt-1">
-                        <select class="custom-select" ng-model="settings.currentLang" ng-click="settings.changeLanguage()">
-                            <option ng-repeat="language in settings.availableLang" value="{{language}}">
-                                {{language}}
-                            </option>
-                        </select>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center">
+                        <div class="input-group mt-1">
+                            <select class="custom-select">
+                                <option value="">Kazakhstan</option>
+                                <option value="">Russia</option>
+                                <option value="">Other..</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row px-3 mt-4">
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="lead settings-item-title" translate="settings.interfaceLang">Interface language: </div>
-                    <div class="lead text-muted settings-item-description">You can choose you native language</div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center">
-                    <div class="input-group mt-1">
-                        <select class="custom-select" ng-model="settings.currentLang" ng-click="settings.changeLanguage()">
-                            <option ng-repeat="language in settings.availableLang" value="{{language}}">
-                            {{language}}
-                            </option>
-                        </select>
+                <div class="row px-3 mt-4">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="lead settings-item-title" translate="settings.titleLanguage">Interface language: </div>
+                        <div class="lead text-muted settings-item-description" translate="settings.descLanguage">You can choose you native language</div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center">
+                        <div class="input-group mt-1">
+                            <select class="custom-select" ng-model="settings.currentLang" ng-click="settings.changeLanguage()">
+                                <option ng-repeat="language in settings.availableLang" value="{{language}}">
+                                {{language === 'ru' ? 'Русский' : 'English'}}
+                                </option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <hr>
-            <div class="row px-3">
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="lead settings-item-title">Name</div>
-                    <div class="lead text-muted settings-item-description">Change username of account</div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center">
-                    <div class="input-group mt-1">
-                        <input type="text" class="form-control auth-input" ng-class="{'auth-input-error' : settingsForm.name.$invalid && settingsForm.name.$dirty || settingsForm.name.$invalid && settings.settingsFormSubmitted}" placeholder="{{ 'settings.inputName' | translate }}" aria-label="Name" name="name" ng-model="settings.update.name" ng-minlength="2" ng-maxlength="15" >
-                        <i class="auth-input-icon mdi mdi-account"></i>
+                <hr>
+                <div class="row px-3">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="lead settings-item-title" translate="settings.titleName">Name</div>
+                        <div class="lead text-muted settings-item-description" translate="settings.descName">Change username of account</div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="row px-3 mt-1">
+                            <input type="text" class="form-control default-input" ng-class="{'is-invalid' : settingsForm.name.$invalid && settingsForm.name.$dirty || settingsForm.name.$invalid && settings.settingsFormSubmitted || settings.settingsFormSubmitted && settings.updateFormServerError && settings.updateFormServerErrorMessage.name}" placeholder="{{ 'settings.inputName' | translate }}" aria-label="Name" name="name" ng-model="settings.update.name" ng-minlength="2" ng-maxlength="15" required >
+                            <i class="default-input-icon mdi mdi-account"></i>
+                            <div ng-show="settingsForm.name.$invalid && settingsForm.name.$dirty || settingsForm.name.$invalid && settings.settingsFormSubmitted" class="invalid-feedback ml-3" translate="settings.inputNameErr">The name field can contain from 2 to 10 characters</div>
+                            <div ng-show="settings.settingsFormSubmitted && settings.updateFormServerError && settings.updateFormServerErrorMessage.name" class="invalid-feedback ml-3 d-block">{{settings.updateFormServerErrorMessage.name[0]}}</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row px-3 mt-4">
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="lead settings-item-title">Surname</div>
-                    <div class="lead text-muted settings-item-description">You can specify personal surname or nickname</div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center">
-                    <div class="input-group mt-1">
-                        <input type="text" class="form-control auth-input" ng-class="{'auth-input-error' : settingsForm.surname.$invalid && settingsForm.surname.$dirty || settingsForm.surname.$invalid && settings.settingsFormSubmitted}" placeholder="{{ 'settings.inputSurname' | translate }}" aria-label="Surname" name="surname" ng-model="settings.update.surname" ng-minlength="3" ng-maxlength="20" >
-                        <i class="auth-input-icon mdi mdi-account"></i>
+                <div class="row px-3 mt-4">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="lead settings-item-title" translate="settings.titleSurname">Surname</div>
+                        <div class="lead text-muted settings-item-description" translate="settings.descSurname">You can specify self surname or nickname</div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="row px-3 mt-1">
+                            <input type="text" class="form-control default-input" ng-class="{'is-invalid' : settingsForm.surname.$invalid && settingsForm.surname.$dirty || settingsForm.surname.$invalid && settings.settingsFormSubmitted || settings.settingsFormSubmitted && settings.updateFormServerError && settings.updateFormServerErrorMessage.surname}" placeholder="{{ 'settings.inputSurname' | translate }}" aria-label="Surname" name="surname" ng-model="settings.update.surname" ng-minlength="3" ng-maxlength="20" >
+                            <i class="default-input-icon mdi mdi-account"></i>
+                            <div ng-show="settingsForm.surname.$invalid && settingsForm.surname.$dirty || settingsForm.surname.$invalid && settings.settingsFormSubmitted" class="invalid-feedback ml-3" translate="settings.inputSurnameErr">The surname field can contain from 2 to 10 characters</div>
+                            <div ng-show="settings.settingsFormSubmitted && settings.updateFormServerError && settings.updateFormServerErrorMessage.surname" class="invalid-feedback ml-3 d-block">{{settings.updateFormServerErrorMessage.surname[0]}}</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <hr>
-            <div class="row px-3">
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="lead settings-item-title">Email</div>
-                    <div class="lead text-muted settings-item-description">You can change authorization email</div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center">
-                    <div class="input-group mt-1">
-                        <input type="text" class="form-control auth-input" ng-class="{'auth-input-error' : settingsForm.surname.$invalid && settingsForm.surname.$dirty || settingsForm.surname.$invalid && settings.settingsFormSubmitted}" placeholder="{{ 'settings.inputSurname' | translate }}" aria-label="Surname" name="surname" ng-model="settings.update.surname" ng-minlength="3" ng-maxlength="20" >
-                        <i class="auth-input-icon mdi mdi-account"></i>
+                <hr>
+                <div class="row px-3">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="lead settings-item-title" translate="settings.titleEmail">Email</div>
+                        <div class="lead text-muted settings-item-description" translate="settings.descEmail">You can change authorization email</div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="row px-3 mt-1">
+                            <input type="email" class="form-control default-input" ng-class="{'is-invalid' : settingsForm.email.$invalid && settingsForm.email.$dirty || settingsForm.email.$invalid && settings.settingsFormSubmitted || settings.settingsFormSubmitted && settings.updateFormServerError && settings.updateFormServerErrorMessage.email}" placeholder="{{ 'settings.inputEmail' | translate }}" aria-label="Email address" name="email" ng-model="settings.update.email" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" required >
+                            <i class="default-input-icon mdi mdi-email"></i>
+                            <div ng-show="settingsForm.email.$invalid && settingsForm.email.$dirty || settingsForm.email.$invalid && settings.settingsFormSubmitted" class="invalid-feedback ml-3" translate="settings.inputEmailErr">The email field must have a valid email</div>
+                            <div ng-show="settings.settingsFormSubmitted && settings.updateFormServerError && settings.updateFormServerErrorMessage.email" class="invalid-feedback ml-3 d-block">{{settings.updateFormServerErrorMessage.email[0]}}</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row px-3 mt-4">
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="lead settings-item-title">Password</div>
-                    <div class="lead text-muted settings-item-description">Change you password</div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center">
-                    <div class="input-group mt-1">
-                        <input type="text" class="form-control auth-input" ng-class="{'auth-input-error' : settingsForm.surname.$invalid && settingsForm.surname.$dirty || settingsForm.surname.$invalid && settings.settingsFormSubmitted}" placeholder="{{ 'settings.inputSurname' | translate }}" aria-label="Surname" name="surname" ng-model="settings.update.surname" ng-minlength="3" ng-maxlength="20" >
-                        <i class="auth-input-icon mdi mdi-account"></i>
+                <div class="row px-3 mt-4">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="lead settings-item-title" translate="settings.titlePassword">Password</div>
+                        <div class="lead text-muted settings-item-description" translate="settings.descPassword">Change your password</div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="row px-3 mt-1">
+                            <input type="password" class="form-control default-input" ng-class="{'is-invalid' : settingsForm.password.$invalid && settingsForm.password.$dirty || settingsForm.password.$invalid && settings.settingsFormSubmitted || settings.settingsFormSubmitted && settings.updateFormServerError && settings.updateFormServerErrorMessage.password}" placeholder="{{ 'settings.inputPass' | translate }}" aria-label="Password" name="password" ng-model="settings.update.password" ng-minlength="4" >
+                            <i class="default-input-icon mdi mdi-lock"></i>
+                            <div ng-show="settingsForm.password.$invalid && settingsForm.password.$dirty || settingsForm.password.$invalid && settings.settingsFormSubmitted" class="invalid-feedback ml-3" translate="settings.inputPassErr">The password field is required</div>
+                            <div ng-show="settings.settingsFormSubmitted && settings.updateFormServerError && settings.updateFormServerErrorMessage.password" class="invalid-feedback ml-3 d-block">{{settings.updateFormServerErrorMessage.password[0]}}</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row px-3 mt-4">
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <div class="lead settings-item-title">Confirm password</div>
-                    <div class="lead text-muted settings-item-description">You can specify personal surname or nickname</div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center">
-                    <div class="input-group mt-1">
-                        <input type="text" class="form-control auth-input" ng-class="{'auth-input-error' : settingsForm.surname.$invalid && settingsForm.surname.$dirty || settingsForm.surname.$invalid && settings.settingsFormSubmitted}" placeholder="{{ 'settings.inputSurname' | translate }}" aria-label="Surname" name="surname" ng-model="settings.update.surname" ng-minlength="3" ng-maxlength="20" >
-                        <i class="auth-input-icon mdi mdi-account"></i>
+                <div class="row px-3 mt-4">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="lead settings-item-title" translate="settings.titleConfirmPass">Confirm password</div>
+                        <div class="lead text-muted settings-item-description" translate="settings.descConfirmPass">Please enter your password again</div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="row px-3 mt-1">
+                            <input type="password" class="form-control default-input" ng-class="{'is-invalid' : settingsForm.password.$dirty && settings.update.password_confirmation !== settings.update.password && settings.update.password.length > 0 || settings.settingsFormSubmitted && settingsForm.password.$touched && settings.update.password_confirmation !== settings.update.password || settings.settingsFormSubmitted && settings.updateFormServerError && settings.updateFormServerErrorMessage.password_confirmation}" placeholder="{{ 'settings.inputConfPass' | translate }}" aria-label="Confirm password" name="password_confirmation" ng-model="settings.update.password_confirmation" >
+                            <i class="default-input-icon mdi mdi-lock"></i>
+                            <div ng-show="settingsForm.password.$dirty && settings.update.password_confirmation !== settings.update.password && settings.update.password.length > 0 || settings.settingsFormSubmitted && settingsForm.password.$touched && settings.update.password_confirmation !== settings.update.password" class="invalid-feedback ml-3" translate="settings.inputConfPassErr">Password confirmation does not match</div>
+                            <div ng-show="settings.settingsFormSubmitted && settings.updateFormServerError && settings.updateFormServerErrorMessage.password_confirmation" class="invalid-feedback ml-3 d-block">{{settings.updateFormServerErrorMessage.password_confirmation[0]}}</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <hr>
-            <div class="row px-3">
-                <div class="col-12 text-center">
-                    <div class="lead settings-item-title">Apply setting</div>
-                    <div class="lead text-muted settings-item-description">For apply new settings you will need enter a current password</div>
-                    <div class="input-group w-25 mx-auto my-3">
-                        <input type="text" class="form-control auth-input" ng-class="{'auth-input-error' : settingsForm.surname.$invalid && settingsForm.surname.$dirty || settingsForm.surname.$invalid && settings.settingsFormSubmitted}" placeholder="{{ 'settings.inputSurname' | translate }}" aria-label="Surname" name="surname" ng-model="settings.update.surname" ng-minlength="3" ng-maxlength="20" >
-                        <i class="auth-input-icon mdi mdi-account"></i>
+                <hr>
+                <div class="row px-3">
+                    <div class="col-12 text-center">
+                        <div class="lead settings-item-title" translate="settings.titleApply">Apply settings</div>
+                        <small><span class="text-danger">* <span class="text-muted" translate="settings.descApply">for update settings you must enter current password</span></span></small>
+                        <div class="row px-3 col-xl-4 mx-auto mt-3">
+                            <input type="password" class="form-control default-input" ng-class="{'is-invalid' : settingsForm.current_password.$invalid && settingsForm.current_password.$dirty && !settings.updateFormServerSuccess || settingsForm.current_password.$invalid && settings.settingsFormSubmitted && !settings.updateFormServerSuccess || settings.settingsFormSubmitted && settings.updateFormServerError && settings.updateFormServerErrorMessage.current_password}" placeholder="{{ 'settings.inputCurrPass' | translate }}" aria-label="Current Password" name="current_password" ng-model="settings.update.current_password" ng-minlength="4" required >
+                            <i class="default-input-icon mdi mdi-lock-open"></i>
+                            <div ng-show="settingsForm.current_password.$invalid && settingsForm.current_password.$dirty && !settings.updateFormServerSuccess || settingsForm.current_password.$invalid && settings.settingsFormSubmitted && !settings.updateFormServerSuccess" class="invalid-feedback" translate="settings.inputCurrPassErr">Password length at least 4 characters</div>
+                        </div>
+                        <div ng-show="settings.settingsFormSubmitted && settings.updateFormServerError" class="text-center invalid-feedback d-block">
+                            <i class="mdi mdi-account-alert"></i>
+                            <span ng-show="settings.updateFormServerErrorMessage.current_password">{{settings.updateFormServerErrorMessage.current_password[0]}}</span>
+                            <span ng-show="!settings.updateFormServerErrorMessage.current_password" translate="settings.updateError">Update error</span><span>{{settings.updateFormServerError}}</span>
+                        </div>
+                        <div ng-show="settings.settingsFormSubmitted && settings.updateFormServerSuccess" class="text-center text-success">
+                            <i class="mdi mdi-check-circle-outline"></i>
+                            <small translate="settings.updateSuccess">Settings successfully updated</small>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-warning my-3" ng-click="settings.updateSettings(settingsForm.$valid)" translate="settings.updateSettings">Confirm</button>
                     </div>
-                    <button type="button" class="btn btn-sm btn-warning mb-5">Confirm settings</button>
                 </div>
-            </div>
-            <!--<p ng-show="settings.settingsFormSubmitted && settings.updateFormServerError" class="text-danger" translate="settings.invalidData">The given data was invalid</p>-->
-            <!--<p ng-show="settings.settingsFormSubmitted && settings.updateFormServerSuccess" class="text-success" translate="settings.updateSuccess">Settings successfully updated</p>-->
-
-            <!--<img class="d-block w-25" ng-src="{{settings.update.avatar}}" alt="{{settings.update.name}}">-->
-
-            <!--<div class="input-group mt-3">-->
-                <!--<label class="custom-file">-->
-                    <!--<input type="file" id="file2" class="custom-file-input" ng-model="settings.update.fileAvatar">-->
-                    <!--<span class="custom-file-control"></span>-->
-                <!--</label>-->
-            <!--</div>-->
-
-            <!--<div class="input-group mt-3">-->
-                <!--<input type="text" class="form-control auth-input" ng-class="{'auth-input-error' : ''}" placeholder="{{ 'settings.linkAvatar' | translate }}" aria-label="Avatar" name="avatar" ng-change="settings.setAvatarByLink()" ng-model="settings.avatarLink" >-->
-                <!--<i class="auth-input-icon mdi mdi-link"></i>-->
-            <!--</div>-->
-
-
-
-
-
-
-            <!--<form name="settingsForm" class="mt-2 w-75 d-inline-block text-center" novalidate>-->
-
-
-                <!--<div class="input-group mt-3">-->
-                    <!--<input type="text" class="form-control auth-input" ng-class="{'auth-input-error' : settingsForm.name.$invalid && settingsForm.name.$dirty || settingsForm.name.$invalid && settings.settingsFormSubmitted}" placeholder="{{ 'settings.inputName' | translate }}" aria-label="Name" name="name" ng-model="settings.update.name" ng-minlength="2" ng-maxlength="15" >-->
-                    <!--<i class="auth-input-icon mdi mdi-account"></i>-->
-                <!--</div>-->
-                <!--<span ng-show="settingsForm.name.$invalid && settingsForm.name.$dirty || settingsForm.name.$invalid && settings.settingsFormSubmitted" class="text-danger auth-required-error" translate="settings.inputNameErr">The name field can contain from 2 to 10 characters</span>-->
-                <!--<div class="input-group mt-3">-->
-                    <!--<input type="text" class="form-control auth-input" ng-class="{'auth-input-error' : settingsForm.surname.$invalid && settingsForm.surname.$dirty || settingsForm.surname.$invalid && settings.settingsFormSubmitted}" placeholder="{{ 'settings.inputSurname' | translate }}" aria-label="Surname" name="surname" ng-model="settings.update.surname" ng-minlength="3" ng-maxlength="20" >-->
-                    <!--<i class="auth-input-icon mdi mdi-account"></i>-->
-                <!--</div>-->
-                <!--<span ng-show="settingsForm.surname.$invalid && settingsForm.surname.$dirty || settingsForm.surname.$invalid && settings.settingsFormSubmitted" class="text-danger auth-required-error" translate="settings.inputSurnameErr">The surname field can contain from 2 to 10 characters</span>-->
-
-
-
-
-
-                <!--<div class="input-group mt-3">-->
-                    <!--<input type="email" class="form-control auth-input" ng-class="{'auth-input-error' : settingsForm.email.$invalid && settingsForm.email.$dirty || settingsForm.email.$invalid && settings.settingsFormSubmitted}" placeholder="{{ 'settings.inputEmail' | translate }}" aria-label="Email address" name="email" ng-model="settings.update.email" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" >-->
-                    <!--<i class="auth-input-icon mdi mdi-email"></i>-->
-                <!--</div>-->
-                <!--<span ng-show="settingsForm.email.$invalid && settingsForm.email.$dirty || settingsForm.email.$invalid && settings.settingsFormSubmitted" class="text-danger auth-required-error" translate="settings.inputEmailErr">The email field must have a valid email</span>-->
-
-
-
-
-
-
-                <!--<div class="input-group mt-3">-->
-                    <!--<input type="password" class="form-control auth-input" ng-class="{'auth-input-error' : settingsForm.password.$invalid && settingsForm.password.$dirty || settingsForm.password.$invalid && settings.settingsFormSubmitted}" placeholder="{{ 'settings.inputPass' | translate }}" aria-label="Password" name="password" ng-model="settings.update.password" >-->
-                    <!--<i class="auth-input-icon mdi mdi-lock"></i>-->
-                <!--</div>-->
-                <!--<span ng-show="settingsForm.password.$invalid && settingsForm.password.$dirty || settingsForm.password.$invalid && settings.settingsFormSubmitted" class="text-danger auth-required-error" translate="settings.inputPassErr">The password field is required</span>-->
-                <!--<div class="input-group mt-3">-->
-                    <!--<input type="password" class="form-control auth-input" ng-class="{'auth-input-error' : settingsForm.password.$dirty && settingsForm.password_confirmation.$dirty && settings.update.password_confirmation !== settings.update.password || settings.settingsFormSubmitted && settingsForm.password.$touched && settings.update.password_confirmation !== settings.update.password}" placeholder="{{ 'settings.inputConfPass' | translate }}" aria-label="Confirm password" name="password_confirmation" ng-model="settings.update.password_confirmation" >-->
-                    <!--<i class="auth-input-icon mdi mdi-lock"></i>-->
-                <!--</div>-->
-                <!--<span ng-show="settingsForm.password.$dirty && settingsForm.password_confirmation.$dirty && settings.update.password_confirmation !== settings.update.password || settings.settingsFormSubmitted && settingsForm.password.$touched && settings.update.password_confirmation !== settings.update.password" class="text-danger auth-required-error" translate="settings.inputConfPassErr">Password confirmation does not match</span>-->
-
-
-
-
-                <!--<div class="input-group mt-3">-->
-                    <!--<input type="password" class="form-control auth-input" ng-class="{'auth-input-error' : settingsForm.current_password.$invalid && settingsForm.current_password.$dirty && !settings.updateFormServerSuccess || settingsForm.current_password.$invalid && settings.settingsFormSubmitted && !settings.updateFormServerSuccess}" placeholder="{{ 'settings.inputCurrPass' | translate }}" aria-label="Current Password" name="current_password" ng-model="settings.update.current_password" ng-minlength="4" required >-->
-                    <!--<i class="auth-input-icon mdi mdi-lock"></i>-->
-                <!--</div>-->
-                <!--<span ng-show="settingsForm.current_password.$invalid && settingsForm.current_password.$dirty && !settings.updateFormServerSuccess || settingsForm.current_password.$invalid && settings.settingsFormSubmitted && !settings.updateFormServerSuccess" class="text-danger auth-required-error d-block" translate="settings.inputCurrPassErr">Current password is not correct</span>-->
-                <!--<span class="text-danger">* <span class="text-muted auth-required-field" translate="settings.enterCurrPassword">for update settings you must enter current password</span></span>-->
-
-
-
-
-
-
-
-
-            <!--</form>-->
-            <!--<button class="mt-4 w-50 btn btn-primary" ng-click="settings.updateSettings(settingsForm.$valid)" translate="settings.updateSettings">Sign up</button>-->
-
+            </form>
+            <form class="container settings-view" name="privacyForm" ng-show="settings.utils.view === 'privacy'">
+                <h4 class="mt-5 text-center">Coming soon..</h4>
+            </form>
         </div>
     </div>
 </div>

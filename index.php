@@ -10,12 +10,12 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="node_modules/mdi/css/materialdesignicons.min.css" media="all" type="text/css" />
+    <link rel="stylesheet" href="node_modules/animate.css/animate.min.css">
 
     <script src="node_modules/jquery/dist/jquery.js"></script>
 
     <script src="node_modules/angular/angular.js"></script>
     <script src="node_modules/@uirouter/angularjs/release/angular-ui-router.js"></script>
-    <!--<script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>-->
     <script src="node_modules/angular-animate/angular-animate.js"></script>
     <script src="node_modules/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="node_modules/angulargrid/angulargrid.min.js"></script>
@@ -26,6 +26,7 @@
     <script src="node_modules/moment/min/moment.min.js"></script>
 
     <script src="node_modules/angular-translate/dist/angular-translate.min.js"></script>
+
 
 </head>
 
@@ -52,5 +53,6 @@
 <script src="controllers/pages-controllers.js"></script>
 
 <script src="directives/material-ripple-directive.js"></script>
+<script src="directives/image-base64-directive.js"></script>
 
 </html>

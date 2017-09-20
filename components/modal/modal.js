@@ -14,8 +14,8 @@
     });
 
     // Start modal component
-    ModalController.$inject = ['$state', 'AuthService', 'CommonService'];
-    function ModalController($state, AuthService, CommonService) {
+    ModalController.$inject = ['$state', 'AuthService', '$location'];
+    function ModalController($state, AuthService, $location) {
 
         var modal = this,
             modalElement = jQuery('#modalWindow');
@@ -23,6 +23,7 @@
         //  Show modal on init
         modal.$onInit = function() {
             modalElement.modal('show');
+            // console.log($location.search().token);
         };
 
         //  Back state on hidden modal
@@ -37,22 +38,18 @@
         modal.authHandler = function () {
             modal.authView = true;
             modal.regView = false;
+            modal.utils = {
+                defaultAvatarLink: window.location.origin + '/img/default-avatars/captainamerica.png'
+            };
 
             //  Disable avatar carousel sliding
             angular.element('#carouselDefaultAvatars').carousel({
                 interval: 0
             });
 
-            //  Convert default avatar to base64
-            CommonService.getBase64(window.location.origin + '/img/default-avatars/captainamerica.png').then(function (response) {
-                modal.reg.avatar = response;
-            });
-
             //  Get selected avatar of user
             angular.element('#carouselDefaultAvatars').on('slide.bs.carousel', function (e) {
-                CommonService.getBase64(angular.element(e.relatedTarget).find('img')[0].src).then(function (response) {
-                    modal.reg.avatar = response;
-                });
+                modal.utils.defaultAvatarLink = angular.element(e.relatedTarget).find('img')[0].src;
             });
 
             modal.auth = {
@@ -61,6 +58,7 @@
             };
 
             modal.reg = {
+                avatar: '',
                 name: '',
                 email: '',
                 password: '',
@@ -90,6 +88,10 @@
                         response.success ? modal.authSuccess() : modal.authFormServerError = response.data;
                     })
                 }
+            };
+
+            modal.authUserBySocial = function (key) {
+                AuthService.registrationBySocial(key);
             };
 
             modal.regUser = function(isValid) {

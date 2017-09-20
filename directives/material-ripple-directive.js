@@ -2,6 +2,7 @@
     'use strict';
     angular.module('app').directive('materialRipple', function () {
         return {
+            restrict: 'A',
             link: function(scope, element, attrs) {
                 angular.element(element).addClass('material-ripple');
                 element.click(function(event){

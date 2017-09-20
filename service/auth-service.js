@@ -34,12 +34,14 @@
                     .then(function (response) {
                         localStorage.setItem('auth-data', JSON.stringify(response));
                         $rootScope.$emit('userAuthenticated');
-                        response.success = true;
                         return response;
                     })
                     .catch(function(response) {
                         return response;
                     });
+            },
+            registrationBySocial: function (key) {
+                return window.location.replace(EnvironmentService.socialRegistrationPath(key));
             }
         };
     }])

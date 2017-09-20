@@ -1,18 +1,17 @@
-.dropdown-toggle::after {
-    vertical-align: .155em !important;
-    margin-left: 0.5rem !important;
+
+/* Elements fixes */
+
+h6 {
+    font-weight: 400 !important;
 }
-.dropdown-toggle {
-    cursor: pointer;
-}
+
+/* Bootstrap class fixes */
+
 .btn {
     cursor: pointer;
 }
 .card {
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
-}
-h6 {
-    font-weight: 400 !important;
 }
 .close:focus, .close:hover {
     opacity: 1 !important;
@@ -20,6 +19,38 @@ h6 {
 .dropdown-item {
     font-size: 0.9rem;
 }
+.dropdown-toggle::after {
+    vertical-align: .155em !important;
+    margin-left: 0.5rem !important;
+}
+.dropdown-toggle {
+    cursor: pointer;
+}
 .lead {
     font-size: x-large !important;
+}
+
+/* Form input fixes */
+
+.is-invalid {
+    border-color: #ff717f !important;
+    color: #ff717f !important;
+}
+.is-invalid ~ .default-input-icon {
+    color: #ff717f !important;
+}
+.invalid-feedback {
+    font-size: 0.8rem;
+    opacity: 0.75;
+    width: 100%;
+}
+.is-valid {
+    border-color: #28b446 !important;
+    color: #28b446 !important;
+}
+.is-valid ~ .default-input-icon {
+    color: #28b446 !important;
+}
+.custom-control-input:focus~.custom-control-indicator {
+    box-shadow: none !important;
 }

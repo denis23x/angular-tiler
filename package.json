@@ -16,6 +16,7 @@
     "angular-translate": "^2.15.2",
     "angular-ui-router": "^1.0.0-rc.1",
     "angulargrid": "^0.6.5",
+    "animate.css": "^3.5.2",
     "bootstrap": "^4.0.0-beta",
     "jquery": "^3.2.1",
     "mdi": "^2.0.46",

@@ -1,0 +1,54 @@
+.auth-avatar-name {
+    font-size: 0.8rem;
+}
+.auth-avatar-chevron-prev {
+    color: #868e96 !important;
+    left: -30px !important;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+.auth-avatar-chevron-next {
+    color: #868e96 !important;
+    right: -30px !important;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+.auth-error-server {
+    font-size: 0.8rem;
+    opacity: 0.75;
+}
+.auth-error-server > i {
+    font-size: 1.2rem;
+    transform: translate(0px,3px);
+    display: inline-block;
+}
+.auth-social-icon {
+    padding: 0.25rem;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.auth-social-icon:hover {
+    transform: scale(1.2);
+}
+.reg-error-server {
+    font-size: 0.8rem;
+    opacity: 0.75;
+}
+.reg-error-server > i {
+    font-size: 1.2rem;
+    transform: translate(0px,3px);
+    display: inline-block;
+}
+.reg-agree-rules {
+    font-size: 0.9rem;
+}
+.modal-close-button {
+    width: 1.5rem;
+    cursor: pointer;
+    opacity: 0.4;
+}
+.post-image {
+    width: 100%;
+    padding: 1rem 0rem;
+}

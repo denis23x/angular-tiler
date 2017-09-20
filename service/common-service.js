@@ -16,47 +16,6 @@
 
                 return w+'x'+h+' > '+size;
             },
-            getBase64: function (url, file) {
-                if (file) {
-                    var deferred = $q.defer(),
-                        reader = new FileReader();
-
-                    reader.onload = function(file) {
-                        deferred.resolve(file.target.result);
-                    };
-
-                    reader.onerror = function() {
-                        deferred.reject(file);
-                    };
-
-                    reader.readAsDataURL(file);
-
-                    return deferred.promise;
-                } else {
-                    var xhr = new XMLHttpRequest(),
-                        deferred = $q.defer(),
-                        proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-
-                    xhr.open('GET', proxyUrl + url, true);
-                    xhr.responseType = 'blob';
-                    xhr.onload = function (e) {
-                        var reader = new FileReader();
-
-                        reader.onload = function(event) {
-                            deferred.resolve(event.target.result);
-                        };
-
-                        reader.onerror = function() {
-                            deferred.reject(this);
-                        };
-
-                        reader.readAsDataURL(this.response);
-                    };
-                    xhr.send();
-
-                    return deferred.promise;
-                }
-            },
             post: function(url, req, cfg) {
                 var deferred = $q.defer();
 
@@ -74,7 +33,7 @@
                 $http.get(url).then(function(data) {
                     deferred.resolve(data.data);
                 }, function (reason) {
-                    deferred.resolve(reason);
+                    deferred.reject(reason);
                 });
 
                 return deferred.promise;
@@ -85,7 +44,7 @@
                 $http.delete(url).then(function(data) {
                     deferred.resolve(data.data);
                 }, function (reason) {
-                    deferred.resolve(reason);
+                    deferred.reject(reason);
                 });
 
                 return deferred.promise;
@@ -96,7 +55,7 @@
                 $http.put(url, req ? req : {}).then(function(data) {
                     deferred.resolve(data.data);
                 }, function (reason) {
-                    deferred.resolve(reason);
+                    deferred.reject(reason);
                 });
 
                 return deferred.promise;
@@ -107,7 +66,7 @@
                 $http.patch(url, req ? req : {}).then(function(data) {
                     deferred.resolve(data.data);
                 }, function (reason) {
-                    deferred.resolve(reason);
+                    deferred.reject(reason);
                 });
 
                 return deferred.promise;

@@ -3,53 +3,54 @@
         <div class="modal-content" >
             <div class="modal-header">
                 <h5 class="modal-title" id="modalWindowTitle">
-                    <span class="animation-fade" ng-show="modal.authView" translate="modal.auth.header">Authorization</span>
-                    <span class="animation-fade" ng-show="modal.regView" translate="modal.reg.header">Registration</span>
+                    <span class="modal-view-header" ng-show="modal.authView" translate="modal.auth.header">Authorization</span>
+                    <span class="modal-view-header" ng-show="modal.regView"><i class="mdi mdi-arrow-left text-muted mr-3 c-pointer" ng-click="modal.authSwitch()"></i><span translate="modal.reg.header"> Registration</span></span>
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <img class="modal-close-button" src="../../../img/interface/close-cross.svg" aria-hidden="true">
                 </button>
             </div>
             <div class="modal-body">
-                <div class="col-12 text-center animation-fade" ng-show="modal.authView">
+                <div class="col-12 text-center modal-view" ng-show="modal.authView">
                     <h5 translate="modal.auth.title">Good evening! Welcome back.</h5>
                     <h6 class="text-muted" translate="modal.auth.desc">Sign into your account here:</h6>
                     <form name="authForm" class="mt-4 w-75 d-inline-block">
-                        <div class="input-group">
-                            <input type="email" class="form-control auth-input" ng-class="{'auth-input-error' : authForm.email.$invalid && authForm.email.$dirty || authForm.email.$invalid && modal.authFormSubmitted}" placeholder="{{ 'modal.auth.inputEmail' | translate }}" aria-label="Email address" name="email" ng-model="modal.auth.email" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" required >
-                            <i class="auth-input-icon mdi mdi-email"></i>
+                        <div class="row px-3">
+                            <input type="email" class="form-control default-input" ng-class="{'is-invalid' : authForm.email.$invalid && authForm.email.$dirty || authForm.email.$invalid && modal.authFormSubmitted, 'is-valid' : authForm.email.$valid && authForm.email.$dirty}" placeholder="{{ 'modal.auth.inputEmail' | translate }}" aria-label="Email address" name="email" ng-model="modal.auth.email" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" required >
+                            <i class="mdi mdi-email default-input-icon"></i>
+                            <div ng-show="authForm.email.$invalid && authForm.email.$dirty || authForm.email.$invalid && modal.authFormSubmitted" class="invalid-feedback" translate="modal.auth.inputEmailErr">Incorrect email</div>
                         </div>
-                        <span ng-show="authForm.email.$invalid && authForm.email.$dirty || authForm.email.$invalid && modal.authFormSubmitted" class="text-danger auth-required-error" translate="modal.auth.inputEmailErr">Incorrect email</span>
-                        <div class="input-group mt-3">
-                            <input type="password" class="form-control auth-input" ng-class="{'auth-input-error' : authForm.password.$invalid && authForm.password.$dirty || authForm.password.$invalid && modal.authFormSubmitted}" placeholder="{{ 'modal.auth.inputPass' | translate }}" aria-label="Password" name="password" ng-model="modal.auth.password" ng-minlength="4" required>
-                            <i class="auth-input-icon mdi mdi-lock"></i>
+                        <div class="row px-3 mt-3">
+                            <input type="password" class="form-control default-input" ng-class="{'is-invalid' : authForm.password.$invalid && authForm.password.$dirty || authForm.password.$invalid && modal.authFormSubmitted, 'is-valid' : authForm.password.$valid && authForm.password.$dirty}" placeholder="{{ 'modal.auth.inputPass' | translate }}" aria-label="Password" name="password" ng-model="modal.auth.password" ng-minlength="4" required>
+                            <i class="mdi mdi-lock default-input-icon"></i>
+                            <div ng-show="authForm.password.$invalid && authForm.password.$dirty || authForm.password.$invalid && modal.authFormSubmitted" class="invalid-feedback" translate="modal.auth.inputPassErr">Password length at least 4 characters</div>
                         </div>
-                        <span ng-show="authForm.password.$invalid && authForm.password.$dirty || authForm.password.$invalid && modal.authFormSubmitted" class="text-danger auth-required-error" translate="modal.auth.inputPassErr">Password length at least 4 characters</span>
-                        <div ng-show="modal.authFormSubmitted && modal.authFormServerError.error" class="text-danger auth-required-error-server block">
-                            <i class="mdi mdi mdi-account-alert mr-1"></i>
+                        <div ng-show="modal.authFormSubmitted && modal.authFormServerError.error" class="auth-error-server text-danger">
+                            <i class="mdi mdi-account-alert mr-1"></i>
                             <span translate="modal.auth.inputPassErrServer">These credentials do not match our records.</span>
                         </div>
+                        <a class="d-block mt-4" href="" ui-sref="#" translate="modal.auth.forgotPass">Forgotten password?</a>
+                        <button class="mt-3 w-50 btn btn-success" material-ripple ng-click="modal.authUser(authForm.$valid)" translate="modal.auth.signIn">Sign in</button>
                     </form>
-                    <h6 class="text-muted mt-4" translate="modal.auth.forgotPass">Forgotten password?</h6>
-                    <button class="mt-3 w-50 btn btn-success" material-ripple ng-click="modal.authUser(authForm.$valid)" translate="modal.auth.signIn">Sign in</button>
                     <h6 class="text-muted mt-4">&mdash; <span translate="modal.auth.orContinue">Or continue with</span> &mdash;</h6>
                     <div class="row mt-3">
                         <div class="col-3 col-sm-2 col-md-2 col-lg-2 col-xl-2 ml-auto">
                             <img class="auth-social-icon" src="../../../img/social-icons/twitter.svg" alt="Twitter">
                         </div>
-                        <div class="col-3 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                        <div class="col-3 col-sm-2 col-md-2 col-lg-2 col-xl-2" ng-click="modal.authUserBySocial('google')">
                             <img class="auth-social-icon" src="../../../img/social-icons/google.svg" alt="Google">
                         </div>
-                        <div class="col-3 col-sm-2 col-md-2 col-lg-2 col-xl-2 mr-auto">
+                        <div class="col-3 col-sm-2 col-md-2 col-lg-2 col-xl-2 mr-auto" ng-click="modal.authUserBySocial('instagram')">
                             <img class="auth-social-icon" src="../../../img/social-icons/instagram.svg" alt="Instagram">
                         </div>
                     </div>
                     <h6 class="text-muted mt-3 d-inline-block" translate="modal.auth.dontHaveAcc">Don't have an account?</h6>
                     <a href="" ng-click="modal.authSwitch()" translate="modal.auth.signUp">Sign up.</a>
                 </div>
-                <div class="col-12 text-center animation-fade" ng-show="modal.regView">
+                <div class="col-12 text-center modal-view" ng-show="modal.regView">
                     <h5 translate="modal.reg.title">Join us!</h5>
                     <h6 class="text-muted mb-4" translate="modal.reg.isFree">Registration is free</h6>
+                    <image-base64 type="text" ng-model="modal.utils.defaultAvatarLink" result="modal.reg.avatar" loader error>
                     <div class="row justify-content-center">
                         <div class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                             <div id="carouselDefaultAvatars" class="carousel slide" data-ride="carousel">
@@ -70,64 +71,63 @@
                             </div>
                         </div>
                     </div>
-                    <span class="text-muted d-block auth-required-field"><span class="text-success">*</span> <span translate="modal.reg.canChange">you can change default avatar after registration</span></span>
-                    <h6 class="text-muted mt-5" translate="modal.reg.desc">Enter your account information here:</h6>
-                    <form name="regForm" class="mt-2 w-75 d-inline-block" novalidate>
-                        <div class="input-group">
-                            <input type="text" class="form-control auth-input" ng-class="{'auth-input-error' : regForm.name.$invalid && regForm.name.$dirty || regForm.name.$invalid && modal.regFormSubmitted}" placeholder="{{ 'modal.reg.inputName' | translate }}" aria-label="Name" name="name" ng-model="modal.reg.name" ng-minlength="2" ng-maxlength="15" required >
-                            <i class="auth-input-icon mdi mdi-account"></i>
+                    <small class="d-block"><span class="text-success">*</span> <span class="text-muted" translate="modal.reg.canChange">you can change default avatar after registration</span></small>
+                    <h6 class="mt-5" translate="modal.reg.desc">Enter your account information here:</h6>
+                    <form name="regForm" class="mt-2 w-75 d-inline-block">
+                        <div class="row px-3">
+                            <input type="text" class="form-control default-input" ng-class="{'is-invalid' : regForm.name.$invalid && regForm.name.$dirty || regForm.name.$invalid && modal.regFormSubmitted, 'is-valid' : regForm.name.$valid && regForm.name.$dirty}" placeholder="{{ 'modal.reg.inputName' | translate }}" aria-label="Name" name="name" ng-model="modal.reg.name" ng-minlength="2" ng-maxlength="15" required >
+                            <i class="default-input-icon mdi mdi-account"></i>
+                            <div ng-show="regForm.name.$invalid && regForm.name.$dirty || regForm.name.$invalid && modal.regFormSubmitted" class="invalid-feedback" translate="modal.reg.inputNameErr">The name field can contain from 2 to 10 characters</div>
                         </div>
-                        <span ng-show="regForm.name.$invalid && regForm.name.$dirty || regForm.name.$invalid && modal.regFormSubmitted" class="text-danger auth-required-error" translate="modal.reg.inputNameErr">The name field can contain from 2 to 10 characters</span>
-                        <span ng-show="modal.regFormSubmitted && modal.regFormServerError.name" class="text-danger auth-required-error-server">
+                        <div ng-show="modal.regFormSubmitted && modal.regFormServerError.name" class="text-danger reg-error-server">
                             <span translate="modal.reg.inputNameErrServer">The name field is required</span>
-                        </span>
-                        <span class="text-right text-muted d-block auth-required-field"><span class="text-danger">*</span> <span translate="modal.reg.requiredField">required field</span></span>
-                        <div class="input-group mt-3">
-                            <input type="email" class="form-control auth-input" ng-class="{'auth-input-error' : regForm.email.$invalid && regForm.email.$dirty || regForm.email.$invalid && modal.regFormSubmitted}" placeholder="{{ 'modal.reg.inputEmail' | translate }}" aria-label="Email address" name="email" ng-model="modal.reg.email" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" required >
-                            <i class="auth-input-icon mdi mdi-email"></i>
                         </div>
-                        <span ng-show="regForm.email.$invalid && regForm.email.$dirty || regForm.email.$invalid && modal.regFormSubmitted" class="text-danger auth-required-error" translate="modal.reg.inputEmailErr">The email field must have a valid email</span>
-                        <div ng-show="modal.regFormSubmitted && modal.regFormServerError.email" class="text-danger auth-required-error-server">
-                            <i class="mdi mdi mdi-emoticon-sad"></i>
+                        <div class="row px-3 mt-3">
+                            <input type="email" class="form-control default-input" ng-class="{'is-invalid' : regForm.email.$invalid && regForm.email.$dirty || regForm.email.$invalid && modal.regFormSubmitted || modal.regFormSubmitted && modal.regFormServerError.email, 'is-valid' : regForm.email.$valid && regForm.email.$dirty && !modal.regFormServerError.email}" placeholder="{{ 'modal.reg.inputEmail' | translate }}" aria-label="Email address" name="email" ng-model="modal.reg.email" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" required >
+                            <i class="default-input-icon mdi mdi-email"></i>
+                            <div ng-show="regForm.email.$invalid && regForm.email.$dirty || regForm.email.$invalid && modal.regFormSubmitted" class="invalid-feedback" translate="modal.reg.inputEmailErr">The email field must have a valid email</div>
+                        </div>
+                        <div ng-show="modal.regFormSubmitted && modal.regFormServerError.email" class="text-danger reg-error-server">
+                            <i class="mdi mdi-emoticon-sad"></i>
                             <span class="text-close-black"><u>{{modal.regFormServerError.takenEmail}}</u></span>
                             <span translate="modal.reg.inputEmailErrServer">The email has already been taken</span>
                         </div>
-                        <span class="text-right text-muted d-block auth-required-field"><span class="text-danger">*</span> <span translate="modal.reg.requiredField">required field</span></span>
-                        <div class="input-group mt-3">
-                            <input type="password" class="form-control auth-input" ng-class="{'auth-input-error' : regForm.password.$invalid && regForm.password.$dirty || regForm.password.$invalid && modal.regFormSubmitted}" placeholder="{{ 'modal.reg.inputPass' | translate }}" aria-label="Password" name="password" ng-model="modal.reg.password" ng-minlength="4" required >
-                            <i class="auth-input-icon mdi mdi-lock"></i>
+                        <div class="row px-3 mt-3">
+                            <input type="password" class="form-control default-input" ng-class="{'is-invalid' : regForm.password.$invalid && regForm.password.$dirty || regForm.password.$invalid && modal.regFormSubmitted, 'is-valid' : regForm.password.$valid && regForm.password.$dirty}" placeholder="{{ 'modal.reg.inputPass' | translate }}" aria-label="Password" name="password" ng-model="modal.reg.password" ng-minlength="4" required >
+                            <i class="default-input-icon mdi mdi-lock"></i>
+                            <div ng-show="regForm.password.$invalid && regForm.password.$dirty || regForm.password.$invalid && modal.regFormSubmitted" class="invalid-feedback" translate="modal.reg.inputPassErr">Password length at least 4 characters</div>
                         </div>
-                        <span ng-show="regForm.password.$invalid && regForm.password.$dirty || regForm.password.$invalid && modal.regFormSubmitted" class="text-danger auth-required-error" translate="modal.reg.inputPassErr">Password length at least 4 characters</span>
-                        <span ng-show="modal.regFormSubmitted && modal.regFormServerError.password" class="text-danger auth-required-error-server">
+                        <div ng-show="modal.regFormSubmitted && modal.regFormServerError.password" class="text-danger reg-error-server">
                             <span translate="modal.reg.inputPassErrServer">The password field is required</span>
-                        </span>
-                        <span class="text-right text-muted d-block auth-required-field"><span class="text-danger">*</span> <span translate="modal.reg.requiredField">required field</span></span>
-                        <div class="input-group mt-3">
-                            <input type="password" class="form-control auth-input" ng-class="{'auth-input-error' : regForm.password.$dirty && regForm.password_confirmation.$dirty && modal.reg.password_confirmation !== modal.reg.password || modal.regFormSubmitted && regForm.password.$touched && modal.reg.password_confirmation !== modal.reg.password}" placeholder="{{ 'modal.reg.inputConfPass' | translate }}" aria-label="Confirm password" name="password_confirmation" ng-model="modal.reg.password_confirmation" required >
-                            <i class="auth-input-icon mdi mdi-lock"></i>
                         </div>
-                        <span ng-show="regForm.password.$dirty && regForm.password_confirmation.$dirty && modal.reg.password_confirmation !== modal.reg.password || modal.regFormSubmitted && regForm.password.$touched && modal.reg.password_confirmation !== modal.reg.password" class="text-danger auth-required-error" translate="modal.reg.inputConfPassErr">Password confirmation does not match</span>
-                        <span class="text-right text-muted d-block auth-required-field"><span class="text-danger">*</span> <span translate="modal.reg.requiredField">required field</span></span>
-                        <div class="input-group mt-4 text-center d-block">
-                            <label class="form-check-label d-block mt-4 pl-0">
-                                <input type="checkbox" name="termsAgree" class="form-check-input" ng-model="modal.reg.terms" required>
-                                <span class="auth-agree-rules" translate="modal.reg.inputTerms">I agree with </span>
-                                <span class="auth-agree-rules"><a href="" translate="modal.reg.inputTermsLink">terms of use</a></span>
-                                <span ng-show="!modal.reg.terms" class="text-danger d-inline-block auth-required-error" translate="modal.reg.inputTermsErr">You must agree with the terms of use</span>
+                        <div class="row px-3 mt-3">
+                            <input type="password" class="form-control default-input" ng-class="{'is-invalid' : regForm.password.$dirty && modal.reg.password_confirmation !== modal.reg.password || modal.regFormSubmitted && regForm.password.$touched && modal.reg.password_confirmation !== modal.reg.password, 'is-valid' : regForm.password.$dirty && regForm.password_confirmation.$dirty && modal.reg.password_confirmation === modal.reg.password}" placeholder="{{ 'modal.reg.inputConfPass' | translate }}" aria-label="Confirm password" name="password_confirmation" ng-model="modal.reg.password_confirmation" required >
+                            <i class="default-input-icon mdi mdi-lock"></i>
+                            <span ng-show="regForm.password.$touched && modal.reg.password_confirmation !== modal.reg.password || modal.regFormSubmitted && regForm.password.$touched && modal.reg.password_confirmation !== modal.reg.password" class="invalid-feedback" translate="modal.reg.inputConfPassErr">Password confirmation does not match</span>
+                        </div>
+                        <small><span class="text-danger">*</span> <span class="text-muted" translate="modal.reg.requiredFields">all fields are required</span></small>
+                        <div class="row px-3 mt-4 text-center d-block">
+                            <label class="d-block mt-4 pl-0">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" name="termsAgree" class="custom-control-input" ng-model="modal.reg.terms" required>
+                                    <span class="custom-control-indicator"></span>
+                                    <div class="reg-agree-rules custom-control-description" >
+                                        <span translate="modal.reg.inputTerms">I agree with </span>
+                                        <a href="" translate="modal.reg.inputTermsLink">terms of use</a>
+                                    </div>
+                                </div>
+                                <span ng-show="!modal.reg.terms" class="d-inline-block invalid-feedback" translate="modal.reg.inputTermsErr">You must agree with the terms of use</span>
                             </label>
                         </div>
+                        <button class="mt-4 w-50 btn btn-primary" material-ripple ng-click="modal.regUser(regForm.$valid)" translate="modal.reg.signUp">Sign up</button>
                     </form>
-                    <button class="mt-4 w-50 btn btn-primary" material-ripple ng-click="modal.regUser(regForm.$valid)" translate="modal.reg.signUp">Sign up</button>
                     <div>
                         <h6 class="text-muted mt-3 d-inline-block" translate="modal.reg.getBack">Get back to </h6>
                         <a href="" ng-click="modal.authSwitch()" translate="modal.reg.getBackLink">authorization.</a>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-                <!--<button type="button" class="btn btn-primary">Save changes</button>-->
-            </div>
+            <div class="modal-footer"></div>
         </div>
     </div>
 </div>

@@ -1,12 +1,34 @@
 @import "grid-style.css";
 @import "bootstrap-fixes.css";
 @import "default-animations.css";
+@import "modal-component.css";
+@import "directives-style.css";
 
-
+/* Colors */
 .text-close-black {
     color: #495057 ;
 }
-
+/* Utils */
+.c-pointer {
+    cursor: pointer;
+}
+/* Mixins */
+.default-input {
+    font-size: 0.8rem !important;
+    border-radius: .25rem !important;
+    padding-left: 2rem !important;
+}
+.default-input:focus ~ .default-input-icon {
+    color: #80bdff;
+}
+.default-input-icon {
+    position: absolute;
+    z-index: 10;
+    padding-top: 0.25rem;
+    padding-left: 0.5rem;
+    color: #868e96;
+}
+/* General */
 * {
     outline: none !important;
 }
@@ -18,7 +40,7 @@ body::-webkit-scrollbar-thumb {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #BFBFBF;
 }
-
+/* Header */
 .header-input {
     background: none !important;
     color: white !important;
@@ -34,7 +56,8 @@ body::-webkit-scrollbar-thumb {
 .header-input:-ms-input-placeholder      {color:#78bdff !important;}
 
 .header-user-avatar {
-    width: 36px;
+    max-width: 36px;
+    max-height: 36px;
 }
 .header-user-list {
     display: inline-block;
@@ -46,79 +69,7 @@ body::-webkit-scrollbar-thumb {
     vertical-align: .75em !important;
     margin-left: 0.5rem !important;
 }
-.auth-avatar-chevron-prev {
-    color: #868e96 !important;
-    left: -30px !important;
-    font-size: 2.5rem;
-    cursor: pointer;
-}
-
-.auth-avatar-chevron-next {
-    color: #868e96 !important;
-    right: -30px !important;
-    font-size: 2.5rem;
-    cursor: pointer;
-}
-.auth-avatar-name {
-    font-size: 0.8rem;
-}
-.auth-input-icon {
-    position: absolute;
-    z-index: 10;
-    padding-top: 0.25rem;
-    padding-left: 0.5rem;
-    color: #868e96;
-}
-.auth-input {
-    font-size: 0.8rem !important;
-    border-radius: .25rem !important;
-    padding-left: 2rem !important;
-}
-.auth-input:focus ~ .auth-input-icon {
-    color: #80bdff;
-}
-.auth-input-error {
-    border-color: #ff717f !important;
-    color: #ff717f !important;
-}
-.auth-input-error ~ .auth-input-icon {
-    color: #ff717f !important;
-}
-.auth-social-icon {
-    padding: 0.25rem;
-    width: 100%;
-    cursor: pointer;
-}
-.auth-required-field {
-    font-size: 0.8rem;
-    padding-right: 0.25rem;
-    opacity: 0.75;
-}
-.auth-required-error {
-    font-size: 0.8rem;
-    opacity: 0.75;
-}
-.auth-required-error-server {
-    font-size: 0.8rem;
-    opacity: 0.75;
-}
-.auth-required-error-server > i {
-    font-size: 1.2rem;
-    transform: translate(0px,3px);
-    display: inline-block;
-}
-.auth-agree-rules {
-    font-size: 0.9rem;
-}
-.modal-close-button {
-    width: 1.5rem;
-    cursor: pointer;
-    opacity: 0.4;
-}
-.post-image {
-    width: 100%;
-    padding: 1rem 0rem;
-}
+/* About page */
 .about-nav-block {
     border-right: 1px solid #ddd;
     background-color: #f8f9fa;
@@ -150,13 +101,13 @@ body::-webkit-scrollbar-thumb {
     max-height: 55px;
     padding: 0.25rem;
 }
-
-
+/* Settings page */
 .settings-page-header {
     font-size: 2rem !important;
 }
 .settings-avatar {
-    max-width: 50px;
+    max-width: 60px !important;
+    max-height: 60px !important;
     margin-right: 1rem;
 }
 .settings-item-title {
@@ -166,55 +117,4 @@ body::-webkit-scrollbar-thumb {
 .settings-item-description {
     font-size: 0.75rem !important;
     font-weight: 400 !important;
-}
-
-
-
-
-
-
-
-/* Material Ripple effect */
-.material-ripple {
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    user-select: none;
-}
-
-.material-ripple > span {
-    /* static positioned elements appear behind absolutely positioned siblings (.material-ink in this case)
-    so we will make the elements relatively positioned to bring them above .material-ink */
-    position: relative;
-    display: block;
-    padding: 15px 25px;
-}
-
-.red-ripple > .material-ink {
-    background-color: red;
-}
-
-/*
-.ink styles - the elements which will create the ripple effect.
-The size and position of these elements will be set by the JS code.
-Initially these elements will be scaled down to 0% and later animated to large fading circles on user click.
-*/
-.material-ink {
-    position: absolute;
-    background: #bdc3c7;
-    border-radius: 50%;
-    transform: scale(0);
-    opacity: 0.4;
-}
-
-/* animation effect */
-.material-ink.animate {
-    animation: ripple 0.6s linear;
-}
-
-@keyframes ripple {
-    100% {
-        transform: scale(2.5);
-        opacity: 0;
-    }
 }

@@ -34,9 +34,16 @@
 
     }
 
-    SettingsController.$inject = ['$translate', 'AuthService', 'CommonService'];
-    function SettingsController($translate, AuthService, CommonService) {
+    SettingsController.$inject = ['$translate', 'AuthService'];
+    function SettingsController($translate, AuthService) {
         var settings = this;
+        settings.utils = {
+            view: 'general',
+            linkAvatar: '',
+            base64Loader: '',
+            base64Error: '',
+            base64File: ''
+        };
 
         settings.update = JSON.parse(localStorage.getItem('auth-data'));
 
@@ -45,18 +52,6 @@
 
         settings.changeLanguage = function () {
             $translate.use(settings.currentLang);
-        };
-
-        angular.element('#file2').on('change', function (fileInput) {
-            CommonService.getBase64(false, fileInput.currentTarget.files[0]).then(function (response) {
-                settings.update.avatar = response;
-            });
-        });
-
-        settings.setAvatarByLink = function () {
-            CommonService.getBase64(settings.avatarLink).then(function (response) {
-                settings.update.avatar = response;
-            })
         };
 
         settings.updateSettings = function (isValid) {
@@ -70,12 +65,23 @@
                 });
 
                 AuthService.updateUserSettings(settings.update.id, settings.update).then(function (response) {
-                    if (response.success) {
+                    if (response.hasOwnProperty('status')) {
+                        settings.updateFormServerError = true;
+                        switch(response.status) {
+                            case 400:
+                            case 401:
+                            case 403:
+                                settings.updateFormServerError = response.data;
+                                break;
+                            case 422:
+                                settings.updateFormServerErrorMessage = response.data.errors;
+                                break;
+                            default:
+                                break
+                        }
+                    } else {
                         settings.updateFormServerSuccess = true;
                         settings.update = JSON.parse(localStorage.getItem('auth-data'));
-                    } else {
-                        console.log(response);
-                        settings.updateFormServerError = response.data;
                     }
                 })
             }

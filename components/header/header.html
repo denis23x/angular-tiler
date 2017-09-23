@@ -1,58 +1,74 @@
-<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-primary">
-    <a class="navbar-brand" href="#" ui-sref="home" translate="header.logoDesc">dev project: tiler</a>
+<nav class="navbar navbar-expand-xl sticky-top navbar-dark bg-primary py-0 px-3">
+    <a class="navbar-brand" href="#" ui-sref="home"><i class="mdi mdi-folder-open mr-2" aria-hidden="true"></i><span translate="header.logoDesc">tiler</span></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-        <!--<ul class="navbar-nav mr-auto" ng-show="'home' | includedByState">-->
-            <li class="nav-item">
-                <a class="nav-link" href="#" ng-show="!header.reverseNewest" ng-click="header.mostWatches()" translate="header.newest">the newest</a>
-                <a class="nav-link" href="#" ng-show="header.reverseNewest" ng-click="header.mostWatches()" translate="header.oldest">the oldest</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" ng-show="!header.reversePopular" ng-click="header.mostPopular()" translate="header.popular">most popular</a>
-                <a class="nav-link" href="#" ng-show="header.reversePopular" ng-click="header.mostPopular()" translate="header.unpopular">most unpopular</a>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="#" translate="header.or">or</a></li>
-            <li class="nav-item">
-                <input class="form-control mr-sm-2 header-input" type="text" placeholder="{{ 'header.searchBy' | translate }}" aria-label="Search" ng-model="header.searchText" ng-model-options="{debounce : 300}" ng-change="header.startSearch()">
-            </li>
-            <li class="nav-item"><a class="nav-link" href="#" translate="header.inCategory">in category</a></li>
-            <li class="nav-item">
-                <div class="nav-link dropdown">
-                    <span class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" translate="header.all">all</span>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">games</a>
-                        <a class="dropdown-item" href="#">sports</a>
-                        <a class="dropdown-item" href="#">politics</a>
-                        <h6 class="dropdown-header">My collections</h6>
-                        <a class="dropdown-item" href="#">my games</a>
-                        <a class="dropdown-item" href="#">my cars</a>
-                    </div>
+        <ul class="navbar-nav mr-auto navbar-section" ng-show="'home' | includedByState">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle hidden-after" material-ripple href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="mr-2" translate="header.sort">Сортировка</span><i class="mdi mdi-chevron-down" aria-hidden="true"></i></a>
+                <div class="dropdown-menu dropdown-menu-left mt-0">
+                    <a class="dropdown-item header-dropdown-item" ng-class="{'select': true}" href="#" ng-click="header.mostWatches(true)" translate="header.newest">the newest</a>
+                    <a class="dropdown-item header-dropdown-item" href="#" ng-click="header.mostWatches(false)" translate="header.oldest">the oldest</a>
+                    <a class="dropdown-item header-dropdown-item" href="#" ng-click="header.mostPopular(false)" translate="header.popular">most popular</a>
+                    <a class="dropdown-item header-dropdown-item" href="#" ng-click="header.mostPopular(true)" translate="header.unpopular">most unpopular</a>
                 </div>
             </li>
+            <li class="nav-item dropdown mr-3">
+                <a class="nav-link dropdown-toggle hidden-after" material-ripple href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="mr-2" translate="header.inCategory">Category</span><i class="mdi mdi-chevron-down" aria-hidden="true"></i></a>
+                <div class="dropdown-menu dropdown-menu-left mt-0">
+                    <a class="dropdown-item header-dropdown-item" ng-class="{'select': true}" href="#" translate="header.newest">the newest</a>
+                    <h6 class="dropdown-header"><i class="mdi mdi-folder-outline mr-1" aria-hidden="true"></i> My collections</h6>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item header-dropdown-item" href="#">my games</a>
+                    <a class="dropdown-item header-dropdown-item text-muted" href="#">my cars</a>
+                    <h6 class="dropdown-header"><i class="mdi mdi-folder-outline mr-1" aria-hidden="true"></i> Others</h6>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item header-dropdown-item" href="#">games</a>
+                    <a class="dropdown-item header-dropdown-item" href="#">sports</a>
+                    <a class="dropdown-item header-dropdown-item" href="#">politics</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <input class="form-control mr-sm-2 header-input" type="text" placeholder="{{ 'header.searchBy' | translate }}" aria-label="Search" ng-model="header.searchText" ng-model-options="{debounce : 200}" ng-change="header.startSearch()">
+                <i class="mdi mdi-magnify header-input-icon" aria-hidden="true"></i>
+            </li>
         </ul>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item" ng-show="!header.userData"><a class="nav-link" href="#" translate="header.signIn" ui-sref="home.auth">Sign in</a></li>
-            <li class="nav-item" ng-show="!header.userData"><a class="nav-link" href="#" ui-sref="about" translate="header.about">About</a></li>
-            <li class="nav-item dropdown" ng-show="header.userData">
-                <a class="nav-link dropdown-toggle d-inline-block p-0" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <ul class="navbar-nav ml-auto" ng-show="!header.userData">
+            <li class="nav-item"><a class="nav-link" material-ripple href="#" translate="header.signIn" ui-sref="home.auth">Sign in</a></li>
+            <li class="nav-item"><a class="nav-link" material-ripple href="#" ui-sref="about" translate="header.about">About</a></li>
+        </ul>
+        <ul class="navbar-nav ml-auto" ng-show="header.userData">
+            <li class="nav-item">
+                <a class="nav-link" material-ripple href="#" ui-sref="about">
+                    <i class="mdi mdi-plus" aria-hidden="true"></i>
+                    <span translate="header.add"> Add</span>
+                </a>
+            </li>
+            <li class="nav-item"><a class="nav-link" material-ripple href="#" ui-sref="about" translate="header.myProfile">My profile</a></li>
+            <li class="nav-item"><a class="nav-link" material-ripple href="#" ui-sref="about" translate="header.collections">Collections</a></li>
+            <li class="nav-item mr-4"><a class="nav-link" material-ripple href="#" ui-sref="about" translate="header.users">Users</a></li>
+            <li class="nav-item mr-4 dropdown">
+                <a class="nav-link dropdown-toggle d-inline-block py-0 hidden-after" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="d-inline-block align-text-bottom mr-2 header-user-avatar" ng-src="{{header.userData.avatar}}" alt="{{header.userData.name}}">
                     <ul class="header-user-list">
                         <li>{{header.userData.name}}</li>
                         <li>{{header.userData.email}}</li>
                     </ul>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right mt-2" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="#" ui-sref="" translate="header.myProfile">My profile</a>
-                    <a class="dropdown-item" href="#" ui-sref="" translate="header.collections">Collections</a>
-                    <a class="dropdown-item" href="#" ui-sref="" translate="header.users">Users</a>
-                    <a class="dropdown-item" href="#" ui-sref="settings" translate="header.settings">Settings</a>
+                <div class="dropdown-menu dropdown-menu-right mt-0">
+                    <a class="dropdown-item header-dropdown-item" href="#" ui-sref="home" translate="header.home">Home</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#" ng-click="header.logOut()" translate="header.logOut">Log out</a>
+                    <a class="dropdown-item header-dropdown-item" href="#" ui-sref="" translate="header.myProfile">My profile</a>
+                    <a class="dropdown-item header-dropdown-item" href="#" ui-sref="" translate="header.collections">Collections</a>
+                    <a class="dropdown-item header-dropdown-item" href="#" ui-sref="" translate="header.users">Users</a>
+                    <a class="dropdown-item header-dropdown-item" href="#" ui-sref="settings" translate="header.settings">Settings</a>
+                    <a class="dropdown-item header-dropdown-item" href="#" ui-sref="about" translate="header.about">About</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item header-dropdown-item" href="#" ng-click="header.logOut()" translate="header.logOut">Log out</a>
                 </div>
             </li>
+            <li class="nav-item"><a class="nav-link p-0" href="#" data-toggle="dropdown"><i class="mdi mdi-dots-horizontal mdi-24px" aria-hidden="true"></i></a></li>
         </ul>
     </div>
 </nav>

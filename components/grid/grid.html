@@ -1,24 +1,37 @@
-<div class="grid-wrap" custom-scroll on-scroll="grid.onScroll()">
-    <div class="dynamic-grid" angular-grid="grid.posts" ag-grid-width="grid.gridWidth" ag-gutter-size="grid.gutterSize"  ag-id="gallery" ag-refresh-on-img-load="true" ag-infinite-scroll="grid.loadMore()">
-        <div class="card grid" data-ng-repeat="post in grid.posts">
-            <div class="grid-img-wrap" ui-sref="home.post({id:post.id})">
-                <img class="card-img-top" ng-src="{{post.images.teaser}}" alt="{{post.title}}">
-                <span class="grid-author"><i class="mdi mdi-account-circle" aria-hidden="true"></i> {{post.user.name}}</span>
-                <div class="grid-tags">
-                    <span class="grid-tags-item" ng-repeat="tag in post.tags">{{tag}}</span>
-                </div>
+<div class="row justify-content-md-center">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
+        <div class="mt-5 text-center grid-search-wrap" ng-show="grid.posts.length === 0">
+            <i class="mdi mdi-comment-alert-outline mdi-48px" aria-hidden="true"></i>
+            <div class="grid-search-title lead"><span class="text-danger">{{grid.searchText}}</span> - <span translate="grid.notFoundTitle">not found</span></div>
+            <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-6 mx-auto lead">
+                <span translate="grid.notFoundDesc">Nothing found on your request, try to change the search category, or</span>
+                <a href="" translate="grid.notFoundLink">create an interesting post</a>
+                <span translate="grid.notFoundEnd">yourself</span>
             </div>
-            <div class="card-body p-2">
-                <p class="card-text mb-0 grid-title text-close-black">{{post.title}}</p>
-                <p class="card-text mb-0 grid-desc" ng-bind-html="::post.description | unsafe"></p>
-                <hr class="mb-1">
-                <div class="row text-close-black">
-                    <div class="col-6 pr-0">
-                        <small><i class="mdi mdi-clock" aria-hidden="true"></i> {{post.created}}</small>
+        </div>
+        <div class="grid-wrap" custom-scroll on-scroll="grid.onScroll()">
+            <div class="dynamic-grid" angular-grid="grid.posts" ag-grid-width="grid.gridWidth" ag-gutter-size="grid.gutterSize"  ag-id="gallery" ag-refresh-on-img-load="true" ag-infinite-scroll="grid.loadMore()">
+                <div class="card grid" data-ng-repeat="post in grid.posts">
+                    <div class="grid-img-wrap" ui-sref="home.post({id:post.id})">
+                        <img class="card-img-top" ng-src="{{post.images.teaser}}" alt="{{post.title}}">
+                        <span class="grid-author"><i class="mdi mdi-account-circle" aria-hidden="true"></i> {{post.user.name}}</span>
+                        <div class="grid-tags">
+                            <span class="grid-tags-item" ng-repeat="tag in post.tags">{{tag}}</span>
+                        </div>
                     </div>
-                    <div class="col-6 pl-0 text-right">
-                        <small class="mr-2"><i class="mdi mdi-thumb-up-outline" aria-hidden="true"></i> {{post.likes_count}}</small>
-                        <small><i class="mdi mdi-eye-outline" aria-hidden="true"></i> {{post.views_count}}</small>
+                    <div class="card-body p-2">
+                        <p class="card-text mb-0 grid-title text-close-black">{{post.title}}</p>
+                        <p class="card-text mb-0 grid-desc" ng-bind-html="::post.description | unsafe"></p>
+                        <hr class="mb-1">
+                        <div class="row text-close-black">
+                            <div class="col-6 pr-0">
+                                <small><i class="mdi mdi-clock" aria-hidden="true"></i> {{post.created}}</small>
+                            </div>
+                            <div class="col-6 pl-0 text-right">
+                                <small class="mr-2"><i class="mdi mdi-thumb-up-outline" aria-hidden="true"></i> {{post.likes_count}}</small>
+                                <small><i class="mdi mdi-eye-outline" aria-hidden="true"></i> {{post.views_count}}</small>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

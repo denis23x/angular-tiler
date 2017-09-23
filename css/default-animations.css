@@ -26,3 +26,15 @@
 [ui-view].ng-leave {
     display: none;
 }
+.navbar-section.ng-hide-remove {
+    animation: bounceInLeft 0.7s;
+}
+.navbar-section.ng-hide-add {
+    animation: bounceOutLeft 0.5s;
+}
+.grid-search-wrap.ng-hide-remove {
+    animation: bounceIn 0.7s;
+}
+.grid-search-wrap.ng-hide-add {
+    animation: bounceOutLeft 0.5s;
+}

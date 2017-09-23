@@ -55,6 +55,12 @@
 .grid-wrap {
     padding: 0.5rem;
 }
+.grid-search-wrap > i {
+    opacity: 0.5;
+}
+.grid-search-title {
+    font-size: 2rem !important;
+}
 .grid-img-wrap {
     position:relative;
     cursor: pointer;

@@ -34,9 +34,10 @@
 
     }
 
-    SettingsController.$inject = ['$translate', 'AuthService'];
-    function SettingsController($translate, AuthService) {
+    SettingsController.$inject = ['$translate', '$timeout', 'AuthService'];
+    function SettingsController($translate, $timeout, AuthService) {
         var settings = this;
+
         settings.utils = {
             view: 'general',
             linkAvatar: '',
@@ -45,7 +46,7 @@
             base64File: ''
         };
 
-        settings.update = JSON.parse(localStorage.getItem('auth-data'));
+        settings.update = AuthService.authenticatedUser();
 
         settings.availableLang = $translate.getAvailableLanguageKeys();
         settings.currentLang = $translate.use();
@@ -66,7 +67,7 @@
 
                 AuthService.updateUserSettings(settings.update.id, settings.update).then(function (response) {
                     if (response.hasOwnProperty('status')) {
-                        settings.updateFormServerError = true;
+                        settings.updateFormServerError = {};
                         switch(response.status) {
                             case 400:
                             case 401:
@@ -74,13 +75,15 @@
                                 settings.updateFormServerError = response.data;
                                 break;
                             case 422:
-                                settings.updateFormServerErrorMessage = response.data.errors;
+                                settings.updateFormServerError = response.data.errors;
                                 break;
                             default:
                                 break
                         }
                     } else {
                         settings.updateFormServerSuccess = true;
+                        settings.updateFormServerError ? delete settings.updateFormServerError : false;
+                        $timeout(function () {settings.updateFormServerSuccess = false;},3000);
                         settings.update = JSON.parse(localStorage.getItem('auth-data'));
                     }
                 })

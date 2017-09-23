@@ -8,16 +8,17 @@
             russianLanguage: function () {
                 var dictionary = {
                     header: {
-                        logoDesc    : 'проект tiler',
+                        logoDesc    : 'tiler',
                         newest      : 'новые',
                         oldest      : 'старые',
                         popular     : 'популярные',
                         unpopular   : 'не популярные',
-                        or          : 'или',
-                        searchBy    : 'поиск по заголовкам',
-                        inCategory  : 'в категории',
-                        all         : 'все',
+                        searchBy    : 'Поиск по заголовкам',
+                        sort        : 'Сортировка',
+                        inCategory  : 'Категории',
+                        add         : 'Добавить',
                         signIn      : 'Войти',
+                        home        : 'Главная',
                         myProfile   : 'Мой профиль',
                         collections : 'Коллекции',
                         users       : 'Пользователи',
@@ -25,10 +26,16 @@
                         logOut      : 'Выйти',
                         about       : 'О сайте'
                     },
+                    grid: {
+                        notFoundTitle   : 'не найдено',
+                        notFoundDesc    : 'По вашему запросу ничего не найдено, попробуйте изменить категорию поиска, или',
+                        notFoundLink    : 'создайте интересный вам пост',
+                        notFoundEnd     : 'самостоятельно'
+                    },
                     modal: {
                         auth: {
                             header          : 'Авторизация',
-                            title           : 'Добрый вечер! Добро пожаловать',
+                            title           : 'Добро пожаловать',
                             desc            : 'Войдите в свой аккаунт здесь:',
                             signIn          : 'Войти',
                             forgotPass      : 'Забыли пароль?',
@@ -115,16 +122,17 @@
             englishLanguage: function () {
                 var dictionary = {
                     header: {
-                        logoDesc    : 'dev project: tiler',
+                        logoDesc    : 'tiler',
                         newest      : 'the newest',
                         oldest      : 'the oldest',
                         popular     : 'most popular',
                         unpopular   : 'most unpopular',
-                        or          : 'or',
-                        searchBy    : 'search by title',
-                        inCategory  : 'in category',
-                        all         : 'all',
+                        searchBy    : 'Search by title',
+                        sort        : 'Sorting',
+                        inCategory  : 'Category',
+                        add         : 'Add',
                         signIn      : 'Sign In',
+                        home        : 'Home',
                         myProfile   : 'My profile',
                         collections : 'Collections',
                         users       : 'Users',
@@ -132,10 +140,16 @@
                         logOut      : 'Log Out',
                         about       : 'About'
                     },
+                    grid: {
+                        notFoundTitle   : 'not found',
+                        notFoundDesc    : 'Nothing found on your request, try to change the search category, or',
+                        notFoundLink    : 'create an interesting post',
+                        notFoundEnd     : 'yourself'
+                    },
                     modal: {
                         auth: {
                             header          : 'Authorization',
-                            title           : 'Good evening! Welcome back',
+                            title           : 'Welcome back',
                             desc            : 'Sign into your account here:',
                             signIn          : 'Sign in',
                             forgotPass      : 'Forgotten password?',

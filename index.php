@@ -30,7 +30,7 @@
 
 </head>
 
-<body ng-app="app">
+<body ng-app="app" class="pr-0">
     <div ng-controller="MainController as main">
         <header-component></header-component>
         <div ui-view></div>

@@ -28,9 +28,21 @@
     padding-left: 0.5rem;
     color: #868e96;
 }
+.default-input-select {
+    margin-left: -1.5rem;
+    margin-top: 0.25rem;
+    font-size: 1.25rem;
+    opacity: 0.5;
+}
 /* General */
 * {
     outline: none !important;
+}
+a {
+    text-decoration: none !important;
+}
+body {
+    overflow-x: hidden;
 }
 body::-webkit-scrollbar {
     width: 5px;
@@ -40,21 +52,31 @@ body::-webkit-scrollbar-thumb {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #BFBFBF;
 }
+i {
+    transition: all 0.2s;
+}
 /* Header */
 .header-input {
     background: none !important;
     color: white !important;
     border: none !important;
-    border-bottom: 1px solid #78bdff !important;
     border-radius: 0px !important;
-    border-top: 2px solid #007bff !important;
+    border-top: 1px solid #007bff !important;
+    padding-left: 1.5rem !important;
 }
-
 .header-input::-webkit-input-placeholder {color:#78bdff !important;}
 .header-input::-moz-placeholder          {color:#78bdff !important;}/* Firefox 19+ */
 .header-input:-moz-placeholder           {color:#78bdff !important;}/* Firefox 18- */
 .header-input:-ms-input-placeholder      {color:#78bdff !important;}
-
+.header-input-icon {
+    position: absolute;
+    color: white;
+    opacity: 0.5;
+    margin-top: -1.8rem;
+}
+.header-input:focus ~ i {
+    opacity: 1;
+}
 .header-user-avatar {
     max-width: 36px;
     max-height: 36px;
@@ -65,9 +87,16 @@ body::-webkit-scrollbar-thumb {
     padding-left: 0px;
     font-size: 0.8rem;
 }
-#userDropdown:after {
-    vertical-align: .75em !important;
-    margin-left: 0.5rem !important;
+.header-dropdown-item.select {
+    background-color: #f8f9fa;
+    color: #000000;
+}
+.header-dropdown-item {
+    padding: 0.5rem 1rem !important;
+    color: #868e96 !important;
+}
+.hidden-after:after {
+    display: none !important;
 }
 /* About page */
 .about-nav-block {

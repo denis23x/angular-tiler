@@ -1,11 +1,10 @@
 (function () {
     'use strict';
-    angular.module('app').service('AuthService', ['CommonService', 'EnvironmentService', '$rootScope', function (CommonService, EnvironmentService, $rootScope) {
+    angular.module('app').service('AuthService', ['CommonService', 'EnvironmentService', '$rootScope', '$http', '$state', function (CommonService, EnvironmentService, $rootScope, $http, $state) {
         return {
             registrationUser: function (data) {
                 return CommonService.post(EnvironmentService.apiRoot() + 'users', data)
                     .then(function (response) {
-                        response.success = true;
                         return response;
                     })
                     .catch(function(response) {
@@ -15,11 +14,10 @@
             authorizationUser: function (data) {
                 return CommonService.post(EnvironmentService.apiRoot() + 'auth', data)
                     .then(function (response) {
-                        localStorage.setItem('auth-token', JSON.stringify(response.token));
-                        delete response.token;
+                        $http.defaults.headers.common['Authorization'] = 'Bearer ' + response.token;
+                        localStorage.setItem('auth-token', JSON.stringify(response.token)); delete response.token;
                         localStorage.setItem('auth-data', JSON.stringify(response));
-                        $rootScope.$emit('userAuthenticated');
-                        response.success = true;
+                        $rootScope.$broadcast('userAuthenticated');
                         return response;
                     })
                     .catch(function(response) {
@@ -33,12 +31,19 @@
                 return CommonService.put(EnvironmentService.apiRoot() + 'users/' + id, data)
                     .then(function (response) {
                         localStorage.setItem('auth-data', JSON.stringify(response));
-                        $rootScope.$emit('userAuthenticated');
+                        $rootScope.$broadcast('userAuthenticated');
                         return response;
                     })
                     .catch(function(response) {
                         return response;
                     });
+            },
+            userLogoutUser: function () {
+                delete $http.defaults.headers.common.Authorization;
+                localStorage.removeItem('auth-data');
+                localStorage.removeItem('auth-token');
+                $state.go('home');
+                $rootScope.$broadcast('userLogout');
             },
             registrationBySocial: function (key) {
                 return window.location.replace(EnvironmentService.socialRegistrationPath(key));

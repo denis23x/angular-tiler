@@ -8,12 +8,9 @@
     });
 
     // Start header component
-    HeaderController.$inject = ['$rootScope', 'AuthService', '$state'];
-    function HeaderController($rootScope, AuthService, $state) {
+    HeaderController.$inject = ['$rootScope', 'AuthService'];
+    function HeaderController($rootScope, AuthService) {
         var header = this;
-
-        header.reversePopular = false;
-        header.reverseNewest = false;
 
         //  Get user auth on load application
         header.userData = AuthService.authenticatedUser();
@@ -23,32 +20,31 @@
             header.userData = JSON.parse(localStorage.getItem('auth-data'));
         });
 
+        //  Catch if user logout
+        $rootScope.$on('userLogout', function () {
+            delete header.userData;
+        });
+
         //  Header search input broadcast value
         header.startSearch = function () {
             $rootScope.$broadcast('startSearch', header.searchText);
         };
 
         //  Sort by likes
-        header.mostPopular = function () {
-            header.reversePopular ? header.reversePopular = false : header.reversePopular = true;
-            $rootScope.$broadcast('mostPopular', header.reversePopular);
+        header.mostPopular = function (reverse) {
+            $rootScope.$broadcast('mostPopular', reverse);
         };
 
         //  Sort by watches
         //  TODO: review this sorting by other type?
-        header.mostWatches = function () {
-            header.reverseNewest ? header.reverseNewest = false : header.reverseNewest = true;
-            $rootScope.$broadcast('mostWatches', header.reverseNewest);
+        header.mostWatches = function (reverse) {
+            $rootScope.$broadcast('mostWatches', reverse);
         };
 
         //  Log out user, go home, clear userData and localStorage
         header.logOut = function () {
-            $state.go('home');
-            header.userData = false;
-            localStorage.removeItem('auth-data');
-            localStorage.removeItem('auth-token');
+            AuthService.userLogoutUser();
         };
-
     }
 
 })();

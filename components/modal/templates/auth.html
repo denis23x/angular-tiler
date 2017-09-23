@@ -12,11 +12,11 @@
             </div>
             <div class="modal-body">
                 <div class="col-12 text-center modal-view" ng-show="modal.authView">
-                    <h5 translate="modal.auth.title">Good evening! Welcome back.</h5>
+                    <h5 translate="modal.auth.title">Welcome back.</h5>
                     <h6 class="text-muted" translate="modal.auth.desc">Sign into your account here:</h6>
                     <form name="authForm" class="mt-4 w-75 d-inline-block">
                         <div class="row px-3">
-                            <input type="email" class="form-control default-input" ng-class="{'is-invalid' : authForm.email.$invalid && authForm.email.$dirty || authForm.email.$invalid && modal.authFormSubmitted, 'is-valid' : authForm.email.$valid && authForm.email.$dirty}" placeholder="{{ 'modal.auth.inputEmail' | translate }}" aria-label="Email address" name="email" ng-model="modal.auth.email" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" required >
+                            <input type="email" class="form-control default-input" ng-class="{'is-invalid' : authForm.email.$invalid && authForm.email.$dirty || authForm.email.$invalid && modal.authFormSubmitted, 'is-valid' : authForm.email.$valid && authForm.email.$dirty}" placeholder="{{ 'modal.auth.inputEmail' | translate }}" aria-label="Email address" name="email" ng-model="modal.auth.email" ng-pattern="/^[A-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" required >
                             <i class="mdi mdi-email default-input-icon"></i>
                             <div ng-show="authForm.email.$invalid && authForm.email.$dirty || authForm.email.$invalid && modal.authFormSubmitted" class="invalid-feedback" translate="modal.auth.inputEmailErr">Incorrect email</div>
                         </div>
@@ -83,7 +83,7 @@
                             <span translate="modal.reg.inputNameErrServer">The name field is required</span>
                         </div>
                         <div class="row px-3 mt-3">
-                            <input type="email" class="form-control default-input" ng-class="{'is-invalid' : regForm.email.$invalid && regForm.email.$dirty || regForm.email.$invalid && modal.regFormSubmitted || modal.regFormSubmitted && modal.regFormServerError.email, 'is-valid' : regForm.email.$valid && regForm.email.$dirty && !modal.regFormServerError.email}" placeholder="{{ 'modal.reg.inputEmail' | translate }}" aria-label="Email address" name="email" ng-model="modal.reg.email" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" required >
+                            <input type="email" class="form-control default-input" ng-class="{'is-invalid' : regForm.email.$invalid && regForm.email.$dirty || regForm.email.$invalid && modal.regFormSubmitted || modal.regFormSubmitted && modal.regFormServerError.email, 'is-valid' : regForm.email.$valid && regForm.email.$dirty && !modal.regFormServerError.email}" placeholder="{{ 'modal.reg.inputEmail' | translate }}" aria-label="Email address" name="email" ng-model="modal.reg.email" ng-pattern="/^[A-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" required >
                             <i class="default-input-icon mdi mdi-email"></i>
                             <div ng-show="regForm.email.$invalid && regForm.email.$dirty || regForm.email.$invalid && modal.regFormSubmitted" class="invalid-feedback" translate="modal.reg.inputEmailErr">The email field must have a valid email</div>
                         </div>

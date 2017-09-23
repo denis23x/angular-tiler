@@ -18,7 +18,7 @@
                     </div>
                 </div>
             </div>
-            <form class="container settings-view" name="settingsForm" ng-show="settings.utils.view === 'general'">
+            <form class="container settings-view" name="settingsForm" ng-submit="settings.updateSettings(settingsForm.$valid)" ng-show="settings.utils.view === 'general'">
                 <hr>
                 <div class="row px-3">
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
@@ -58,6 +58,7 @@
                                 <option value="">Russia</option>
                                 <option value="">Other..</option>
                             </select>
+                            <i class="mdi mdi-unfold-more-horizontal default-input-select"></i>
                         </div>
                     </div>
                 </div>
@@ -73,6 +74,7 @@
                                 {{language === 'ru' ? 'Русский' : 'English'}}
                                 </option>
                             </select>
+                            <i class="mdi mdi-unfold-more-horizontal default-input-select"></i>
                         </div>
                     </div>
                 </div>
@@ -84,10 +86,10 @@
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                         <div class="row px-3 mt-1">
-                            <input type="text" class="form-control default-input" ng-class="{'is-invalid' : settingsForm.name.$invalid && settingsForm.name.$dirty || settingsForm.name.$invalid && settings.settingsFormSubmitted || settings.settingsFormSubmitted && settings.updateFormServerError && settings.updateFormServerErrorMessage.name}" placeholder="{{ 'settings.inputName' | translate }}" aria-label="Name" name="name" ng-model="settings.update.name" ng-minlength="2" ng-maxlength="15" required >
+                            <input type="text" class="form-control default-input" ng-class="{'is-invalid' : settingsForm.name.$invalid && settingsForm.name.$dirty || settingsForm.name.$invalid && settings.settingsFormSubmitted || settings.settingsFormSubmitted && settings.updateFormServerError.name}" placeholder="{{ 'settings.inputName' | translate }}" aria-label="Name" name="name" ng-model="settings.update.name" ng-minlength="2" ng-maxlength="15" required >
                             <i class="default-input-icon mdi mdi-account"></i>
                             <div ng-show="settingsForm.name.$invalid && settingsForm.name.$dirty || settingsForm.name.$invalid && settings.settingsFormSubmitted" class="invalid-feedback ml-3" translate="settings.inputNameErr">The name field can contain from 2 to 10 characters</div>
-                            <div ng-show="settings.settingsFormSubmitted && settings.updateFormServerError && settings.updateFormServerErrorMessage.name" class="invalid-feedback ml-3 d-block">{{settings.updateFormServerErrorMessage.name[0]}}</div>
+                            <div ng-show="settings.settingsFormSubmitted && settings.updateFormServerError.name" class="invalid-feedback ml-3 d-block">{{settings.updateFormServerError.name[0]}}</div>
                         </div>
                     </div>
                 </div>
@@ -98,10 +100,10 @@
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                         <div class="row px-3 mt-1">
-                            <input type="text" class="form-control default-input" ng-class="{'is-invalid' : settingsForm.surname.$invalid && settingsForm.surname.$dirty || settingsForm.surname.$invalid && settings.settingsFormSubmitted || settings.settingsFormSubmitted && settings.updateFormServerError && settings.updateFormServerErrorMessage.surname}" placeholder="{{ 'settings.inputSurname' | translate }}" aria-label="Surname" name="surname" ng-model="settings.update.surname" ng-minlength="3" ng-maxlength="20" >
+                            <input type="text" class="form-control default-input" ng-class="{'is-invalid' : settingsForm.surname.$invalid && settingsForm.surname.$dirty || settingsForm.surname.$invalid && settings.settingsFormSubmitted || settings.settingsFormSubmitted && settings.updateFormServerError.surname}" placeholder="{{ 'settings.inputSurname' | translate }}" aria-label="Surname" name="surname" ng-model="settings.update.surname" ng-minlength="3" ng-maxlength="20" >
                             <i class="default-input-icon mdi mdi-account"></i>
                             <div ng-show="settingsForm.surname.$invalid && settingsForm.surname.$dirty || settingsForm.surname.$invalid && settings.settingsFormSubmitted" class="invalid-feedback ml-3" translate="settings.inputSurnameErr">The surname field can contain from 2 to 10 characters</div>
-                            <div ng-show="settings.settingsFormSubmitted && settings.updateFormServerError && settings.updateFormServerErrorMessage.surname" class="invalid-feedback ml-3 d-block">{{settings.updateFormServerErrorMessage.surname[0]}}</div>
+                            <div ng-show="settings.settingsFormSubmitted && settings.updateFormServerError.surname" class="invalid-feedback ml-3 d-block">{{settings.updateFormServerError.surname[0]}}</div>
                         </div>
                     </div>
                 </div>
@@ -113,10 +115,10 @@
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                         <div class="row px-3 mt-1">
-                            <input type="email" class="form-control default-input" ng-class="{'is-invalid' : settingsForm.email.$invalid && settingsForm.email.$dirty || settingsForm.email.$invalid && settings.settingsFormSubmitted || settings.settingsFormSubmitted && settings.updateFormServerError && settings.updateFormServerErrorMessage.email}" placeholder="{{ 'settings.inputEmail' | translate }}" aria-label="Email address" name="email" ng-model="settings.update.email" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" required >
+                            <input type="email" class="form-control default-input" ng-class="{'is-invalid' : settingsForm.email.$invalid && settingsForm.email.$dirty || settingsForm.email.$invalid && settings.settingsFormSubmitted || settings.settingsFormSubmitted && settings.updateFormServerError.email}" placeholder="{{ 'settings.inputEmail' | translate }}" aria-label="Email address" name="email" ng-model="settings.update.email" ng-pattern="/^[A-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" required >
                             <i class="default-input-icon mdi mdi-email"></i>
                             <div ng-show="settingsForm.email.$invalid && settingsForm.email.$dirty || settingsForm.email.$invalid && settings.settingsFormSubmitted" class="invalid-feedback ml-3" translate="settings.inputEmailErr">The email field must have a valid email</div>
-                            <div ng-show="settings.settingsFormSubmitted && settings.updateFormServerError && settings.updateFormServerErrorMessage.email" class="invalid-feedback ml-3 d-block">{{settings.updateFormServerErrorMessage.email[0]}}</div>
+                            <div ng-show="settings.settingsFormSubmitted && settings.updateFormServerError.email" class="invalid-feedback ml-3 d-block">{{settings.updateFormServerError.email[0]}}</div>
                         </div>
                     </div>
                 </div>
@@ -127,10 +129,10 @@
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                         <div class="row px-3 mt-1">
-                            <input type="password" class="form-control default-input" ng-class="{'is-invalid' : settingsForm.password.$invalid && settingsForm.password.$dirty || settingsForm.password.$invalid && settings.settingsFormSubmitted || settings.settingsFormSubmitted && settings.updateFormServerError && settings.updateFormServerErrorMessage.password}" placeholder="{{ 'settings.inputPass' | translate }}" aria-label="Password" name="password" ng-model="settings.update.password" ng-minlength="4" >
+                            <input type="password" class="form-control default-input" ng-class="{'is-invalid' : settingsForm.password.$invalid && settingsForm.password.$dirty || settingsForm.password.$invalid && settings.settingsFormSubmitted || settings.settingsFormSubmitted && settings.updateFormServerError.password}" placeholder="{{ 'settings.inputPass' | translate }}" aria-label="Password" name="password" ng-model="settings.update.password" ng-minlength="4" >
                             <i class="default-input-icon mdi mdi-lock"></i>
                             <div ng-show="settingsForm.password.$invalid && settingsForm.password.$dirty || settingsForm.password.$invalid && settings.settingsFormSubmitted" class="invalid-feedback ml-3" translate="settings.inputPassErr">The password field is required</div>
-                            <div ng-show="settings.settingsFormSubmitted && settings.updateFormServerError && settings.updateFormServerErrorMessage.password" class="invalid-feedback ml-3 d-block">{{settings.updateFormServerErrorMessage.password[0]}}</div>
+                            <div ng-show="settings.settingsFormSubmitted && settings.updateFormServerError.password" class="invalid-feedback ml-3 d-block">{{settings.updateFormServerError.password[0]}}</div>
                         </div>
                     </div>
                 </div>
@@ -141,10 +143,10 @@
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                         <div class="row px-3 mt-1">
-                            <input type="password" class="form-control default-input" ng-class="{'is-invalid' : settingsForm.password.$dirty && settings.update.password_confirmation !== settings.update.password && settings.update.password.length > 0 || settings.settingsFormSubmitted && settingsForm.password.$touched && settings.update.password_confirmation !== settings.update.password || settings.settingsFormSubmitted && settings.updateFormServerError && settings.updateFormServerErrorMessage.password_confirmation}" placeholder="{{ 'settings.inputConfPass' | translate }}" aria-label="Confirm password" name="password_confirmation" ng-model="settings.update.password_confirmation" >
+                            <input type="password" class="form-control default-input" ng-class="{'is-invalid' : settingsForm.password.$dirty && settings.update.password_confirmation !== settings.update.password && settings.update.password.length > 0 || settings.settingsFormSubmitted && settingsForm.password.$touched && settings.update.password_confirmation !== settings.update.password || settings.settingsFormSubmitted && settings.updateFormServerError.password_confirmation}" placeholder="{{ 'settings.inputConfPass' | translate }}" aria-label="Confirm password" name="password_confirmation" ng-model="settings.update.password_confirmation" >
                             <i class="default-input-icon mdi mdi-lock"></i>
                             <div ng-show="settingsForm.password.$dirty && settings.update.password_confirmation !== settings.update.password && settings.update.password.length > 0 || settings.settingsFormSubmitted && settingsForm.password.$touched && settings.update.password_confirmation !== settings.update.password" class="invalid-feedback ml-3" translate="settings.inputConfPassErr">Password confirmation does not match</div>
-                            <div ng-show="settings.settingsFormSubmitted && settings.updateFormServerError && settings.updateFormServerErrorMessage.password_confirmation" class="invalid-feedback ml-3 d-block">{{settings.updateFormServerErrorMessage.password_confirmation[0]}}</div>
+                            <div ng-show="settings.settingsFormSubmitted && settings.updateFormServerError.password_confirmation" class="invalid-feedback ml-3 d-block">{{settings.updateFormServerError.password_confirmation[0]}}</div>
                         </div>
                     </div>
                 </div>
@@ -153,21 +155,21 @@
                     <div class="col-12 text-center">
                         <div class="lead settings-item-title" translate="settings.titleApply">Apply settings</div>
                         <small><span class="text-danger">* <span class="text-muted" translate="settings.descApply">for update settings you must enter current password</span></span></small>
-                        <div class="row px-3 col-xl-4 mx-auto mt-3">
-                            <input type="password" class="form-control default-input" ng-class="{'is-invalid' : settingsForm.current_password.$invalid && settingsForm.current_password.$dirty && !settings.updateFormServerSuccess || settingsForm.current_password.$invalid && settings.settingsFormSubmitted && !settings.updateFormServerSuccess || settings.settingsFormSubmitted && settings.updateFormServerError && settings.updateFormServerErrorMessage.current_password}" placeholder="{{ 'settings.inputCurrPass' | translate }}" aria-label="Current Password" name="current_password" ng-model="settings.update.current_password" ng-minlength="4" required >
-                            <i class="default-input-icon mdi mdi-lock-open"></i>
-                            <div ng-show="settingsForm.current_password.$invalid && settingsForm.current_password.$dirty && !settings.updateFormServerSuccess || settingsForm.current_password.$invalid && settings.settingsFormSubmitted && !settings.updateFormServerSuccess" class="invalid-feedback" translate="settings.inputCurrPassErr">Password length at least 4 characters</div>
-                        </div>
-                        <div ng-show="settings.settingsFormSubmitted && settings.updateFormServerError" class="text-center invalid-feedback d-block">
-                            <i class="mdi mdi-account-alert"></i>
-                            <span ng-show="settings.updateFormServerErrorMessage.current_password">{{settings.updateFormServerErrorMessage.current_password[0]}}</span>
-                            <span ng-show="!settings.updateFormServerErrorMessage.current_password" translate="settings.updateError">Update error</span><span>{{settings.updateFormServerError}}</span>
-                        </div>
                         <div ng-show="settings.settingsFormSubmitted && settings.updateFormServerSuccess" class="text-center text-success">
                             <i class="mdi mdi-check-circle-outline"></i>
-                            <small translate="settings.updateSuccess">Settings successfully updated</small>
+                            <span class="valid-feedback" translate="settings.updateSuccess">Settings successfully updated</span>
                         </div>
-                        <button type="button" class="btn btn-sm btn-warning my-3" ng-click="settings.updateSettings(settingsForm.$valid)" translate="settings.updateSettings">Confirm</button>
+                        <div class="row px-3 col-xl-4 mx-auto mt-3">
+                            <input type="password" class="form-control default-input" ng-class="{'is-invalid' : settingsForm.current_password.$invalid && settingsForm.current_password.$dirty && !settings.settingsFormSubmitted || settingsForm.current_password.$invalid && settings.settingsFormSubmitted && !settings.updateFormServerSuccess && settings.updateFormServerError || settings.settingsFormSubmitted && settings.updateFormServerError}" placeholder="{{ 'settings.inputCurrPass' | translate }}" aria-label="Current Password" name="current_password" ng-model="settings.update.current_password" ng-minlength="4" required >
+                            <i class="default-input-icon mdi mdi-lock-open"></i>
+                        </div>
+                        <div ng-show="settingsForm.current_password.$invalid && settingsForm.current_password.$dirty && !settings.settingsFormSubmitted || settingsForm.current_password.$invalid && settings.settingsFormSubmitted && !settings.updateFormServerSuccess && settings.updateFormServerError" class="invalid-feedback d-block" translate="settings.inputCurrPassErr">Password length at least 4 characters</div>
+                        <div ng-show="settings.settingsFormSubmitted && settings.updateFormServerError" class="text-center invalid-feedback d-block">
+                            <i class="mdi mdi-account-alert"></i>
+                            <span ng-show="settings.updateFormServerError.current_password">{{settings.updateFormServerError.current_password[0]}}</span>
+                            <span ng-show="!settings.updateFormServerError.current_password" translate="settings.updateError">Update error</span>
+                        </div>
+                        <button type="submit" class="btn btn-sm btn-warning my-3" material-ripple data-ripple-color="#818182" translate="settings.updateSettings">Confirm</button>
                     </div>
                 </div>
             </form>

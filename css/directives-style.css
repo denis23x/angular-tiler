@@ -67,10 +67,10 @@
     cursor: pointer;
     user-select: none;
 }
-.material-ripple > span {
+.material-ripple > * {
     position: relative;
-    display: block;
-    padding: 15px 25px;
+    /*display: block;*/
+    /*padding: 15px 25px;*/
 }
 .material-ink {
     position: absolute;

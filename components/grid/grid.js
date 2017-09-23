@@ -33,11 +33,12 @@
             grid.posts = imageList.concat([]);
         });
 
-        grid.gridWidth = 300;
+        grid.gridWidth = 250;
         grid.gutterSize = 10;
 
         //  Sorting grid functions
         $rootScope.$on('startSearch', function (event, val) {
+            grid.searchText = val;
             val = val.toLowerCase();
             grid.posts = imageList.filter(function (post) {
                 return post.title.toLowerCase().indexOf(val) != -1;

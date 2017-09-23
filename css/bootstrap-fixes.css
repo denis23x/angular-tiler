@@ -16,22 +16,37 @@ h6 {
 .close:focus, .close:hover {
     opacity: 1 !important;
 }
+.dropdown-header {
+    color: #495057 !important;
+    font-weight: 600 !important;
+    padding: 0.5rem 1rem !important;
+}
+.dropdown-item:focus, .dropdown-item:hover {
+    color: #000000 !important;
+}
+.dropdown-item:active {
+    color: #fff !important;
+}
 .dropdown-item {
     font-size: 0.9rem;
-}
-.dropdown-toggle::after {
-    vertical-align: .155em !important;
-    margin-left: 0.5rem !important;
 }
 .dropdown-toggle {
     cursor: pointer;
 }
-.lead {
-    font-size: x-large !important;
-}
 
 /* Form input fixes */
-
+.navbar-brand > i {
+    color: white;
+    font-size: 1.25rem;
+}
+.modal::-webkit-scrollbar {
+    width: 5px;
+    background-color: #F7F7F7;
+}
+.modal::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #BFBFBF;
+}
 .is-invalid {
     border-color: #ff717f !important;
     color: #ff717f !important;
@@ -39,8 +54,16 @@ h6 {
 .is-invalid ~ .default-input-icon {
     color: #ff717f !important;
 }
-.invalid-feedback {
+/* Tiler custom class */
+.valid-feedback {
     font-size: 0.8rem;
+    opacity: 0.75;
+    margin-top: .25rem;
+    color: #28a745;
+    display: inline-block;
+}
+.invalid-feedback {
+    font-size: 0.8rem !important;
     opacity: 0.75;
     width: 100%;
 }
@@ -53,4 +76,8 @@ h6 {
 }
 .custom-control-input:focus~.custom-control-indicator {
     box-shadow: none !important;
+}
+/* Input select */
+.custom-select {
+    background: none !important;
 }

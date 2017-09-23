@@ -54,8 +54,8 @@
     }
 
     //  TRUE = only if have html directive: ng-controller="mainController as main" - in index.php
-    MainController.$inject = ['$transitions', '$rootScope', '$http'];
-    function MainController($transitions, $rootScope, $http) {
+    MainController.$inject = ['$transitions'];
+    function MainController($transitions) {
         var main = this,
             restrictedArea = [
                 'settings'
@@ -68,12 +68,6 @@
                 return transition.router.stateService.target('home.auth');
             }
         });
-
-        //  Catch if user login and set headers
-        $rootScope.$on('userAuthenticated', function () {
-            $http.defaults.headers.common['Authorization'] = 'Bearer ' + JSON.parse(localStorage.getItem('auth-token'));
-        });
     }
-
 
 })();

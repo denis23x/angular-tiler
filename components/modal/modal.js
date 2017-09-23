@@ -85,7 +85,7 @@
 
                 if (isValid) {
                     AuthService.authorizationUser(modal.auth).then(function (response) {
-                        response.success ? modal.authSuccess() : modal.authFormServerError = response.data;
+                        response.hasOwnProperty('status') ? modal.authFormServerError = response.data : modal.authSuccess();
                     })
                 }
             };
@@ -99,22 +99,30 @@
 
                 if (isValid) {
                     AuthService.registrationUser(modal.reg).then(function (response) {
-                        if (response.success) {
+                        if (response.hasOwnProperty('status')) {
+                            switch(response.status) {
+                                case 401:
+                                    modal.regFormServerError = response.data;
+                                    break;
+                                case 422:
+                                    modal.regFormServerError = response.data.errors;
+                                    break;
+                                default:
+                                    break
+                            }
+                            modal.regFormServerError.takenEmail = modal.reg.email;
+                        } else {
                             modal.firstAuth = {
                                 email : modal.reg.email,
                                 password : modal.reg.password
                             };
                             AuthService.authorizationUser(modal.firstAuth).then(function (response) {
-                                response.success ? modal.authSuccess() : $state.go('error');
+                                response.hasOwnProperty('status') ? $state.go('error') : modal.authSuccess();
                             });
-                        } else {
-                            modal.regFormServerError = response.data.errors;
-                            modal.regFormServerError.takenEmail = modal.reg.email;
                         }
                     })
                 }
             };
-
         };
 
         //  Handler division of work by type

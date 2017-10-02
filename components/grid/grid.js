@@ -15,7 +15,7 @@
     function GridController($rootScope, $scope, APIService, angularGridInstance) {
 
         var grid = this,
-            page = 1, imageList;
+            page = 1, postList;
 
         //  Watch while grid.posts has loaded/changed
         $scope.$watch(grid.posts, function() {
@@ -29,8 +29,8 @@
                 obj.created = moment(obj.created_at).startOf('hour').from();
             });
 
-            imageList = grid.posts;
-            grid.posts = imageList.concat([]);
+            postList = grid.posts;
+            grid.posts = postList.concat([]);
         });
 
         grid.gridWidth = 250;
@@ -40,20 +40,30 @@
         $rootScope.$on('startSearch', function (event, val) {
             grid.searchText = val;
             val = val.toLowerCase();
-            grid.posts = imageList.filter(function (post) {
+            grid.posts = postList.filter(function (post) {
                 return post.title.toLowerCase().indexOf(val) != -1;
             });
         });
 
         $rootScope.$on('mostPopular', function (event, reverse) {
-            grid.posts = imageList.sort(function (a, b) {
+            grid.posts = postList.sort(function (a, b) {
                 return reverse ? a.likes_count - b.likes_count : b.likes_count - a.likes_count;
             });
         });
 
         $rootScope.$on('mostWatches', function (event, reverse) {
-            grid.posts = imageList.sort(function (a, b) {
+            grid.posts = postList.sort(function (a, b) {
                 return reverse ? a.views_count - b.views_count : b.views_count - a.views_count;
+            });
+        });
+
+        $rootScope.$on('showAll', function (event) {
+                return grid.posts = postList;
+        });
+
+        $rootScope.$on('showCategory', function (event, category) {
+            grid.posts = postList.filter(function (post) {
+                return post.category_id.toString().match(category, 'g');
             });
         });
 

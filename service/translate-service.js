@@ -7,12 +7,25 @@
         return {
             russianLanguage: function () {
                 var dictionary = {
+                    create: {
+                        createTitle         : 'Создать пост',
+                        createTitleInput    : 'Добавить заголовок',
+                        selectCategory      : 'Выбрать категорию',
+                        collections         : 'Коллекции',
+                        categories          : 'Категории',
+                        changeColor         : 'Сменить цвет',
+                        postPreview         : 'Миниатюра поста',
+                        descPreview         : 'Изображение будет являться основным для поста'
+                    },
                     header: {
                         logoDesc    : 'tiler',
                         newest      : 'новые',
                         oldest      : 'старые',
                         popular     : 'популярные',
                         unpopular   : 'не популярные',
+                        showAll     : 'Показать все',
+                        noCollections: 'Нет коллекций',
+                        main        : 'Основные',
                         searchBy    : 'Поиск по заголовкам',
                         sort        : 'Сортировка',
                         inCategory  : 'Категории',
@@ -121,12 +134,26 @@
             },
             englishLanguage: function () {
                 var dictionary = {
+                    create: {
+                        createTitle         : 'Create post',
+                        createTitleInput    : 'Type title',
+                        selectCategory      : 'Select category',
+                        collections         : 'Collections',
+                        categories          : 'Main',
+                        changeColor         : 'Change color',
+                        postPreview         : 'Post preview',
+                        descPreview         : 'The image will be the main one for the post'
+
+                    },
                     header: {
                         logoDesc    : 'tiler',
                         newest      : 'the newest',
                         oldest      : 'the oldest',
                         popular     : 'most popular',
                         unpopular   : 'most unpopular',
+                        showAll     : 'Show all',
+                        noCollections: 'No collections',
+                        main        : 'Main',
                         searchBy    : 'Search by title',
                         sort        : 'Sorting',
                         inCategory  : 'Category',

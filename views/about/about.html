@@ -1,0 +1,116 @@
+<div class="container-fluid" ng-controller="AboutController as about">
+    <div class="row">
+        <div class="col col-md-auto about-nav-block d-none d-md-block">
+            <div class="sticky-top">
+                <nav class="navbar navbar-light about-nav text-right">
+                    <nav class="nav flex-column w-100">
+                        <a class="nav-link" href="#getting-started">Getting started</a>
+                        <nav class="nav flex-column">
+                            <a class="nav-link ml-3 my-1" href="#intro">Introduction</a>
+                            <a class="nav-link ml-3 my-1" href="#features">Features</a>
+                        </nav>
+                        <a class="nav-link" href="#frontend">Frontend Stack</a>
+                        <nav class="nav flex-column">
+                            <a class="nav-link ml-3 my-1" href="#angular">AngularJS</a>
+                            <a class="nav-link ml-3 my-1" href="#bootstrap">Bootstrap 4</a>
+                            <a class="nav-link ml-3 my-1" href="#gulp">Gulp</a>
+                        </nav>
+                        <a class="nav-link" href="#backend">Backend Stack</a>
+                        <nav class="nav flex-column">
+                            <a class="nav-link ml-3 my-1" href="#laravel">Laravel 5</a>
+                        </nav>
+                    </nav>
+                </nav>
+            </div>
+        </div>
+        <div class="col-12 col-sm-8 col-md-6 col-lg-6 col-xl-4 mt-4">
+            <h4 id="getting-started">Getting started</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias aliquam architecto at, blanditiis culpa cumque ducimus fuga odit possimus quis quisquam quo rem sed vero. Commodi nam nulla quibusdam.</p>
+            <h4 id="intro">Introduction</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias aliquam architecto at, blanditiis culpa cumque ducimus fuga odit possimus quis quisquam quo rem sed vero. Commodi nam nulla quibusdam.</p>
+            <h5 id="features">Features</h5>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias aliquam architecto at, blanditiis culpa cumque ducimus fuga odit possimus quis quisquam quo rem sed vero. Commodi nam nulla quibusdam.</p>
+            <div class="about-text-block">
+                <h4 id="frontend">
+                    <mark>Frontend Stack</mark>
+                </h4>
+                <div class="row about-dev-icons text-center">
+                    <div class="col-2">
+                        <a href="#angular"><img src="../../img/dev-icons/angular.svg" alt="AngularJS"></a>
+                    </div>
+                    <div class="col-2">
+                        <a href="#bootstrap"><img src="../../img/dev-icons/bootstrap-4.svg" alt="Bootstrap"></a>
+                    </div>
+                    <div class="col-2">
+                        <a href="#gulp"><img src="../../img/dev-icons/gulp.svg" alt="Gulp"></a>
+                    </div>
+                    <div class="col-2"></div>
+                    <div class="col-2"></div>
+                    <div class="col-2"></div>
+                </div>
+            </div>
+            <div class="about-text-block">
+                <h5 id="angular">
+                    <mark>AngularJS</mark>
+                    <small class="text-muted">Superheroic JavaScript MVW Framework</small>
+                </h5>
+                <i class="mdi mdi-github-circle"></i>
+                <a target="_blank" href="https://github.com/angular/angular.js">https://github.com/angular/angular.js</a>
+                <hr>
+                <p>AngularJS lets you write client-side web applications as if you had a smarter browser. It lets you use good old HTML (or HAML, Jade/Pug and friends!) as your template language and lets you extend HTML’s syntax to express your application’s components clearly and succinctly. It automatically synchronizes data from your UI (view) with your JavaScript objects (model) through 2-way data binding. To help you structure your application better and make it easy to test, AngularJS teaches the browser how to do dependency injection and inversion of control.</p>
+                <p>It also helps with server-side communication, taming async callbacks with promises and deferred objects, and it makes client-side navigation and deep linking with hashbang urls or HTML5 pushState a piece of cake. Best of all? It makes development fun!</p>
+                <hr>
+                <p>Official AngularJS package what we use:</p>
+                <ul>
+                    <li><a target="_blank" href="https://www.npmjs.com/package/angular">angular</a></li>
+                    <li><a target="_blank" href="https://www.npmjs.com/package/angular-animate">angular-animate</a></li>
+                    <li><a target="_blank" href="https://www.npmjs.com/package/angular-sanitize">angular-sanitize</a></li>
+                </ul>
+                <p>Third party packages:</p>
+                <ul>
+                    <li><a target="_blank" href="https://www.npmjs.com/package/angulargrid">angulargrid</a></li>
+                    <li><a target="_blank" href="https://www.npmjs.com/package/angular-translate">angular-translate</a></li>
+                    <li><a target="_blank" href="https://www.npmjs.com/package/angular-ui-router">angular-ui-router</a></li>
+                </ul>
+            </div>
+            <div class="about-text-block">
+                <h5 id="bootstrap">
+                    <mark>Bootstrap 4</mark>
+                    <small class="text-muted">Most popular framework for building responsive sites</small>
+                </h5>
+                <i class="mdi mdi-github-circle"></i>
+                <a target="_blank" href="https://github.com/twbs/bootstrap">https://github.com/twbs/bootstrap</a>
+                <hr>
+                <p>Build responsive, mobile-first projects on the web with the world's most popular front-end component library.</p>
+                <p>Bootstrap is an open source toolkit for developing with HTML, CSS, and JS. Quickly prototype your ideas or build your entire app with our Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful plugins built on jQuery.</p>
+            </div>
+            <div class="about-text-block">
+                <h5 id="gulp">
+                    <mark>Gulp</mark>
+                    <small class="text-muted">The streaming build system</small>
+                </h5>
+                <i class="mdi mdi-github-circle"></i>
+                <a target="_blank" href="https://github.com/gulpjs/gulp/">https://github.com/gulpjs/gulp</a>
+                <hr>
+                <p><b>Automation</b> - gulp is a toolkit that helps you automate painful or time-consuming tasks in your development workflow.</p>
+                <p><b>Platform-agnostic</b> - Integrations are built into all major IDEs and people are using gulp with PHP, .NET, Node.js, Java, and other platforms.</p>
+                <p><b>Strong Ecosystem</b> - Use npm modules to do anything you want + over 2000 curated plugins for streaming file transformations</p>
+                <p><b>Simple</b> - By providing only a minimal API surface, gulp is easy to learn and simple to use</p>
+                <hr>
+                <p>Gulp plugins what we use:</p>
+                <ul>
+                    <li><a target="_blank" href="https://www.npmjs.com/package/gulp">gulp</a></li>
+                    <li><a target="_blank" href="https://www.npmjs.com/package/gulp-clean-css">gulp-clean-css</a></li>
+                    <li><a target="_blank" href="https://www.npmjs.com/package/gulp-concat">gulp-concat</a></li>
+                    <li><a target="_blank" href="https://www.npmjs.com/package/gulp-strip-comments">gulp-strip-comments</a></li>
+                    <li><a target="_blank" href="https://www.npmjs.com/package/gulp-uglify">gulp-uglify</a></li>
+                    <li><a target="_blank" href="https://www.npmjs.com/package/pump">pump</a></li>
+                </ul>
+            </div>
+
+            <h5 id="backend">Backend Stack</h5>
+            <h5 id="laravel">Laravel 5</h5>
+
+        </div>
+    </div>
+</div>

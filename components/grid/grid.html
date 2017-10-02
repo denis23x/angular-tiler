@@ -2,10 +2,10 @@
     <div class="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
         <div class="mt-5 text-center grid-search-wrap" ng-show="grid.posts.length === 0">
             <i class="mdi mdi-comment-alert-outline mdi-48px" aria-hidden="true"></i>
-            <div class="grid-search-title lead"><span class="text-danger">{{grid.searchText}}</span> - <span translate="grid.notFoundTitle">not found</span></div>
+            <div class="grid-search-title lead" ng-show="grid.searchText"><span class="text-danger">{{grid.searchText}}</span> - <span translate="grid.notFoundTitle">not found</span></div>
             <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-6 mx-auto lead">
                 <span translate="grid.notFoundDesc">Nothing found on your request, try to change the search category, or</span>
-                <a href="" translate="grid.notFoundLink">create an interesting post</a>
+                <a href="" ui-sref="create" translate="grid.notFoundLink">create an interesting post</a>
                 <span translate="grid.notFoundEnd">yourself</span>
             </div>
         </div>

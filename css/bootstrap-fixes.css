@@ -27,9 +27,6 @@ h6 {
 .dropdown-item:active {
     color: #fff !important;
 }
-.dropdown-item {
-    font-size: 0.9rem;
-}
 .dropdown-toggle {
     cursor: pointer;
 }

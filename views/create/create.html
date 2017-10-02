@@ -1,0 +1,80 @@
+<div class="container" ng-controller="CreateController as create">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-8 col-xl-8 mx-auto mt-5">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <h3 class="mb-3 lead settings-page-header" translate="create.createTitle">Create post</h3>
+                </div>
+                <!--<button class="btn btn-primary" ng-click="create.test()">click me to start</button>-->
+                <form action="col-12">
+                    <button class="btn btn-primary btn-sm" ng-click="create.forma()">Check Form</button>
+                    <hr>
+                    <div class="px-3">
+                        <div class="row my-4">
+                            <div class="col-8">
+                                <input type="text" class="form-control create-title-input" ng-class="{'is-invalid' : ''}" placeholder="{{ 'create.createTitleInput' | translate }}" ng-model="create.form.title" aria-label="postTitle" name="postTitle">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-3">
+                        <summernote config="create.options" ng-model="create.form.text" placeholder="Текст сообщения"></summernote>
+                    </div>
+                    <div class="px-3 mt-5">
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
+                                <a class="nav-link"><span class="create-category-title lead mr-2" translate="create.selectCategory">Select category</span></a>
+                                <div class="mt-0">
+                                    <div class="dropdown-divider"></div>
+                                    <div class="header-dropdown-fixed-height">
+                                        <div ng-show="create.collections" ng-repeat="collection in create.collections">
+                                            <a class="header-dropdown-item" ng-class="{'select': create.form.collection_id.indexOf(collection.id) !== -1}" href="#" ng-click="create.selectItems(collection.id, 'collection')">
+                                                <i class="mdi mdi-check mr-1" ng-show="create.form.collection_id.indexOf(collection.id) !== -1" aria-hidden="true"></i>
+                                                {{collection.name}}
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-divider"></div>
+                                    <div ng-show="create.categories" ng-repeat="category in create.categories">
+                                        <a class="header-dropdown-item" ng-class="{'select': create.form.category_id.indexOf(category.id) !== -1}" href="#" ng-click="create.selectItems(category.id, 'category')">
+                                            <i class="mdi mdi-check mr-1" ng-show="create.form.category_id.indexOf(category.id) !== -1" aria-hidden="true"></i>
+                                            {{category.name}}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-7">
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-8">
+                                    <div class="base64-image-wrapper d-block">
+                                        <div class="img-thumbnail create-preview-name" ng-show="!create.form.preview"  ng-style="{'background' : '#' + create.utils.randomColor}">
+                                            <div class="create-preview-name-wrapper">{{create.userData.name[0]}}{{create.userData.surname ? create.userData.surname[0] : ''}}</div>
+                                        </div>
+                                        <img class="img-thumbnail d-inline-block" ng-show="create.form.preview" ng-src="{{create.form.preview}}" alt="{{create.form.title}}">
+                                        <div class="base64-image-wrapper-loader animation-fade" ng-show="create.utils.base64Loader">
+                                            <div class="base64-image-wrapper-loader-inside">
+                                                <i class="mdi mdi-loading rotating-spinner"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-link btn-sm mb-3" ng-show="!create.form.preview" ng-click="create.changeColor()" translate="create.changeColor">Change color</button>
+                                    <div class="d-block align-middle">
+                                        <div class="lead settings-item-title" translate="create.postPreview">Post preview</div>
+                                        <div class="lead text-muted settings-item-description" translate="create.descPreview">You can change avatar by link or from file</div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-10">
+                                    <div class="row px-3 mt-3">
+                                        <input image-base64 type="text" class="form-control default-input col-xl-7" ng-class="{'is-invalid' : create.utils.base64Error}" placeholder="{{ 'settings.linkAvatar' | translate }}" aria-label="Preview link" name="previewLink" ng-model="create.utils.linkPreview" result="create.form.preview" loader="create.utils.base64Loader" error="create.utils.base64Error" ng-disabled="create.utils.base64Loader">
+                                        <i class="default-input-icon mdi mdi-link"></i>
+                                        <button type="button" class="col-xl-5 btn btn-sm btn-link" onclick="document.getElementById('inputFileImg').click()" translate="settings.fileAvatar">Select file</button>
+                                        <input image-base64 type="file" id="inputFileImg" accept="image/x-png,image/gif,image/jpeg" aria-label="Preview file" name="previewАшду" ng-model="create.utils.base64File" result="create.form.preview" error="create.utils.base64Error" hidden>
+                                        <div ng-show="create.utils.base64Error" class="invalid-feedback ml-3">{{create.utils.base64Error}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -64,6 +64,7 @@
 .grid-img-wrap {
     position:relative;
     cursor: pointer;
+    max-height: 300px;
 }
 .grid-img-wrap img {
     width:100%;

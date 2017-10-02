@@ -1,0 +1,18 @@
+<div class="container" ng-controller="CollectionsController as collections">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-8 col-xl-8 mx-auto mt-5">
+            <div class="row">
+                <h4>This will be collections page</h4>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-12">
+                    <p>create collection</p>
+                    <input type="text" ng-model="collections.name">
+                    <button ng-click="collections.createCollection()">create click</button>
+                    <p>all collections here:</p>
+                    <ul ng-repeat="collection in collections.list">
+                        <li>{{collection.name}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -17,16 +17,22 @@
             <li class="nav-item dropdown mr-3">
                 <a class="nav-link dropdown-toggle hidden-after" material-ripple href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="mr-2" translate="header.inCategory">Category</span><i class="mdi mdi-chevron-down" aria-hidden="true"></i></a>
                 <div class="dropdown-menu dropdown-menu-left mt-0">
-                    <a class="dropdown-item header-dropdown-item" ng-class="{'select': true}" href="#" translate="header.newest">the newest</a>
-                    <h6 class="dropdown-header"><i class="mdi mdi-folder-outline mr-1" aria-hidden="true"></i> My collections</h6>
+                    <a class="dropdown-item header-dropdown-item" ng-class="{'select': true}" href="#" ng-click="header.showAll()" translate="header.showAll">Show all</a>
+                    <div ng-show="header.userData">
+                        <h6 class="dropdown-header"><i class="mdi mdi-folder-outline mr-2" aria-hidden="true"></i><span translate="header.collections"></span></h6>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item header-dropdown-item" href="#" ui-sref="collections" ng-show="!header.collections" translate="header.noCollections">Нет коллекций</a>
+                        <div class="header-dropdown-fixed-height">
+                            <div ng-show="header.collections" ng-repeat="collection in header.collections | orderBy:'name'">
+                                <a class="dropdown-item header-dropdown-item" href="#" ng-click="header.showCollection(category.id)">{{collection.name}}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <h6 class="dropdown-header"><i class="mdi mdi-folder-outline mr-2" aria-hidden="true"></i><span translate="header.main"></span></h6>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item header-dropdown-item" href="#">my games</a>
-                    <a class="dropdown-item header-dropdown-item text-muted" href="#">my cars</a>
-                    <h6 class="dropdown-header"><i class="mdi mdi-folder-outline mr-1" aria-hidden="true"></i> Others</h6>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item header-dropdown-item" href="#">games</a>
-                    <a class="dropdown-item header-dropdown-item" href="#">sports</a>
-                    <a class="dropdown-item header-dropdown-item" href="#">politics</a>
+                    <div ng-repeat="category in header.categories | orderBy:'name'">
+                        <a class="dropdown-item header-dropdown-item" href="#" ng-click="header.showCategory(category.id)">{{category.name}}</a>
+                    </div>
                 </div>
             </li>
             <li class="nav-item">
@@ -40,14 +46,14 @@
         </ul>
         <ul class="navbar-nav ml-auto" ng-show="header.userData">
             <li class="nav-item">
-                <a class="nav-link" material-ripple href="#" ui-sref="about">
+                <a class="nav-link" material-ripple href="#" ui-sref="create">
                     <i class="mdi mdi-plus" aria-hidden="true"></i>
                     <span translate="header.add"> Add</span>
                 </a>
             </li>
-            <li class="nav-item"><a class="nav-link" material-ripple href="#" ui-sref="about" translate="header.myProfile">My profile</a></li>
-            <li class="nav-item"><a class="nav-link" material-ripple href="#" ui-sref="about" translate="header.collections">Collections</a></li>
-            <li class="nav-item mr-4"><a class="nav-link" material-ripple href="#" ui-sref="about" translate="header.users">Users</a></li>
+            <li class="nav-item"><a class="nav-link" material-ripple href="#" ui-sref="profile" translate="header.myProfile">My profile</a></li>
+            <li class="nav-item"><a class="nav-link" material-ripple href="#" ui-sref="collections" translate="header.collections">Collections</a></li>
+            <li class="nav-item mr-4"><a class="nav-link" material-ripple href="#" ui-sref="users" translate="header.users">Users</a></li>
             <li class="nav-item mr-4 dropdown">
                 <a class="nav-link dropdown-toggle d-inline-block py-0 hidden-after" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="d-inline-block align-text-bottom mr-2 header-user-avatar" ng-src="{{header.userData.avatar}}" alt="{{header.userData.name}}">
@@ -59,9 +65,9 @@
                 <div class="dropdown-menu dropdown-menu-right mt-0">
                     <a class="dropdown-item header-dropdown-item" href="#" ui-sref="home" translate="header.home">Home</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item header-dropdown-item" href="#" ui-sref="" translate="header.myProfile">My profile</a>
-                    <a class="dropdown-item header-dropdown-item" href="#" ui-sref="" translate="header.collections">Collections</a>
-                    <a class="dropdown-item header-dropdown-item" href="#" ui-sref="" translate="header.users">Users</a>
+                    <a class="dropdown-item header-dropdown-item" href="#" ui-sref="profile" translate="header.myProfile">My profile</a>
+                    <a class="dropdown-item header-dropdown-item" href="#" ui-sref="collections" translate="header.collections">Collections</a>
+                    <a class="dropdown-item header-dropdown-item" href="#" ui-sref="users" translate="header.users">Users</a>
                     <a class="dropdown-item header-dropdown-item" href="#" ui-sref="settings" translate="header.settings">Settings</a>
                     <a class="dropdown-item header-dropdown-item" href="#" ui-sref="about" translate="header.about">About</a>
                     <div class="dropdown-divider"></div>

@@ -25,6 +25,20 @@
                     });
             },
             authenticatedUser: function () {
+                // if (localStorage.getItem('auth-token') !== null) {
+                //     var token = JSON.parse(atob(localStorage.getItem('auth-token').split('.')[1])),
+                //         currentUnixTime = Math.floor((new Date()).getTime() / 1000),
+                //         data = localStorage.getItem('auth-data');
+                //
+                //     //  If token expired
+                //     if (currentUnixTime > token.exp) {
+                //         // alert('asdw');
+                //     }
+                //     console.log();
+                //     console.log(this.authorizationUser(data));
+                //
+                // }
+
                 return localStorage.getItem('auth-token') !== null ? JSON.parse(localStorage.getItem('auth-data')) : false;
             },
             updateUserSettings: function (id, data) {
@@ -38,10 +52,11 @@
                         return response;
                     });
             },
-            userLogoutUser: function () {
+            userLogout: function () {
                 delete $http.defaults.headers.common.Authorization;
                 localStorage.removeItem('auth-data');
                 localStorage.removeItem('auth-token');
+                localStorage.removeItem('user-collections');
                 $state.go('home');
                 $rootScope.$broadcast('userLogout');
             },

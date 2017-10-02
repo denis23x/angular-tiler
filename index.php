@@ -4,13 +4,14 @@
     <base href="/">
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>tiler develop</title>
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="node_modules/mdi/css/materialdesignicons.min.css" media="all" type="text/css" />
     <link rel="stylesheet" href="node_modules/animate.css/animate.min.css">
+<!--    <link rel="stylesheet" href="node_modules/angular-loading-bar/build/loading-bar.min.css">-->
 
     <script src="node_modules/jquery/dist/jquery.js"></script>
 
@@ -26,6 +27,10 @@
     <script src="node_modules/moment/min/moment.min.js"></script>
 
     <script src="node_modules/angular-translate/dist/angular-translate.min.js"></script>
+
+    <script src="node_modules/oclazyload/dist/ocLazyLoad.min.js"></script>
+
+<!--    <script src="node_modules/angular-loading-bar/build/loading-bar.min.js"></script>-->
 
 
 </head>
@@ -49,8 +54,6 @@
 <script src="components/header/header.js"></script>
 <script src="components/grid/grid.js"></script>
 <script src="components/modal/modal.js"></script>
-
-<script src="controllers/pages-controllers.js"></script>
 
 <script src="directives/material-ripple-directive.js"></script>
 <script src="directives/image-base64-directive.js"></script>

@@ -5,14 +5,16 @@
         'angularGrid',
         'ngAnimate',
         'ngSanitize',
-        'pascalprecht.translate'
+        'pascalprecht.translate',
+        'oc.lazyLoad'
+        // 'angular-loading-bar'
     ])
     .config(MainConfig)
     .run(MainRun)
     .controller('MainController', MainController);
 
-    MainConfig.$inject = ['$sceDelegateProvider', 'RouterServiceProvider', '$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', 'TranslateServiceProvider', '$httpProvider', 'AuthServiceProvider'];
-    function MainConfig($sceDelegateProvider, RouterServiceProvider, $stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, TranslateServiceProvider, $httpProvider, AuthServiceProvider) {
+    MainConfig.$inject = ['$sceDelegateProvider', 'RouterServiceProvider', '$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', 'TranslateServiceProvider', '$httpProvider', 'AuthServiceProvider', 'APIServiceProvider'];
+    function MainConfig($sceDelegateProvider, RouterServiceProvider, $stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, TranslateServiceProvider, $httpProvider, AuthServiceProvider, APIServiceProvider) {
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode({
             enabled: true,
@@ -32,11 +34,12 @@
         });
 
         //  Cache http queries
-        $httpProvider.defaults.cache = true;
+        // $httpProvider.defaults.cache = true;
 
-        //  Set auth token
+        // Set auth token
         if (AuthServiceProvider.$get().authenticatedUser()) {
             $httpProvider.defaults.headers.common['Authorization'] = 'Bearer ' + JSON.parse(localStorage.getItem('auth-token'));
+            // APIServiceProvider.$get().loadCollections(JSON.parse(localStorage.getItem('auth-data')).id);
         }
 
         //  Register languages
@@ -58,9 +61,11 @@
     function MainController($transitions) {
         var main = this,
             restrictedArea = [
-                'settings'
+                'settings',
+                'profile',
+                'collections',
+                'create'
             ];
-
         //  Watch on user auth condition
         $transitions.onStart({ to: restrictedArea }, function(transition) {
             var auth = transition.injector().get('AuthService');

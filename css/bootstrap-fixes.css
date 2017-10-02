@@ -78,3 +78,13 @@ h6 {
 .custom-select {
     background: none !important;
 }
+
+
+
+/* FIX FOR SHINING BORDER */
+.modal-content {
+    border: 1px solid #ddd !important;
+}
+.card {
+    border: 1px solid #ddd !important;
+}

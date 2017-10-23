@@ -18,7 +18,7 @@
                 <a class="nav-link dropdown-toggle hidden-after" material-ripple href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="mr-2" translate="header.inCategory">Category</span><i class="mdi mdi-chevron-down" aria-hidden="true"></i></a>
                 <div class="dropdown-menu dropdown-menu-left mt-0">
                     <a class="dropdown-item header-dropdown-item" ng-class="{'select': true}" href="#" ng-click="header.showAll()" translate="header.showAll">Show all</a>
-                    <div ng-show="header.userData">
+                    <div ng-show="header.collections.length > 0">
                         <h6 class="dropdown-header"><i class="mdi mdi-folder-outline mr-2" aria-hidden="true"></i><span translate="header.collections"></span></h6>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item header-dropdown-item" href="#" ui-sref="collections" ng-show="!header.collections" translate="header.noCollections">Нет коллекций</a>
@@ -58,7 +58,7 @@
                 <a class="nav-link dropdown-toggle d-inline-block py-0 hidden-after" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="d-inline-block align-text-bottom mr-2 header-user-avatar" ng-src="{{header.userData.avatar}}" alt="{{header.userData.name}}">
                     <ul class="header-user-list">
-                        <li>{{header.userData.name}}</li>
+                        <li>{{header.userData.name}} {{header.userData.surname}}</li>
                         <li>{{header.userData.email}}</li>
                     </ul>
                 </a>

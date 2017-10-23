@@ -8,7 +8,7 @@
         var collections = this;
 
         //  Get user data
-        collections.userData = JSON.parse(localStorage.getItem('auth-data'));
+        collections.userData = JSON.parse(localStorage.getItem('user-data'));
         collections.list = JSON.parse(localStorage.getItem('user-collections'));
 
         //  Refresh collections if user create another one

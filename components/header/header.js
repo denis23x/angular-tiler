@@ -12,8 +12,8 @@
     function HeaderController($rootScope, AuthService, APIService) {
         var header = this;
 
-        //  Get user auth on load application
-        header.userData = JSON.parse(localStorage.getItem('auth-data'));
+        //  Get user data
+        header.userData = JSON.parse(localStorage.getItem('user-data'));
         header.collections = JSON.parse(localStorage.getItem('user-collections'));
 
         APIService.loadCategories().then(function (response) {
@@ -21,12 +21,11 @@
         });
 
         //  Catch if user was login
-        $rootScope.$on('userAuthenticated', function () {
-            header.userData = JSON.parse(localStorage.getItem('auth-data'));
-            APIService.loadCollections(header.userData.id);
+        $rootScope.$on('userRefresh', function () {
+            header.userData = JSON.parse(localStorage.getItem('user-data'));
         });
 
-        //  Catch user collections
+        //  Catch collections if user create another one
         $rootScope.$on('refreshCollections', function () {
             header.collections = JSON.parse(localStorage.getItem('user-collections'));
         });
@@ -66,11 +65,6 @@
         header.logOut = function () {
             AuthService.userLogout();
         };
-
-        //  Catch if user logout
-        $rootScope.$on('userLogout', function () {
-            delete header.userData;
-        });
 
     }
 

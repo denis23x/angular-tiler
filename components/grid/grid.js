@@ -41,7 +41,7 @@
             grid.searchText = val;
             val = val.toLowerCase();
             grid.posts = postList.filter(function (post) {
-                return post.title.toLowerCase().indexOf(val) != -1;
+                return post.title.toLowerCase().indexOf(val) !== -1;
             });
         });
 
@@ -62,9 +62,16 @@
         });
 
         $rootScope.$on('showCategory', function (event, category) {
-            grid.posts = postList.filter(function (post) {
-                return post.category_id.toString().match(category, 'g');
+            var arr = [];
+            postList.filter(function (post) {
+                if (post.categories.length > 0) {
+                    angular.forEach(post.categories, function (val, key) {
+                        val.id === category ? arr.push(post) : false;
+                    });
+                }
             });
+
+            grid.posts = arr;
         });
 
         grid.refresh = function(){

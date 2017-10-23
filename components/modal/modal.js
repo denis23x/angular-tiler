@@ -23,7 +23,16 @@
         //  Show modal on init
         modal.$onInit = function() {
             modalElement.modal('show');
-            // console.log($location.search().token);
+
+            //  If user registration by social
+            if ($location.search().email !== undefined) {
+                modal.utils.regContinue = true;
+                modal.authSwitch();
+                modal.reg.name = $location.search().name;
+                modal.reg.email = $location.search().email;
+                modal.reg.surname = $location.search().surname;
+                $location.url($location.path());
+            }
         };
 
         //  Back state on hidden modal
@@ -32,29 +41,28 @@
         });
 
         modal.postHandler = function () {
-
+            //  TODO: post handler
         };
 
         modal.authHandler = function () {
             modal.authView = true;
             modal.regView = false;
             modal.utils = {
+                regContinue: false,
                 defaultAvatarLink: window.location.origin + '/img/default-avatars/captainamerica.png'
             };
 
-            //  Disable avatar carousel sliding
-            angular.element('#carouselDefaultAvatars').carousel({
-                interval: 0
-            });
-
             //  Get selected avatar of user
-            angular.element('#carouselDefaultAvatars').on('slide.bs.carousel', function (e) {
+            angular.element('#carouselDefaultAvatars').on('slid.bs.carousel', function (e) {
                 modal.utils.defaultAvatarLink = angular.element(e.relatedTarget).find('img')[0].src;
             });
 
             modal.auth = {
-                email: '',
-                password: ''
+                username: '',
+                password: '',
+                grant_type: AuthService.passportData('grant_type'),
+                client_id: AuthService.passportData('client_id'),
+                client_secret: AuthService.passportData('client_secret')
             };
 
             modal.reg = {
@@ -71,12 +79,12 @@
                 modal.regView === true ? modal.regView = false : modal.regView = true;
             };
 
-            modal.authSuccess = function () {
+            modal.authRedirect = function (type) {
                 modalElement.modal('hide');
-
-                //  TODO: this retrieve transition error
                 modalElement.on('hidden.bs.modal', function (e) {
-                    $state.go('settings');
+                    $state.go('home').then(function () {
+                        type === 'success' ? $state.go('settings') : $state.go('error');
+                    });
                 });
             };
 
@@ -85,7 +93,7 @@
 
                 if (isValid) {
                     AuthService.authorizationUser(modal.auth).then(function (response) {
-                        response.hasOwnProperty('status') ? modal.authFormServerError = response.data : modal.authSuccess();
+                        response.hasOwnProperty('access_token') ?  modal.authRedirect('success') : modal.authFormServerError = response.data;
                     })
                 }
             };
@@ -113,11 +121,14 @@
                             modal.regFormServerError.takenEmail = modal.reg.email;
                         } else {
                             modal.firstAuth = {
-                                email : modal.reg.email,
+                                grant_type: AuthService.passportData('grant_type'),
+                                client_id: AuthService.passportData('client_id'),
+                                client_secret: AuthService.passportData('client_secret'),
+                                username : modal.reg.email,
                                 password : modal.reg.password
                             };
                             AuthService.authorizationUser(modal.firstAuth).then(function (response) {
-                                response.hasOwnProperty('status') ? $state.go('error') : modal.authSuccess();
+                                response.hasOwnProperty('access_token') ? modal.authRedirect('success') : modal.authRedirect('error');
                             });
                         }
                     })
@@ -134,7 +145,6 @@
             default:
                 break
         }
-
     }
 
     //  Filter for description post text

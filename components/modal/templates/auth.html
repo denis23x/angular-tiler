@@ -16,7 +16,7 @@
                     <h6 class="text-muted" translate="modal.auth.desc">Sign into your account here:</h6>
                     <form name="authForm" class="mt-4 w-75 d-inline-block">
                         <div class="row px-3">
-                            <input type="email" class="form-control default-input" ng-class="{'is-invalid' : authForm.email.$invalid && authForm.email.$dirty || authForm.email.$invalid && modal.authFormSubmitted, 'is-valid' : authForm.email.$valid && authForm.email.$dirty}" placeholder="{{ 'modal.auth.inputEmail' | translate }}" aria-label="Email address" name="email" ng-model="modal.auth.email" ng-pattern="/^[A-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" required >
+                            <input type="email" class="form-control default-input" ng-class="{'is-invalid' : authForm.email.$invalid && authForm.email.$dirty || authForm.email.$invalid && modal.authFormSubmitted, 'is-valid' : authForm.email.$valid && authForm.email.$dirty}" placeholder="{{ 'modal.auth.inputEmail' | translate }}" aria-label="Email address" name="email" ng-model="modal.auth.username" ng-pattern="/^[A-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" required >
                             <i class="mdi mdi-email default-input-icon"></i>
                             <div ng-show="authForm.email.$invalid && authForm.email.$dirty || authForm.email.$invalid && modal.authFormSubmitted" class="invalid-feedback" translate="modal.auth.inputEmailErr">Incorrect email</div>
                         </div>
@@ -53,7 +53,7 @@
                     <image-base64 type="text" ng-model="modal.utils.defaultAvatarLink" result="modal.reg.avatar" loader error>
                     <div class="row justify-content-center">
                         <div class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                            <div id="carouselDefaultAvatars" class="carousel slide" data-ride="carousel">
+                            <div id="carouselDefaultAvatars" class="carousel slide" data-ride="carousel" data-interval="0">
                                 <div class="carousel-inner">
                                     <div class="carousel-item" ng-class="{'active' : $first}" ng-repeat="avatar in modal.avatars" index={{$index}}>
                                         <img class="d-block w-100" src="../img/default-avatars/{{avatar.image}}" alt="{{avatar.name}}">
@@ -72,10 +72,13 @@
                         </div>
                     </div>
                     <small class="d-block"><span class="text-success">*</span> <span class="text-muted" translate="modal.reg.canChange">you can change default avatar after registration</span></small>
-                    <h6 class="mt-5" translate="modal.reg.desc">Enter your account information here:</h6>
+                    <div class="row justify-content-center my-3" ng-show="modal.utils.regContinue">
+                        <div class="col-8 alert alert-success rounded p-3 mb-0" translate="modal.reg.socialReg">To continue registration, it remains to fill in several fields</div>
+                    </div>
+                    <h6 class="mt-5" ng-hide="modal.utils.regContinue" translate="modal.reg.desc">Enter your account information here:</h6>
                     <form name="regForm" class="mt-2 w-75 d-inline-block">
                         <div class="row px-3">
-                            <input type="text" class="form-control default-input" ng-class="{'is-invalid' : regForm.name.$invalid && regForm.name.$dirty || regForm.name.$invalid && modal.regFormSubmitted, 'is-valid' : regForm.name.$valid && regForm.name.$dirty}" placeholder="{{ 'modal.reg.inputName' | translate }}" aria-label="Name" name="name" ng-model="modal.reg.name" ng-minlength="2" ng-maxlength="15" required >
+                            <input type="text" class="form-control default-input" ng-class="{'is-invalid' : regForm.name.$invalid && regForm.name.$dirty || regForm.name.$invalid && modal.regFormSubmitted, 'is-valid' : regForm.name.$valid && regForm.name.$dirty || modal.utils.regContinue && modal.reg.name.length !== 0}" placeholder="{{ 'modal.reg.inputName' | translate }}" aria-label="Name" name="name" ng-model="modal.reg.name" ng-minlength="2" ng-maxlength="15" required >
                             <i class="default-input-icon mdi mdi-account"></i>
                             <div ng-show="regForm.name.$invalid && regForm.name.$dirty || regForm.name.$invalid && modal.regFormSubmitted" class="invalid-feedback" translate="modal.reg.inputNameErr">The name field can contain from 2 to 10 characters</div>
                         </div>
@@ -83,7 +86,7 @@
                             <span translate="modal.reg.inputNameErrServer">The name field is required</span>
                         </div>
                         <div class="row px-3 mt-3">
-                            <input type="email" class="form-control default-input" ng-class="{'is-invalid' : regForm.email.$invalid && regForm.email.$dirty || regForm.email.$invalid && modal.regFormSubmitted || modal.regFormSubmitted && modal.regFormServerError.email, 'is-valid' : regForm.email.$valid && regForm.email.$dirty && !modal.regFormServerError.email}" placeholder="{{ 'modal.reg.inputEmail' | translate }}" aria-label="Email address" name="email" ng-model="modal.reg.email" ng-pattern="/^[A-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" required >
+                            <input type="email" class="form-control default-input" ng-class="{'is-invalid' : regForm.email.$invalid && regForm.email.$dirty || regForm.email.$invalid && modal.regFormSubmitted || modal.regFormSubmitted && modal.regFormServerError.email, 'is-valid' : regForm.email.$valid && regForm.email.$dirty && !modal.regFormServerError.email || modal.utils.regContinue && modal.reg.email.length !== 0}" placeholder="{{ 'modal.reg.inputEmail' | translate }}" aria-label="Email address" name="email" ng-model="modal.reg.email" ng-pattern="/^[A-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" required >
                             <i class="default-input-icon mdi mdi-email"></i>
                             <div ng-show="regForm.email.$invalid && regForm.email.$dirty || regForm.email.$invalid && modal.regFormSubmitted" class="invalid-feedback" translate="modal.reg.inputEmailErr">The email field must have a valid email</div>
                         </div>
@@ -93,7 +96,7 @@
                             <span translate="modal.reg.inputEmailErrServer">The email has already been taken</span>
                         </div>
                         <div class="row px-3 mt-3">
-                            <input type="password" class="form-control default-input" ng-class="{'is-invalid' : regForm.password.$invalid && regForm.password.$dirty || regForm.password.$invalid && modal.regFormSubmitted, 'is-valid' : regForm.password.$valid && regForm.password.$dirty}" placeholder="{{ 'modal.reg.inputPass' | translate }}" aria-label="Password" name="password" ng-model="modal.reg.password" ng-minlength="4" required >
+                            <input type="password" class="form-control default-input" ng-class="{'is-invalid' : regForm.password.$invalid && regForm.password.$dirty || regForm.password.$invalid && modal.regFormSubmitted || modal.utils.regContinue && modal.reg.password.length === 0, 'is-valid' : regForm.password.$valid && regForm.password.$dirty}" placeholder="{{ 'modal.reg.inputPass' | translate }}" aria-label="Password" name="password" ng-model="modal.reg.password" ng-minlength="4" required >
                             <i class="default-input-icon mdi mdi-lock"></i>
                             <div ng-show="regForm.password.$invalid && regForm.password.$dirty || regForm.password.$invalid && modal.regFormSubmitted" class="invalid-feedback" translate="modal.reg.inputPassErr">Password length at least 4 characters</div>
                         </div>
@@ -101,7 +104,7 @@
                             <span translate="modal.reg.inputPassErrServer">The password field is required</span>
                         </div>
                         <div class="row px-3 mt-3">
-                            <input type="password" class="form-control default-input" ng-class="{'is-invalid' : regForm.password.$dirty && modal.reg.password_confirmation !== modal.reg.password || modal.regFormSubmitted && regForm.password.$touched && modal.reg.password_confirmation !== modal.reg.password, 'is-valid' : regForm.password.$dirty && regForm.password_confirmation.$dirty && modal.reg.password_confirmation === modal.reg.password}" placeholder="{{ 'modal.reg.inputConfPass' | translate }}" aria-label="Confirm password" name="password_confirmation" ng-model="modal.reg.password_confirmation" required >
+                            <input type="password" class="form-control default-input" ng-class="{'is-invalid' : regForm.password.$dirty && modal.reg.password_confirmation !== modal.reg.password || modal.regFormSubmitted && regForm.password.$touched && modal.reg.password_confirmation !== modal.reg.password || modal.utils.regContinue && modal.reg.password_confirmation.length === 0, 'is-valid' : regForm.password.$dirty && regForm.password_confirmation.$dirty && modal.reg.password_confirmation === modal.reg.password}" placeholder="{{ 'modal.reg.inputConfPass' | translate }}" aria-label="Confirm password" name="password_confirmation" ng-model="modal.reg.password_confirmation" required >
                             <i class="default-input-icon mdi mdi-lock"></i>
                             <span ng-show="regForm.password.$touched && modal.reg.password_confirmation !== modal.reg.password || modal.regFormSubmitted && regForm.password.$touched && modal.reg.password_confirmation !== modal.reg.password" class="invalid-feedback" translate="modal.reg.inputConfPassErr">Password confirmation does not match</span>
                         </div>

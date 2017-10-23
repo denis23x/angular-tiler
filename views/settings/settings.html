@@ -1,6 +1,6 @@
 <div class="container" ng-controller="SettingsController as settings">
     <div class="row">
-        <div class="col-12 col-sm-12 col-md-6 col-lg-8 col-xl-8 mx-auto mt-5">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-8 col-xl-8 mx-auto my-5">
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center">
                     <h3 class="mb-3 lead settings-page-header" translate="settings.header">Account settings</h3>
@@ -24,6 +24,8 @@
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                         <div class="base64-image-wrapper">
                             <img class="img-thumbnail d-inline-block settings-avatar" ng-src="{{settings.update.avatar}}" alt="{{settings.update.name}}">
+                            <!-- TODO: settings.update.avatar === undefined-->
+                            <!--<div class="settings-avatar-cover" ng-show="settings.update.avatar === undefined"><i class="mdi mdi-help"></i></div>-->
                             <div class="base64-image-wrapper-loader animation-fade" ng-show="settings.utils.base64Loader">
                                 <div class="base64-image-wrapper-loader-inside">
                                     <i class="mdi mdi-loading rotating-spinner"></i>

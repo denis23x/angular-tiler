@@ -13,7 +13,7 @@
             <div class="dynamic-grid" angular-grid="grid.posts" ag-grid-width="grid.gridWidth" ag-gutter-size="grid.gutterSize"  ag-id="gallery" ag-refresh-on-img-load="true" ag-infinite-scroll="grid.loadMore()">
                 <div class="card grid" data-ng-repeat="post in grid.posts">
                     <div class="grid-img-wrap" ui-sref="home.post({id:post.id})">
-                        <img class="card-img-top" ng-src="{{post.images.teaser}}" alt="{{post.title}}">
+                        <img class="card-img-top" ng-src="{{post.preview}}" alt="{{post.title}}">
                         <span class="grid-author"><i class="mdi mdi-account-circle" aria-hidden="true"></i> {{post.user.name}}</span>
                         <div class="grid-tags">
                             <span class="grid-tags-item" ng-repeat="tag in post.tags">{{tag}}</span>
@@ -21,7 +21,7 @@
                     </div>
                     <div class="card-body p-2">
                         <p class="card-text mb-0 grid-title text-close-black">{{post.title}}</p>
-                        <p class="card-text mb-0 grid-desc" ng-bind-html="::post.description | unsafe"></p>
+                        <p class="card-text mb-0 grid-desc" ng-bind-html="::post.text | unsafe"></p>
                         <hr class="mb-1">
                         <div class="row text-close-black">
                             <div class="col-6 pr-0">

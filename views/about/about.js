@@ -21,7 +21,7 @@
             angular.element('html, body').animate({
                 scrollTop: $(hash).offset().top -75
             }, 300, function () {
-                window.location.hash = hash;
+                // window.location.hash = hash;
             });
         };
 

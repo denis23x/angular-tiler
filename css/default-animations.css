@@ -38,3 +38,17 @@
 .grid-search-wrap.ng-hide-add {
     animation: bounceOutLeft 0.5s;
 }
+.base64-image-wrapper.ng-enter {
+    animation: fadeOutUp 0.5s;
+}
+.base64-image-wrapper.ng-leave {
+    display: none;
+}
+input::-webkit-input-placeholder       {opacity: 1; transition: opacity 0.3s ease;}
+input::-moz-placeholder                {opacity: 1; transition: opacity 0.3s ease;}
+input:-moz-placeholder                 {opacity: 1; transition: opacity 0.3s ease;}
+input:-ms-input-placeholder            {opacity: 1; transition: opacity 0.3s ease;}
+input:focus::-webkit-input-placeholder {opacity: 0; transition: opacity 0.3s ease;}
+input:focus::-moz-placeholder          {opacity: 0; transition: opacity 0.3s ease;}
+input:focus:-moz-placeholder           {opacity: 0; transition: opacity 0.3s ease;}
+input:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s ease;}

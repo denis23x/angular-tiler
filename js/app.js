@@ -13,8 +13,8 @@
     .run(MainRun)
     .controller('MainController', MainController);
 
-    MainConfig.$inject = ['$sceDelegateProvider', 'RouterServiceProvider', '$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', 'TranslateServiceProvider', '$httpProvider', 'AuthServiceProvider', 'APIServiceProvider'];
-    function MainConfig($sceDelegateProvider, RouterServiceProvider, $stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, TranslateServiceProvider, $httpProvider, AuthServiceProvider, APIServiceProvider) {
+    MainConfig.$inject = ['$sceDelegateProvider', 'RouterServiceProvider', '$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', 'TranslateServiceProvider'];
+    function MainConfig($sceDelegateProvider, RouterServiceProvider, $stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, TranslateServiceProvider) {
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode({
             enabled: true,
@@ -24,7 +24,6 @@
         //  Allowed links for API
         $sceDelegateProvider.resourceUrlWhitelist([
             'self',
-            'https://api.dribbble.com/**',
             'http://api.tiler.com/**'
         ]);
 
@@ -33,27 +32,31 @@
             $stateProvider.state(state);
         });
 
-        //  Cache http queries
-        // $httpProvider.defaults.cache = true;
-
-        // Set auth token
-        if (AuthServiceProvider.$get().authenticatedUser()) {
-            $httpProvider.defaults.headers.common['Authorization'] = 'Bearer ' + JSON.parse(localStorage.getItem('auth-token'));
-            // APIServiceProvider.$get().loadCollections(JSON.parse(localStorage.getItem('auth-data')).id);
-        }
-
         //  Register languages
         $translateProvider.useSanitizeValueStrategy('sce');
         $translateProvider.registerAvailableLanguageKeys(['en', 'ru']);
-        $translateProvider.preferredLanguage('ru');
+        $translateProvider.preferredLanguage('en');
         $translateProvider.translations('ru', TranslateServiceProvider.$get().russianLanguage());
         $translateProvider.translations('en', TranslateServiceProvider.$get().englishLanguage());
     }
 
-    MainRun.$inject = ['$rootScope'];
-    function MainRun ($rootScope) {
+    MainRun.$inject = ['$location', 'AuthService', '$http'];
+    function MainRun ($location, AuthService, $http) {
         var run = this;
 
+        //  Set auth token
+        if (AuthService.userIsLogin()) {
+            var token = JSON.parse(localStorage.getItem('auth-token')),
+                hash;
+
+            token.hasOwnProperty('access_token') ? hash = token.access_token : hash = token;
+            $http.defaults.headers.common['Authorization'] = 'Bearer ' + hash;
+        }
+
+        if ($location.search().token !== undefined) {
+            AuthService.authorizationByToken($location.search().token);
+            $location.url($location.path());
+        }
     }
 
     //  TRUE = only if have html directive: ng-controller="mainController as main" - in index.php
@@ -66,10 +69,11 @@
                 'collections',
                 'create'
             ];
+
         //  Watch on user auth condition
         $transitions.onStart({ to: restrictedArea }, function(transition) {
             var auth = transition.injector().get('AuthService');
-            if (!auth.authenticatedUser()) {
+            if (!auth.userIsLogin()) {
                 return transition.router.stateService.target('home.auth');
             }
         });

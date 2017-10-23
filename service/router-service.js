@@ -114,7 +114,18 @@
                         return $ocLazyLoad.load('views/users/users.js');
                     }]
                 }
+            },{
+                name: 'error',
+                url: '/error',
+                controller: 'ErrorController',
+                templateUrl: 'views/error/error.html',
+                resolve: {
+                    loadDependencies: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load('views/error/error.js');
+                    }]
+                }
             }
+
 
             ];
 

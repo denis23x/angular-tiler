@@ -15,7 +15,7 @@
             base64File: ''
         };
 
-        settings.update = AuthService.authenticatedUser();
+        settings.update = JSON.parse(localStorage.getItem('user-data'));
 
         settings.availableLang = $translate.getAvailableLanguageKeys();
         settings.currentLang = $translate.use();
@@ -53,7 +53,7 @@
                         settings.updateFormServerSuccess = true;
                         settings.updateFormServerError ? delete settings.updateFormServerError : false;
                         $timeout(function () {settings.updateFormServerSuccess = false;},3000);
-                        settings.update = JSON.parse(localStorage.getItem('auth-data'));
+                        settings.update = JSON.parse(localStorage.getItem('user-data'));
                     }
                 })
             }

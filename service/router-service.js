@@ -80,6 +80,8 @@
                             'node_modules/summernote/dist/summernote-bs4.css',
                             'node_modules/summernote/dist/summernote-bs4.js',
                             'node_modules/angular-summernote/dist/angular-summernote.min.js',
+                            'node_modules/html2canvas/dist/html2canvas.js',
+                            'css/summernote-skin.css',
                             'views/create/create.js'
                         ], {serie: true});
                     }]

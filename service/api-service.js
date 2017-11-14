@@ -34,7 +34,17 @@
                     .catch(function(response) {
                         return response;
                     });
+            },
+            createPost: function (data) {
+                return CommonService.post(EnvironmentService.apiRoot() + 'users/' + data.user_id + '/posts', data)
+                    .then(function (response) {
+                        return response;
+                    })
+                    .catch(function(response) {
+                        return response;
+                    });
             }
+
         };
         return service;
     }])

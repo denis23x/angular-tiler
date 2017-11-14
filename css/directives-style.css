@@ -5,6 +5,11 @@
 .base64-image-wrapper {
     display: inline-block;
     position: relative;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+}
+.base64-image-wrapper-create {
+    padding: 3px !important;
+    box-shadow: 2px 2px 10px 0px #ddd;
 }
 .base64-image-wrapper-loader {
     position: absolute;
@@ -88,20 +93,3 @@
         opacity: 0;
     }
 }
-
-/* Loading bar directive */
-
-/*#loading-bar .bar {*/
-    /*height: 5px !important;*/
-    /*background: #007bff !important;*/
-    /*border-top: 2px solid white;*/
-    /*box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.5);*/
-    /*top: 41px !important;*/
-/*}*/
-/*#loading-bar .peg {*/
-    /*height: 3px !important;*/
-    /*animation: bounceInLeft 1s infinite;*/
-    /*box-shadow: #f8f9fa 1px 0 6px 1px !important;*/
-    /*background: rgba(255, 255, 255, 0.75);*/
-    /*width: 50px !important;*/
-/*}*/

@@ -1,102 +1,162 @@
 <div class="container" ng-controller="CreateController as create">
     <div class="row">
-        <div class="col-12 col-sm-12 col-md-6 col-lg-8 col-xl-8 mx-auto my-5">
+        <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 mx-auto my-5">
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <h3 class="mb-3 lead settings-page-header" translate="create.createTitle">Create post</h3>
+                    <h3 class="mb-3 create-page-header" translate="create.createTitle">Create post</h3>
                 </div>
-                <!--<button class="btn btn-primary" ng-click="create.test()">click me to start</button>-->
-                <form action="">
+                <form name="createForm">
                     <hr>
                     <div class="col-12 px-3">
                         <div class="row my-4">
                             <div class="col-8">
-                                <input type="text" class="form-control create-title-input" ng-class="{'is-invalid' : ''}" placeholder="{{ 'create.createTitleInput' | translate }}" ng-model="create.form.title" aria-label="postTitle" name="postTitle">
+                                <input type="text" class="form-control create-title-input" ng-class="{'is-invalid' : createForm.title.$invalid && createForm.title.$dirty || create.utils.formSubmitted && createForm.title.$invalid || create.form.title.length > 36}" placeholder="{{ 'create.createTitleInput' | translate }}" ng-model="create.form.title" aria-label="title" name="title" minlength="6" required>
+                                <div ng-show="createForm.title.$invalid && createForm.title.$dirty || create.utils.formSubmitted && createForm.title.$invalid" class="invalid-feedback" translate="create.minimumTitle">Minimum length of 6 characters</div>
+                                <div ng-show="create.form.title.length > 36 || create.utils.formSubmitted && create.form.title.length > 36" class="invalid-feedback d-block" translate="create.maximumTitle">Maximum length of 36 characters</div>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 px-3">
-                        <summernote config="create.options" ng-model="create.form.text" placeholder="Текст сообщения"></summernote>
+                        <div class="summernote-wrapper" ng-class="{'is-invalid' : create.form.text.length !== 0 && create.utils.plainText.length < 40 || createForm.text.$dirty && create.utils.plainText === '' && create.form.text.length !== 0 || create.utils.formSubmitted && createForm.text.$invalid || create.utils.plainText.length > 500}">
+                            <div class="summernote-text-counter">
+                                <div class="text-secondary" ng-hide="create.form.text.length !== 0 && create.utils.plainText.length < 40 || createForm.text.$dirty && create.utils.plainText === '' && create.form.text.length !== 0 || create.utils.formSubmitted && createForm.text.$invalid || create.utils.plainText.length > 500">
+                                    <small>{{create.utils.plainText.length}} / 500</small>
+                                </div>
+                                <div ng-show="create.form.text.length !== 0 && create.utils.plainText.length < 40 || createForm.text.$dirty && create.utils.plainText === '' && create.form.text.length !== 0 || create.utils.formSubmitted && createForm.text.$invalid && create.utils.plainText.length < 40" class="summernote-invalid-feedback mt-2" translate="create.minimumText">Minimum length of 40 characters</div>
+                                <div ng-show="create.form.text.length !== 0 && create.utils.plainText.length > 500 || create.utils.formSubmitted && createForm.text.$invalid && create.utils.plainText.length > 500" class="summernote-invalid-feedback mt-2" translate="create.maximumText">Maximum length of 500 characters</div>
+                            </div>
+                            <input type="file" id="summernoteInputFileImg" accept="image/x-png,image/gif,image/jpeg" aria-label="Summernote file" name="summernoteFile" hidden>
+                            <summernote id="summernote" config="create.options" ng-model="create.form.text" name="text" minlength="40" required><summernote/>
+                        </div>
                     </div>
-                    <div class="col-12 px-3 mt-5">
+                    <div class="col-12 px-3">
                         <div class="row">
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
-                                <a class="nav-link"><span class="create-category-title lead mr-2" translate="create.selectCategory">Select category</span></a>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4 my-3">
+                                <button type="button" class="btn btn-link lead d-flex">
+                                    <i class="mdi mdi-vector-arrange-below mr-2" aria-hidden="true"></i>
+                                    <a ui-sref="collections" translate="create.collections">Collections</a>
+                                </button>
                                 <div class="mt-0">
-                                    <div ng-show="create.collections.length > 0" class="dropdown-divider"></div>
-                                    <div ng-show="create.collections.length > 0" class="header-dropdown-fixed-height">
-                                        <div ng-repeat="collection in create.collections">
-                                            <a class="header-dropdown-item" ng-class="{'select': create.form.collection_id.indexOf(collection.id) !== -1}" href="#" ng-click="create.selectItems(collection.id, 'collection')">
+                                    <hr class="dropdown-divider">
+                                    <div class="p-3" ng-show="create.collections.length === 0">
+                                        <span translate="create.emptyCollections">You have no collections, click</span>
+                                        <a href="" ui-sref="collections" translate="create.clickCollections">here</a>
+                                        <span translate="create.firstCollections">to create the first collection</span>
+                                    </div>
+                                    <div ng-show="create.collections.length > 0" class="create-collection-list-fixed">
+                                        <a class="create-default-item" ng-class="{'select': create.form.collection_id.length === 0}" href="#">
+                                            <i class="mdi mdi-check transition-none mr-1" ng-show="create.form.collection_id.length === 0" aria-hidden="true"></i>
+                                            <span translate="create.default">Without collection</span>
+                                        </a>
+                                        <div ng-repeat="collection in create.collections | orderBy:'name'">
+                                            <a class="create-collection-item" ng-class="{'select': create.form.collection_id.indexOf(collection.id) !== -1}" href="#" ng-click="create.selectItems(collection.id, 'collection')">
                                                 <i class="mdi mdi-check transition-none mr-1" ng-show="create.form.collection_id.indexOf(collection.id) !== -1" aria-hidden="true"></i>
                                                 {{collection.name}}
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="dropdown-divider"></div>
-                                    <div ng-show="create.categories" ng-repeat="category in create.categories">
-                                        <a class="header-dropdown-item" ng-class="{'select': create.form.category_id.indexOf(category.id) !== -1}" href="#" ng-click="create.selectItems(category.id, 'category')">
-                                            <i class="mdi mdi-check transition-none mr-1" ng-show="create.form.category_id.indexOf(category.id) !== -1" aria-hidden="true"></i>
-                                            {{category.name}}
-                                        </a>
+                                    <div class="selected-items text-secondary px-3 pt-3" ng-show="create.form.collection_id.length !== 0">
+                                        <small>
+                                            <span translate="create.selected">Selected: </span>
+                                            {{create.form.collection_id.length}}
+                                        </small>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-8">
                                 <div class="row">
-                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                        <div class="base64-image-wrapper d-block">
-                                            <div class="img-thumbnail create-preview-name" ng-show="!create.form.preview"  ng-style="{'background' : create.utils.randomColor}" ng-click="create.changeColor()">
-                                                <div class="create-preview-name-wrapper">{{create.userData.name[0]}}{{create.userData.surname ? create.userData.surname[0] : ''}}</div>
-                                            </div>
-                                            <img class="img-thumbnail d-inline-block" ng-show="create.form.preview" ng-src="{{create.form.preview}}" alt="{{create.form.title}}">
-                                            <div class="base64-image-wrapper-loader animation-fade" ng-show="create.utils.base64Loader">
-                                                <div class="base64-image-wrapper-loader-inside">
-                                                    <i class="mdi mdi-loading rotating-spinner"></i>
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3">
+                                        <div class="base64-image-wrapper-create img-thumbnail">
+                                            <div class="base64-image-wrapper d-block">
+                                                <div class="create-preview-name" ng-show="!create.form.preview"  ng-style="{'background' : create.utils.randomColor}" ng-click="create.changeColor()">
+                                                    <div class="create-preview-name-wrapper">{{create.userData.name[0]}}{{create.userData.surname ? create.userData.surname[0] : ''}}</div>
+                                                </div>
+                                                <img class="d-inline-block img-responsive" ng-show="create.form.preview" ng-src="{{create.form.preview}}" alt="{{create.form.title}}">
+                                                <div class="base64-image-wrapper-loader animation-fade" ng-show="create.utils.base64Loader">
+                                                    <div class="base64-image-wrapper-loader-inside">
+                                                        <i class="mdi mdi-loading rotating-spinner"></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="button" class="btn btn-link btn-sm mb-3" ng-show="!create.form.preview" ng-click="create.changeColor()"><i class="mdi mdi-refresh"></i><span translate="create.changeColor">Change color</span></button>
-                                        <button type="button" class="btn btn-link btn-sm mb-3" ng-show="!create.form.preview" onclick="document.getElementById('inputColor').click()"><i class="mdi mdi-format-color-fill"></i><span translate="create.selectColor">Select color</span></button>
-                                        <input type="color" id="inputColor" ng-model="create.utils.randomColor" hidden>
-                                        {{create.utils.randomColor}}
                                     </div>
-                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3">
                                         <div class="d-block align-middle">
-                                            <div class="lead settings-item-title" translate="create.postPreview">Post preview</div>
-                                            <div class="lead text-muted settings-item-description" translate="create.descPreview">The image will be the main one for the post</div>
+                                            <div class="create-item-title" translate="create.postPreview">Post preview</div>
+                                            <div class="text-muted create-item-description" translate="create.descPreview">The image will be the main one for the post</div>
                                         </div>
                                         <div class="row px-3 mt-3">
-                                            <input image-base64 type="text" class="form-control default-input" ng-class="{'is-invalid' : create.utils.base64Error}" placeholder="{{ 'settings.linkAvatar' | translate }}" aria-label="Preview link" name="previewLink" ng-model="create.utils.linkPreview" result="create.form.preview" loader="create.utils.base64Loader" error="create.utils.base64Error" ng-disabled="create.utils.base64Loader">
+                                            <input type="color" id="inputColor" ng-model="create.utils.randomColor" hidden>
+                                            <input image-base64 type="file" id="inputFileImg" accept="image/x-png,image/gif,image/jpeg" aria-label="Preview file" name="previewFile" ng-model="create.utils.base64File" result="create.form.preview" error="create.utils.base64Error" hidden>
+                                            <input image-base64 type="text" class="form-control default-input" ng-class="{'is-invalid' : create.utils.base64Error}" placeholder="{{ 'create.linkPreview' | translate }}" aria-label="Preview link" name="previewLink" ng-model="create.utils.base64Link" result="create.form.preview" loader="create.utils.base64Loader" error="create.utils.base64Error" ng-disabled="create.utils.base64Loader">
                                             <i class="default-input-icon mdi mdi-link"></i>
                                             <div ng-show="create.utils.base64Error" class="invalid-feedback ml-3">{{create.utils.base64Error}}</div>
-                                            <button type="button" class="btn btn-sm btn-light mt-2" onclick="document.getElementById('inputFileImg').click()"><i class="mdi mdi-file-find f-size-1 mr-2 text-muted"></i><span class="text-dark" translate="settings.fileAvatar">Select file</span></button>
-                                            <input image-base64 type="file" id="inputFileImg" accept="image/x-png,image/gif,image/jpeg" aria-label="Preview file" name="previewАшду" ng-model="create.utils.base64File" result="create.form.preview" error="create.utils.base64Error" hidden>
+                                            <div class="row mt-2">
+                                                <div class="col-sm-6 col-md-l2 col-lg-12 col-xl-l2">
+                                                    <button type="button" class="btn btn-link btn-sm d-flex" onclick="document.getElementById('inputFileImg').click()">
+                                                        <i class="mdi mdi-file-find mr-2"></i>
+                                                        <span translate="create.filePreview">Select file</span>
+                                                    </button>
+                                                </div>
+                                                <div class="col-sm-6 col-md-l2 col-lg-12 col-xl-l2" ng-show="!create.form.preview || create.utils.formSubmitted">
+                                                    <button type="button" class="btn btn-link btn-sm d-flex" ng-click="create.changeColor()">
+                                                        <i class="mdi mdi-refresh mr-2"></i>
+                                                        <span translate="create.changeColor">Change color</span>
+                                                    </button>
+                                                </div>
+                                                <div class="col-sm-6 col-md-l2 col-lg-12 col-xl-l2" ng-show="!create.form.preview || create.utils.formSubmitted">
+                                                    <button type="button" class="btn btn-link btn-sm mb-2 d-flex" onclick="document.getElementById('inputColor').click()">
+                                                        <i class="mdi mdi-format-color-fill mr-2"></i>
+                                                        <span translate="create.selectColor">Select color</span>
+                                                    </button>
+                                                </div>
+                                                <div class="col-sm-6 col-md-l2 col-lg-12 col-xl-l2" ng-show="create.form.preview && !create.utils.formSubmitted">
+                                                    <button type="button" class="btn btn-link btn-sm mb-2 text-danger d-flex" ng-click="create.form.preview = ''">
+                                                        <i class="mdi mdi-close mr-2"></i>
+                                                        <span translate="create.removeImage">Remove image</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <div class="lead" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    <strong>Дополнительно</strong>
+                                </div>
+                                <div class="collapse" id="collapseExample">
+                                    <div class="mt-3">
+                                        <button class="btn btn-link" type="button" translate="create.selectCategory">
+                                            Select category
+                                        </button>
+                                        <!--<a class="nav-link"><span class="create-category-title mr-2" translate="create.selectCategory"></span></a>-->
+                                        <!--<div ng-show="create.collections.length > 0" class="dropdown-divider"></div>-->
+                                        <div ng-show="create.categories" ng-repeat="category in create.categories">
+                                            <a class="create-category-item" ng-class="{'select': create.form.category_id.indexOf(category.id) !== -1}" href="#" ng-click="create.selectItems(category.id, 'category')">
+                                            <i class="mdi mdi-check transition-none mr-1" ng-show="create.form.category_id.indexOf(category.id) !== -1" aria-hidden="true"></i>
+                                            {{category.name}}
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <hr>
-                    <button type="button" class="btn btn-sm btn-primary" ng-click="create.forma()">Check Form</button>
-
-                    <div class="col-12">
+                    <div class="col-12 mt-5">
                         <div class="row px-3">
                             <div class="col-12 text-center">
-                                <div class="lead settings-item-title" translate="create.postPublish">Publish post</div>
+                                <div class="create-item-title-sm" translate="create.postPublish">Publish post</div>
                                 <small>
                                     <span class="text-danger">* <span class="text-muted" translate="create.postPublishDesc">creating a public message, you agree with the</span>
                                         <a href="" translate="create.postPublishDescLink">site rules</a>
                                     </span>
                                 </small>
-                                <!--<div ng-show="settings.settingsFormSubmitted && settings.updateFormServerSuccess" class="text-center text-success">-->
-                                    <!--<i class="mdi mdi-check-circle-outline"></i>-->
-                                    <!--<span class="valid-feedback" translate="settings.updateSuccess">Settings successfully updated</span>-->
-                                <!--</div>-->
                                 <div class="col-12 mx-auto my-3">
-                                    <button type="submit" class="btn btn-sm btn-success" material-ripple data-ripple-color="#818182" translate="create.postPublic">Public</button>
-                                    <button type="submit" class="btn btn-sm btn-primary" material-ripple data-ripple-color="#818182" translate="create.postDraft">Draft</button>
-                                    <button type="submit" class="btn btn-sm btn-light" material-ripple data-ripple-color="#818182" translate="create.postCancel">Cancel</button>
+                                    <button type="submit" class="btn btn-lg btn-primary" material-ripple data-ripple-color="#818182" ng-click="create.postPublish(createForm.$valid)" translate="create.postPublic">Public</button>
                                 </div>
                                 <!--<div ng-show="" class="invalid-feedback d-block" translate="settings.inputCurrPassErr">Password length at least 4 characters</div>-->
                                 <!--<div ng-show="settings.settingsFormSubmitted && settings.updateFormServerError" class="text-center invalid-feedback d-block">-->

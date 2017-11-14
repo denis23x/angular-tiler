@@ -8,7 +8,7 @@
                     <input type="text" ng-model="collections.name">
                     <button ng-click="collections.createCollection()">create click</button>
                     <p>all collections here:</p>
-                    <ul ng-repeat="collection in collections.list">
+                    <ul ng-repeat="collection in collections.list | orderBy:'name'">
                         <li>{{collection.name}}</li>
                     </ul>
                 </div>

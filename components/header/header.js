@@ -16,6 +16,9 @@
         header.userData = JSON.parse(localStorage.getItem('user-data'));
         header.collections = JSON.parse(localStorage.getItem('user-collections'));
 
+        header.sorting = 'newest';
+        header.toggle = true;
+
         APIService.loadCategories().then(function (response) {
             header.categories = response;
         });
@@ -35,15 +38,24 @@
             $rootScope.$broadcast('startSearch', header.searchText);
         };
 
-        //  Sort by likes
-        header.mostPopular = function (reverse) {
-            $rootScope.$broadcast('mostPopular', reverse);
+        //  Sort by views
+        header.viewsToggle = function (reverse) {
+            $rootScope.$broadcast('viewsToggle', reverse);
         };
 
-        //  Sort by watches
-        //  TODO: review this sorting by other type?
-        header.mostWatches = function (reverse) {
-            $rootScope.$broadcast('mostWatches', reverse);
+        //  Sort by likes
+        header.likesToggle = function (reverse) {
+            $rootScope.$broadcast('likesToggle', reverse);
+        };
+
+        header.newest = function (reverse) {
+            if (header.toggle === reverse) {
+                return false;
+            } else {
+                header.toggle = reverse;
+                header.sorting = reverse ? 'newest' : 'oldest' ;
+                $rootScope.$broadcast('newestToggle', reverse);
+            }
         };
 
         //  Show all posts
@@ -53,7 +65,7 @@
 
         //  Show only collection
         header.showCollection = function (collection) {
-            console.log(collection);
+            $rootScope.$broadcast('showCollection', collection);
         };
 
         //  Show only category

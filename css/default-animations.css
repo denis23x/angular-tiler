@@ -1,15 +1,19 @@
 /* Animation for forms input */
 
+.summernote-invalid-feedback.ng-hide-remove,
+.selected-items.ng-hide-remove,
 .invalid-feedback.ng-hide-remove,
 .auth-error-server.ng-hide-remove,
 .reg-error-server.ng-hide-remove {
     animation: bounceIn 0.7s;
 }
+.selected-items.ng-hide-add,
 .invalid-feedback.ng-hide-add,
 .auth-error-server.ng-hide-add,
 .reg-error-server.ng-hide-add {
     animation: zoomOut 0.5s;
 }
+.summernote-text-counter>.text-secondary.ng-hide-remove,
 .modal-view.ng-hide-remove,
 .modal-view-header.ng-hide-remove,
 .settings-view.ng-hide-remove {

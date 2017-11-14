@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-xl sticky-top navbar-dark bg-primary py-0 px-3">
-    <a class="navbar-brand" href="#" ui-sref="home"><i class="mdi mdi-folder-open mr-2" aria-hidden="true"></i><span translate="header.logoDesc">tiler</span></a>
+    <a class="navbar-brand" href="#" ui-sref="home" ui-sref-opts="{reload: true}"><i class="mdi mdi-folder-open mr-2" aria-hidden="true"></i><span translate="header.logoDesc">tiler</span></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -8,27 +8,39 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle hidden-after" material-ripple href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="mr-2" translate="header.sort">Сортировка</span><i class="mdi mdi-chevron-down" aria-hidden="true"></i></a>
                 <div class="dropdown-menu dropdown-menu-left mt-0">
-                    <a class="dropdown-item header-dropdown-item" ng-class="{'select': true}" href="#" ng-click="header.mostWatches(true)" translate="header.newest">the newest</a>
-                    <a class="dropdown-item header-dropdown-item" href="#" ng-click="header.mostWatches(false)" translate="header.oldest">the oldest</a>
-                    <a class="dropdown-item header-dropdown-item" href="#" ng-click="header.mostPopular(false)" translate="header.popular">most popular</a>
-                    <a class="dropdown-item header-dropdown-item" href="#" ng-click="header.mostPopular(true)" translate="header.unpopular">most unpopular</a>
+                    <a class="dropdown-item header-dropdown-item" ng-class="{'select': header.sorting === 'newest' }" href="#" ng-click="header.newest(true)" translate="header.newest">newest</a>
+                    <a class="dropdown-item header-dropdown-item" ng-class="{'select': header.sorting === 'oldest' }" href="#" ng-click="header.newest(false)" translate="header.oldest">oldest</a>
+
+                    <!--<a class="dropdown-item header-dropdown-item" href="#" ng-click="header.likesToggle(true)" translate="header.moreLikely">more likely</a>-->
+                    <!--<a class="dropdown-item header-dropdown-item" href="#" ng-click="header.viewsToggle(true)" translate="header.moreViews">more views</a>-->
+                    <!--<a class="dropdown-item header-dropdown-item" href="#" ng-click="header.likesToggle(false)" translate="header.lessLike">less like</a>-->
+                    <!--<a class="dropdown-item header-dropdown-item" href="#" ng-click="header.viewsToggle(false)" translate="header.lessViews">less views</a>-->
                 </div>
             </li>
             <li class="nav-item dropdown mr-3">
-                <a class="nav-link dropdown-toggle hidden-after" material-ripple href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="mr-2" translate="header.inCategory">Category</span><i class="mdi mdi-chevron-down" aria-hidden="true"></i></a>
+                <a class="nav-link dropdown-toggle hidden-after" material-ripple href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="mr-2" translate="header.inCategory">Category</span>
+                    <i class="mdi mdi-chevron-down" aria-hidden="true"></i>
+                </a>
                 <div class="dropdown-menu dropdown-menu-left mt-0">
                     <a class="dropdown-item header-dropdown-item" ng-class="{'select': true}" href="#" ng-click="header.showAll()" translate="header.showAll">Show all</a>
                     <div ng-show="header.collections.length > 0">
-                        <h6 class="dropdown-header"><i class="mdi mdi-folder-outline mr-2" aria-hidden="true"></i><span translate="header.collections"></span></h6>
+                        <div class="header-dropdown-title">
+                            <i class="mdi mdi-folder-outline mr-1" aria-hidden="true"></i>
+                            <span translate="header.collections">Collections</span>
+                        </div>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item header-dropdown-item" href="#" ui-sref="collections" ng-show="!header.collections" translate="header.noCollections">Нет коллекций</a>
+                        <a class="dropdown-item header-dropdown-item" href="#" ui-sref="collections" ng-show="!header.collections" translate="header.noCollections">No collections</a>
                         <div class="header-dropdown-fixed-height">
                             <div ng-show="header.collections" ng-repeat="collection in header.collections | orderBy:'name'">
-                                <a class="dropdown-item header-dropdown-item" href="#" ng-click="header.showCollection(category.id)">{{collection.name}}</a>
+                                <a class="dropdown-item header-dropdown-item" href="#" ng-click="header.showCollection(collection.id)">{{collection.name}}</a>
                             </div>
                         </div>
                     </div>
-                    <h6 class="dropdown-header"><i class="mdi mdi-folder-outline mr-2" aria-hidden="true"></i><span translate="header.main"></span></h6>
+                    <div class="header-dropdown-title">
+                        <i class="mdi mdi-folder-outline mr-1" aria-hidden="true"></i>
+                        <span translate="header.main"></span>
+                    </div>
                     <div class="dropdown-divider"></div>
                     <div ng-repeat="category in header.categories | orderBy:'name'">
                         <a class="dropdown-item header-dropdown-item" href="#" ng-click="header.showCategory(category.id)">{{category.name}}</a>

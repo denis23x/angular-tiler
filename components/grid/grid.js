@@ -17,16 +17,18 @@
         var grid = this,
             page = 1, postList;
 
+        grid.order = {
+            reverse: false,
+            type: 'created_at'
+        };
+
         //  Watch while grid.posts has loaded/changed
         $scope.$watch(grid.posts, function() {
-
             //  TODO: review the relevance of this cycle
             grid.posts.forEach(function(obj) {
                 obj.actualHeight = 150;
                 obj.actualWidth = 150;
-
-                //  TODO: review data output
-                obj.created = moment(obj.created_at).startOf('hour').from();
+                obj.created = moment.utc(obj.created_at).startOf('minute').from();
             });
 
             postList = grid.posts;
@@ -45,16 +47,24 @@
             });
         });
 
-        $rootScope.$on('mostPopular', function (event, reverse) {
-            grid.posts = postList.sort(function (a, b) {
-                return reverse ? a.likes_count - b.likes_count : b.likes_count - a.likes_count;
-            });
+        $rootScope.$on('viewsToggle', function (event, reverse) {
+            console.log('Here im return sort by views in - ' + reverse);
+            // grid.posts = postList.sort(function (a, b) {
+            //     return reverse ? a.likes_count - b.likes_count : b.likes_count - a.likes_count;
+            // });
         });
 
-        $rootScope.$on('mostWatches', function (event, reverse) {
-            grid.posts = postList.sort(function (a, b) {
-                return reverse ? a.views_count - b.views_count : b.views_count - a.views_count;
-            });
+        $rootScope.$on('likesToggle', function (event, reverse) {
+            console.log('Here im return sort by likes in - ' + reverse);
+            // grid.posts = postList.sort(function (a, b) {
+            //     return reverse ? a.views_count - b.views_count : b.views_count - a.views_count;
+            // });
+        });
+
+        $rootScope.$on('newestToggle', function (event, toggle) {
+            grid.order.reverse = !grid.order.reverse;
+            grid.order.type = 'created_at';
+            grid.posts = postList.sort();
         });
 
         $rootScope.$on('showAll', function (event) {
@@ -70,7 +80,19 @@
                     });
                 }
             });
+            grid.posts = arr;
+        });
 
+        $rootScope.$on('showCollection', function (event, collection) {
+            var arr = [];
+            postList.filter(function (post) {
+                if (post.collections.length > 0) {
+                    angular.forEach(post.collections, function (val, key) {
+                        console.log(val);
+                        val.id === collection ? arr.push(post) : false;
+                    });
+                }
+            });
             grid.posts = arr;
         });
 
@@ -85,11 +107,21 @@
             });
         };
 
+        grid.setText = function (text) {
+            var parser = new DOMParser(),
+                doc = parser.parseFromString(text, 'text/html'),
+                nodes = doc.firstChild.lastChild.childNodes,
+                tmp = '';
+
+            for (var i = 0; i < 6; i++) {
+                if (nodes[i] !== undefined && nodes[i].innerHTML !== undefined) {
+                    if (nodes[i].textContent !== '' && nodes[i].outerHTML.indexOf('img-fluid') === -1 || nodes[i].outerHTML.indexOf('img-emoji') !== -1) {
+                        tmp = tmp + (nodes[i].outerHTML);
+                    }
+                }
+            }
+            return tmp;
+        }
+
     }
-
-    //  Filter for description post text
-    angular.module('app').filter('unsafe', ['$sce', function ($sce){
-        return $sce.trustAsHtml;
-    }])
-
 })();

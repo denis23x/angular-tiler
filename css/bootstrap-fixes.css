@@ -4,7 +4,22 @@
 h6 {
     font-weight: 400 !important;
 }
-
+figure {
+    position: relative;
+}
+figcaption {
+    margin-top: 0.5rem;
+}
+blockquote {
+    border-left: 3px solid rgb(204, 204, 204);
+    padding-left: 0.5rem;
+}
+pre {
+    background: #e8e8e8;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid #b5b5b5;
+    border-radius: 5px;
+}
 /* Bootstrap class fixes */
 
 .btn {
@@ -15,17 +30,6 @@ h6 {
 }
 .close:focus, .close:hover {
     opacity: 1 !important;
-}
-.dropdown-header {
-    color: #495057 !important;
-    font-weight: 600 !important;
-    padding: 0.5rem 1rem !important;
-}
-.dropdown-item:focus, .dropdown-item:hover {
-    color: #000000 !important;
-}
-.dropdown-item:active {
-    color: #fff !important;
 }
 .dropdown-toggle {
     cursor: pointer;
@@ -43,6 +47,12 @@ h6 {
 .modal::-webkit-scrollbar-thumb {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #BFBFBF;
+}
+.is-active {
+    border-color: #80bdff !important;
+}
+.is-invalid-shadow {
+    box-shadow: 0 0 0 0.2rem rgba(220,53,69,.25);
 }
 .is-invalid {
     border-color: #ff717f !important;

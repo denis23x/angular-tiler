@@ -7,7 +7,6 @@
         'ngSanitize',
         'pascalprecht.translate',
         'oc.lazyLoad'
-        // 'angular-loading-bar'
     ])
     .config(MainConfig)
     .run(MainRun)

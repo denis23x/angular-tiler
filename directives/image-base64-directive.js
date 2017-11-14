@@ -57,15 +57,26 @@
                         element.change(function(event){
                             var deferred = $q.defer(),
                                 reader = new FileReader(),
-                                file = event.currentTarget.files[0];
+                                file = event.currentTarget.files[0],
+                                _URL = window.URL || window.webkitURL,
+                                image = new Image();
 
-                            reader.onload = function(file) {deferred.resolve(file.target.result);};
-                            reader.onerror = function() {deferred.reject(file);};
-                            reader.readAsDataURL(file);
+                            image.onload = function () {
+                                if (this.width < 200 || this.height < 300) {
+                                    alert('ERROR: Minimal image size: 200x300');
+                                    // alert('ERROR: Minimal size: 200x300, uploaded image: ' + this.width + 'x' + this.height);
+                                    return false;
+                                } else {
+                                    reader.onload = function(file) {deferred.resolve(file.target.result);};
+                                    reader.onerror = function() {deferred.reject(file);};
+                                    reader.readAsDataURL(file);
 
-                            deferred.promise.then(function (base64) {
-                                scope.result = base64;
-                            });
+                                    deferred.promise.then(function (base64) {
+                                        scope.result = base64;
+                                    });
+                                }
+                            };
+                            image.src = _URL.createObjectURL(file);
                         });
                         break;
                     default:

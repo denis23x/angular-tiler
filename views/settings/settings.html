@@ -3,7 +3,7 @@
         <div class="col-12 col-sm-12 col-md-6 col-lg-8 col-xl-8 mx-auto my-5">
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center">
-                    <h3 class="mb-3 lead settings-page-header" translate="settings.header">Account settings</h3>
+                    <h3 class="mb-3 settings-page-header" translate="settings.header">Account settings</h3>
                 </div>
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center">
                     <div class="btn-group" data-toggle="buttons">
@@ -33,14 +33,13 @@
                             </div>
                         </div>
                         <div class="d-inline-block align-middle">
-                            <div class="lead settings-item-title" translate="settings.titleAvatar">User avatar</div>
-                            <div class="lead text-muted settings-item-description" translate="settings.descAvatar">You can change avatar by link or from file</div>
+                            <div class="settings-item-title" translate="settings.titleAvatar">User avatar</div>
+                            <div class="text-muted settings-item-description" translate="settings.descAvatar">You can change avatar by link or from file</div>
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <div class="row px-3 mt-3">
-                            <input image-base64 type="text" class="form-control default-input col-xl-7" ng-class="{'is-invalid' : settings.utils.base64Error}" placeholder="{{ 'settings.linkAvatar' | translate }}" aria-label="Avatar Link" name="avatarLink" ng-model="settings.utils.linkAvatar" result="settings.update.avatar" loader="settings.utils.base64Loader" error="settings.utils.base64Error" ng-disabled="settings.utils.base64Loader">
-                            <i class="default-input-icon mdi mdi-link"></i>
+                        <div class="row px-3 my-auto h-100">
+                            <input image-base64 type="text" class="form-control default-input col-xl-7 pl-3 my-auto" ng-class="{'is-invalid' : settings.utils.base64Error}" placeholder="{{ 'settings.linkAvatar' | translate }}" aria-label="Avatar Link" name="avatarLink" ng-model="settings.utils.linkAvatar" result="settings.update.avatar" loader="settings.utils.base64Loader" error="settings.utils.base64Error" ng-disabled="settings.utils.base64Loader">
                             <button type="button" class="col-xl-5 btn btn-sm btn-link" onclick="document.getElementById('inputFileImg').click()" translate="settings.fileAvatar">Select file</button>
                             <input image-base64 type="file" id="inputFileImg" accept="image/x-png,image/gif,image/jpeg" aria-label="Avatar File" name="avatarFile" ng-model="settings.utils.base64File" result="settings.update.avatar" error="settings.utils.base64Error" hidden>
                             <div ng-show="settings.utils.base64Error" class="invalid-feedback ml-3">{{settings.utils.base64Error}}</div>
@@ -50,8 +49,8 @@
                 <hr>
                 <div class="row px-3">
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <div class="lead settings-item-title" translate="settings.titleRegion">Region: </div>
-                        <div class="lead text-muted settings-item-description" translate="settings.descRegion">Changes search results to be region specific</div>
+                        <div class="settings-item-title" translate="settings.titleRegion">Region: </div>
+                        <div class="text-muted settings-item-description" translate="settings.descRegion">Changes search results to be region specific</div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center">
                         <div class="input-group mt-1">
@@ -66,8 +65,8 @@
                 </div>
                 <div class="row px-3 mt-4">
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <div class="lead settings-item-title" translate="settings.titleLanguage">Interface language: </div>
-                        <div class="lead text-muted settings-item-description" translate="settings.descLanguage">You can choose you native language</div>
+                        <div class="settings-item-title" translate="settings.titleLanguage">Interface language: </div>
+                        <div class="text-muted settings-item-description" translate="settings.descLanguage">You can choose you native language</div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center">
                         <div class="input-group mt-1">
@@ -83,8 +82,8 @@
                 <hr>
                 <div class="row px-3">
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <div class="lead settings-item-title" translate="settings.titleName">Name</div>
-                        <div class="lead text-muted settings-item-description" translate="settings.descName">Change username of account</div>
+                        <div class="settings-item-title" translate="settings.titleName">Name</div>
+                        <div class="text-muted settings-item-description" translate="settings.descName">Change username of account</div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                         <div class="row px-3 mt-1">
@@ -97,8 +96,8 @@
                 </div>
                 <div class="row px-3 mt-4">
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <div class="lead settings-item-title" translate="settings.titleSurname">Surname</div>
-                        <div class="lead text-muted settings-item-description" translate="settings.descSurname">You can specify self surname or nickname</div>
+                        <div class="settings-item-title" translate="settings.titleSurname">Surname</div>
+                        <div class="text-muted settings-item-description" translate="settings.descSurname">You can specify self surname or nickname</div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                         <div class="row px-3 mt-1">
@@ -112,8 +111,8 @@
                 <hr>
                 <div class="row px-3">
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <div class="lead settings-item-title" translate="settings.titleEmail">Email</div>
-                        <div class="lead text-muted settings-item-description" translate="settings.descEmail">You can change authorization email</div>
+                        <div class="settings-item-title" translate="settings.titleEmail">Email</div>
+                        <div class="text-muted settings-item-description" translate="settings.descEmail">You can change authorization email</div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                         <div class="row px-3 mt-1">
@@ -126,8 +125,8 @@
                 </div>
                 <div class="row px-3 mt-4">
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <div class="lead settings-item-title" translate="settings.titlePassword">Password</div>
-                        <div class="lead text-muted settings-item-description" translate="settings.descPassword">Change your password</div>
+                        <div class="settings-item-title" translate="settings.titlePassword">Password</div>
+                        <div class="text-muted settings-item-description" translate="settings.descPassword">Change your password</div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                         <div class="row px-3 mt-1">
@@ -140,8 +139,8 @@
                 </div>
                 <div class="row px-3 mt-4">
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <div class="lead settings-item-title" translate="settings.titleConfirmPass">Confirm password</div>
-                        <div class="lead text-muted settings-item-description" translate="settings.descConfirmPass">Please enter your password again</div>
+                        <div class="settings-item-title" translate="settings.titleConfirmPass">Confirm password</div>
+                        <div class="text-muted settings-item-description" translate="settings.descConfirmPass">Please enter your password again</div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                         <div class="row px-3 mt-1">
@@ -155,7 +154,7 @@
                 <hr>
                 <div class="row px-3">
                     <div class="col-12 text-center">
-                        <div class="lead settings-item-title" translate="settings.titleApply">Apply settings</div>
+                        <div class="settings-item-title" translate="settings.titleApply">Apply settings</div>
                         <small><span class="text-danger">* <span class="text-muted" translate="settings.descApply">for update settings you must enter current password</span></span></small>
                         <div ng-show="settings.settingsFormSubmitted && settings.updateFormServerSuccess" class="text-center text-success">
                             <i class="mdi mdi-check-circle-outline"></i>

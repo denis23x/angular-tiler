@@ -7,11 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>tiler develop</title>
 
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="node_modules/mdi/css/materialdesignicons.min.css" media="all" type="text/css" />
     <link rel="stylesheet" href="node_modules/animate.css/animate.min.css">
-<!--    <link rel="stylesheet" href="node_modules/angular-loading-bar/build/loading-bar.min.css">-->
+    <link rel="stylesheet" href="css/style.css">
 
     <script src="node_modules/jquery/dist/jquery.js"></script>
 
@@ -30,7 +29,6 @@
 
     <script src="node_modules/oclazyload/dist/ocLazyLoad.min.js"></script>
 
-<!--    <script src="node_modules/angular-loading-bar/build/loading-bar.min.js"></script>-->
 
 
 </head>

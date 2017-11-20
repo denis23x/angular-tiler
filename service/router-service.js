@@ -7,8 +7,8 @@
                 url: '/',
                 component: 'gridComponent',
                 resolve: {
-                    posts: function (APIService) {
-                        return APIService.loadManyPosts();
+                    content: function (APIService) {
+                        return APIService.loadPosts();
                     }
                 }
             },{
@@ -68,6 +68,25 @@
                     loadDependencies: ['$ocLazyLoad', function($ocLazyLoad) {
                         return $ocLazyLoad.load('views/collections/collections.js');
                     }]
+                }
+            },{
+                name: 'collections.post',
+                url: '/post/:id',
+                params: {
+                    type: 'post'
+                },
+                resolve: {
+                    post: function (APIService, $stateParams) {
+                        return APIService.loadPost($stateParams.id);
+                    }
+                },
+                views: {
+                    'modal@collections': {
+                        component: 'modalComponent',
+                        bindings: {
+                            post: 'post'
+                        }
+                    }
                 }
             },{
                 name: 'create',

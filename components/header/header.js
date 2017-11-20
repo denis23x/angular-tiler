@@ -38,15 +38,13 @@
             $rootScope.$broadcast('startSearch', header.searchText);
         };
 
-        //  Sort by views
-        header.viewsToggle = function (reverse) {
-            $rootScope.$broadcast('viewsToggle', reverse);
-        };
-
-        //  Sort by likes
-        header.likesToggle = function (reverse) {
-            $rootScope.$broadcast('likesToggle', reverse);
-        };
+        // header.viewsToggle = function (reverse) {
+        //     $rootScope.$broadcast('viewsToggle', reverse);
+        // };
+        //
+        // header.likesToggle = function (reverse) {
+        //     $rootScope.$broadcast('likesToggle', reverse);
+        // };
 
         header.newest = function (reverse) {
             if (header.toggle === reverse) {
@@ -63,15 +61,13 @@
             $rootScope.$broadcast('showAll');
         };
 
-        //  Show only collection
-        header.showCollection = function (collection) {
-            $rootScope.$broadcast('showCollection', collection);
-        };
-
-        //  Show only category
-        header.showCategory = function (category) {
-            $rootScope.$broadcast('showCategory', category);
-        };
+        // header.showCollection = function (collection) {
+        //     $rootScope.$broadcast('showCollection', collection);
+        // };
+        //
+        // header.showCategory = function (category) {
+        //     $rootScope.$broadcast('showCategory', category);
+        // };
 
         //  Log out user, go home, clear userData and localStorage
         header.logOut = function () {

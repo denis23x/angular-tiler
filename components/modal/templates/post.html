@@ -8,8 +8,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img class="post-image" src="{{modal.post.images.normal}}">
-                <p ng-bind-html="::modal.post.text | unsafe"></p>
+                <!--<img class="post-image" src="{{modal.post.images.normal}}">-->
+
+                <div ng-bind-html="::modal.post.text | unsafe"></div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

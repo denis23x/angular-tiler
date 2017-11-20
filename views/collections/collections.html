@@ -11,8 +11,29 @@
                     <ul ng-repeat="collection in collections.list | orderBy:'name'">
                         <li>{{collection.name}}</li>
                     </ul>
+
+
+                    <div class="grid-wrap" custom-scroll on-scroll="collections.onScroll()">
+                        <div class="dynamic-grid" angular-grid="collections.posts" ag-grid-width="collections.gridWidth" ag-gutter-size="collections.gutterSize" ng-class="{'h-100' : grid.posts.length === 0}">
+                            <div class="card grid" data-ng-repeat="post in collections.posts | orderBy: collections.order.reverse ? collections.order.type : '-' + collections.order.type">
+                                <div class="grid-img-wrap" ui-sref="collections.post({id:post.id})">
+                                    <img class="card-img-top" ng-src="{{post.preview}}" alt="{{post.title}}">
+                                    <div class="grid-author">
+                                        <div>{{post.title}}</div>
+                                    </div>
+                                    <div class="grid-tags">
+                                        <span class="grid-tags-item" ng-repeat="tag in post.tags">{{tag}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center lead my-5 text-primary" ng-show="grid.lastPage && grid.posts.length !== 0" translate="grid.nothingLoad">Nothing more to load on your request</div>
+                    </div>
+
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+<ui-view name="modal" />

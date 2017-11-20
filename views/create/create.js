@@ -25,8 +25,8 @@
                 '<li>Paste links, images and videos by<b> Ctrl+V</b></li>' +
                 '</ul>' +
                 '<p><i>Code at GitHub: <a href="https://github.com/DAMAGEx1/tiler" target="_blank">Here</a></i></p>',
-            collection_id: [],
-            category_id: [],
+            collections: [],
+            categories: [],
             preview: ''
         };
 
@@ -92,10 +92,10 @@
 
             switch(type) {
                 case 'collection':
-                    create.form.collection_id = create.collectId(item, create.form.collection_id);
+                    create.form.collections = create.collectId(item, create.form.collections);
                     break;
                 case 'category':
-                    create.form.category_id = create.collectId(item, create.form.category_id);
+                    create.form.categories = create.collectId(item, create.form.categories);
                     break;
                 default:
                     break

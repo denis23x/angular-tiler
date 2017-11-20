@@ -44,21 +44,21 @@
                                         <span translate="create.firstCollections">to create the first collection</span>
                                     </div>
                                     <div ng-show="create.collections.length > 0" class="create-collection-list-fixed">
-                                        <a class="create-default-item" ng-class="{'select': create.form.collection_id.length === 0}" href="#">
-                                            <i class="mdi mdi-check transition-none mr-1" ng-show="create.form.collection_id.length === 0" aria-hidden="true"></i>
+                                        <a class="create-default-item" ng-class="{'select': create.form.collections.length === 0}" href="#">
+                                            <i class="mdi mdi-check transition-none mr-1" ng-show="create.form.collections.length === 0" aria-hidden="true"></i>
                                             <span translate="create.default">Without collection</span>
                                         </a>
                                         <div ng-repeat="collection in create.collections | orderBy:'name'">
-                                            <a class="create-collection-item" ng-class="{'select': create.form.collection_id.indexOf(collection.id) !== -1}" href="#" ng-click="create.selectItems(collection.id, 'collection')">
-                                                <i class="mdi mdi-check transition-none mr-1" ng-show="create.form.collection_id.indexOf(collection.id) !== -1" aria-hidden="true"></i>
+                                            <a class="create-collection-item" ng-class="{'select': create.form.collections.indexOf(collection.id) !== -1}" href="#" ng-click="create.selectItems(collection.id, 'collection')">
+                                                <i class="mdi mdi-check transition-none mr-1" ng-show="create.form.collections.indexOf(collection.id) !== -1" aria-hidden="true"></i>
                                                 {{collection.name}}
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="selected-items text-secondary px-3 pt-3" ng-show="create.form.collection_id.length !== 0">
+                                    <div class="selected-items text-secondary px-3 pt-3" ng-show="create.form.collections.length !== 0">
                                         <small>
                                             <span translate="create.selected">Selected: </span>
-                                            {{create.form.collection_id.length}}
+                                            {{create.form.collections.length}}
                                         </small>
                                     </div>
                                 </div>

@@ -4,107 +4,106 @@
         .module('app').component('gridComponent', {
         templateUrl: 'components/grid/grid.html',
         bindings: {
-            posts: '<'
+            content: '<'
         },
         controller: ('GridController', GridController),
         controllerAs: 'grid'
     });
 
     // Start grid component
-    GridController.$inject = ['$rootScope', '$scope', 'APIService', 'angularGridInstance'];
-    function GridController($rootScope, $scope, APIService, angularGridInstance) {
+    GridController.$inject = ['$rootScope', '$scope', 'APIService'];
+    function GridController($rootScope, $scope, APIService) {
 
         var grid = this,
-            page = 1, postList;
+            nextPage = 2,
+            defaultContent;
 
+        grid.gridWidth = 250;
+        grid.gutterSize = 10;
+        grid.lastPage = false;
         grid.order = {
             reverse: false,
             type: 'created_at'
         };
 
-        //  Watch while grid.posts has loaded/changed
-        $scope.$watch(grid.posts, function() {
-            //  TODO: review the relevance of this cycle
-            grid.posts.forEach(function(obj) {
-                obj.actualHeight = 150;
-                obj.actualWidth = 150;
-                obj.created = moment.utc(obj.created_at).startOf('minute').from();
+        $scope.$watch(grid.content, function() {
+            grid.content.data.forEach(function(post) {
+                post.created = moment.utc(post.created_at).startOf('minute').from();
             });
 
-            postList = grid.posts;
-            grid.posts = postList.concat([]);
+            defaultContent = grid.content.data;
+            grid.posts = grid.content.data;
         });
 
-        grid.gridWidth = 250;
-        grid.gutterSize = 10;
-
-        //  Sorting grid functions
         $rootScope.$on('startSearch', function (event, val) {
             grid.searchText = val;
-            val = val.toLowerCase();
-            grid.posts = postList.filter(function (post) {
-                return post.title.toLowerCase().indexOf(val) !== -1;
+            grid.posts = defaultContent.filter(function (post) {
+                return post.title.toLowerCase().indexOf(val.toLowerCase()) !== -1;
             });
         });
 
-        $rootScope.$on('viewsToggle', function (event, reverse) {
-            console.log('Here im return sort by views in - ' + reverse);
-            // grid.posts = postList.sort(function (a, b) {
-            //     return reverse ? a.likes_count - b.likes_count : b.likes_count - a.likes_count;
-            // });
-        });
-
-        $rootScope.$on('likesToggle', function (event, reverse) {
-            console.log('Here im return sort by likes in - ' + reverse);
-            // grid.posts = postList.sort(function (a, b) {
-            //     return reverse ? a.views_count - b.views_count : b.views_count - a.views_count;
-            // });
-        });
+        // $rootScope.$on('viewsToggle', function (event, reverse) {
+        //     console.log('Here im return sort by views in - ' + reverse);
+        //     grid.posts = postList.sort(function (a, b) {
+        //         return reverse ? a.likes_count - b.likes_count : b.likes_count - a.likes_count;
+        //     });
+        // });
+        //
+        // $rootScope.$on('likesToggle', function (event, reverse) {
+        //     console.log('Here im return sort by likes in - ' + reverse);
+        //     grid.posts = postList.sort(function (a, b) {
+        //         return reverse ? a.views_count - b.views_count : b.views_count - a.views_count;
+        //     });
+        // });
 
         $rootScope.$on('newestToggle', function (event, toggle) {
             grid.order.reverse = !grid.order.reverse;
             grid.order.type = 'created_at';
-            grid.posts = postList.sort();
+            grid.posts = defaultContent.sort();
         });
 
-        $rootScope.$on('showAll', function (event) {
-                return grid.posts = postList;
+        $rootScope.$on('showAll', function () {
+            return grid.posts = defaultContent;
         });
 
-        $rootScope.$on('showCategory', function (event, category) {
-            var arr = [];
-            postList.filter(function (post) {
-                if (post.categories.length > 0) {
-                    angular.forEach(post.categories, function (val, key) {
-                        val.id === category ? arr.push(post) : false;
-                    });
-                }
-            });
-            grid.posts = arr;
-        });
+        // $rootScope.$on('showCategory', function (event, category) {
+        //     // TODO: right code for filtering
+        //     // grid.posts = defaultContent.filter(function (post) {
+        //     //     return post.categories.indexOf(category) !== -1;
+        //     // });
+        //
+        //     var arr = [];
+        //     grid.posts.filter(function (post) {
+        //         if (post.categories.length > 0) {
+        //             angular.forEach(post.categories, function (val, key) {
+        //                 val.id === category ? arr.push(post) : false;
+        //             });
+        //         }
+        //     });
+        //     grid.posts = arr;
+        // });
 
-        $rootScope.$on('showCollection', function (event, collection) {
-            var arr = [];
-            postList.filter(function (post) {
-                if (post.collections.length > 0) {
-                    angular.forEach(post.collections, function (val, key) {
-                        console.log(val);
-                        val.id === collection ? arr.push(post) : false;
-                    });
-                }
-            });
-            grid.posts = arr;
-        });
-
-        grid.refresh = function(){
-            angularGridInstance.gallery.refresh();
-        };
+        // $rootScope.$on('showCollection', function (event, collection) {
+        //     var arr = [];
+        //     postList.filter(function (post) {
+        //         if (post.collections.length > 0) {
+        //             angular.forEach(post.collections, function (val, key) {
+        //                 val.id === collection ? arr.push(post) : false;
+        //             });
+        //         }
+        //     });
+        //     grid.posts = arr;
+        // });
 
         grid.loadMore = function () {
-            APIService.loadManyPosts(page).then(function(next){
-                grid.posts = grid.posts.concat(next);
-                page++
-            });
+            if (!grid.lastPage) {
+                APIService.loadPosts('?page=' + nextPage).then(function(content) {
+                    defaultContent = defaultContent.concat(content.data);
+                    grid.posts = defaultContent;
+                    grid.lastPage = nextPage === content.last_page;
+                    nextPage++;
+                });
+            }
         };
 
         grid.setText = function (text) {

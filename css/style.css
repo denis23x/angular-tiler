@@ -299,6 +299,11 @@ i {
 }
 
 
+/* Users page */
+.users-avatar {
+    width: 100px;
+}
+
 /*.blur {*/
     /*filter: blur(2px);*/
 /*}*/

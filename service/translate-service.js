@@ -62,7 +62,8 @@
                         notFoundTitle   : 'не найдено',
                         notFoundDesc    : 'По вашему запросу ничего не найдено, попробуйте изменить категорию поиска, или',
                         notFoundLink    : 'создайте интересный вам пост',
-                        notFoundEnd     : 'самостоятельно'
+                        notFoundEnd     : 'самостоятельно',
+                        nothingLoad     : 'Больше ничего не загружать по вашему запросу'
                     },
                     modal: {
                         auth: {
@@ -209,7 +210,8 @@
                         notFoundTitle   : 'not found',
                         notFoundDesc    : 'Nothing found on your request, try to change the search category, or',
                         notFoundLink    : 'create an interesting post',
-                        notFoundEnd     : 'yourself'
+                        notFoundEnd     : 'yourself',
+                        nothingLoad     : 'Nothing more to load on your request'
                     },
                     modal: {
                         auth: {

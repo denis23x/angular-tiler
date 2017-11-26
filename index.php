@@ -36,7 +36,7 @@
 <body ng-app="app" class="pr-0">
     <div ng-controller="MainController as main">
         <header-component></header-component>
-        <div ui-view></div>
+        <div ui-view class="main-view"></div>
     </div>
 </body>
 

@@ -27,7 +27,7 @@
                     case 'client_id':
                         return '1'; break;
                     case 'client_secret':
-                        return 'wNkg0kCjla2RAluCe4gDOj5l5Z4jPfIAgqmmYU7L'; break;
+                        return 'yEnmgm3ozzL4ZQGyRK5AbPNsesiiztyZInbhuzOb'; break;
                     default:
                         return false; break;
                 }

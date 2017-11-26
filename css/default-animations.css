@@ -1,5 +1,7 @@
 /* Animation for forms input */
 
+.collections-edit-buttons.ng-hide-remove,
+.grid-nothing-load-more.ng-hide-remove,
 .summernote-invalid-feedback.ng-hide-remove,
 .selected-items.ng-hide-remove,
 .invalid-feedback.ng-hide-remove,
@@ -7,6 +9,7 @@
 .reg-error-server.ng-hide-remove {
     animation: bounceIn 0.7s;
 }
+.collections-edit-buttons.ng-hide-add,
 .selected-items.ng-hide-add,
 .invalid-feedback.ng-hide-add,
 .auth-error-server.ng-hide-add,

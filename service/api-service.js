@@ -40,6 +40,18 @@
                         return response;
                     });
             },
+            renameCollection: function (id, name) {
+                return CommonService.put(EnvironmentService.apiRoot() + 'collections/' + id, name)
+                    .then(function (response) {
+                        service.loadCollections(JSON.parse(localStorage.getItem('user-data')).id);
+                    })
+            },
+            deleteCollection: function (id) {
+                return CommonService.delete(EnvironmentService.apiRoot() + 'collections/' + id)
+                    .then(function (response) {
+                        service.loadCollections(JSON.parse(localStorage.getItem('user-data')).id);
+                    })
+            },
             loadUsers: function () {
                 return CommonService.get(EnvironmentService.apiRoot() + 'users')
                     .then(function (response) {

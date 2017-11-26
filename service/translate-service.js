@@ -7,6 +7,22 @@
         return {
             russianLanguage: function () {
                 var dictionary = {
+                    collections: {
+                        title:              'Коллекции',
+                        description:        'Здесь вы можете создать новую коллекцию и сохранить в ней свои посты',
+                        NameInput:          'Имя коллекции',
+                        minimumName:        'Максимальная длина 3 символов',
+                        maximumName:        'Максимальная длина 18 символов',
+                        createButton:       'Создать новую коллекцию',
+                        nowShowing:         'Показано:',
+                        save:               'Сохранить',
+                        cancel:             'Отмена',
+                        rename:             'Переименовать',
+                        remove:             'Удалить',
+                        all:                'Всё',
+                        emptyCollection:    'Пустая коллекция',
+                        exists:             'Коллекция с таким именем уже существует'
+                    },
                     create: {
                         createTitle         : 'Создать пост',
                         createTitleInput    : 'Добавить заголовок',
@@ -155,6 +171,22 @@
             },
             englishLanguage: function () {
                 var dictionary = {
+                    collections: {
+                        title:              'Collections',
+                        description:        'Here you can create a new collection and save in it your posts',
+                        NameInput:          'Collection name',
+                        minimumName:        'Minimum length of 3 characters',
+                        maximumName:        'Maximum length of 18 characters',
+                        createButton:       'Create new collection',
+                        nowShowing:         'Now showing:',
+                        save:               'Save',
+                        cancel:             'Cancel',
+                        rename:             'Rename',
+                        remove:             'Remove',
+                        all:                'All',
+                        emptyCollection:    'Empty collection',
+                        exists:             'A collection with this name already exists'
+                    },
                     create: {
                         createTitle         : 'Create post',
                         createTitleInput    : 'Type title',

@@ -16,8 +16,8 @@
         header.userData = JSON.parse(localStorage.getItem('user-data'));
         header.collections = JSON.parse(localStorage.getItem('user-collections'));
 
-        header.sorting = 'newest';
-        header.toggle = true;
+        header.activeSorting = '-created_at';
+        header.activeCategory = 'all';
 
         APIService.loadCategories().then(function (response) {
             header.categories = response;
@@ -38,36 +38,22 @@
             $rootScope.$broadcast('startSearch', header.searchText);
         };
 
-        // header.viewsToggle = function (reverse) {
-        //     $rootScope.$broadcast('viewsToggle', reverse);
-        // };
-        //
-        // header.likesToggle = function (reverse) {
-        //     $rootScope.$broadcast('likesToggle', reverse);
-        // };
+        header.sortingPosts = function (type) {
+            $rootScope.$broadcast('sortingPosts', type);
+        };
 
-        header.newest = function (reverse) {
-            if (header.toggle === reverse) {
-                return false;
-            } else {
-                header.toggle = reverse;
-                header.sorting = reverse ? 'newest' : 'oldest' ;
-                $rootScope.$broadcast('newestToggle', reverse);
+        header.showPosts = function (type, id) {
+            switch(type) {
+                case 'all':
+                    $rootScope.$broadcast('showAll'); break;
+                case 'collection':
+                    $rootScope.$broadcast('showCollection', id); break;
+                case 'category':
+                    $rootScope.$broadcast('showCategory', id); break;
+                default:
+                    break;
             }
         };
-
-        //  Show all posts
-        header.showAll = function () {
-            $rootScope.$broadcast('showAll');
-        };
-
-        // header.showCollection = function (collection) {
-        //     $rootScope.$broadcast('showCollection', collection);
-        // };
-        //
-        // header.showCategory = function (category) {
-        //     $rootScope.$broadcast('showCategory', category);
-        // };
 
         //  Log out user, go home, clear userData and localStorage
         header.logOut = function () {

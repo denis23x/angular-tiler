@@ -1,34 +1,31 @@
 <div class="container" ng-controller="UsersController as users">
     <div class="row">
-        <div class="col-12 col-sm-12 col-md-6 col-lg-8 col-xl-8 mx-auto mt-5">
+        <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 mx-auto mt-5">
             <div class="row">
-                <h4>This will be users page</h4>
-
-
-                <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="user in users.list">
-
-
-                        <div class="media">
-                            <img class="img-thumbnail mr-3 users-avatar" src="{{user.avatar}}" alt="Generic placeholder image">
-                            <div class="media-body">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">{{user.name}} {{user.surname}}</h5>
-                                    <small class="text-muted">3 days ago</small>
-                                </div>
-                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                                <small class="text-muted">Donec id elit non mi porta.</small>
-                            </div>
-                        </div>
-
-
-
-
-
-                    </a>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <h3 class="mb-3 collections-page-header">Users</h3>
                 </div>
-
-
+                <div class="w-100">
+                    <hr>
+                    <div class="col-12 px-3">
+                        <p>This will be the users page</p>
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" ng-repeat="user in users.list">
+                                <div class="media">
+                                    <img class="img-thumbnail mr-3 users-avatar" src="{{user.avatar}}" alt="Generic placeholder image">
+                                    <div class="media-body">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">{{user.name}} {{user.surname}}</h5>
+                                            <small class="text-muted">3 days ago</small>
+                                        </div>
+                                        <p class="mb-0">{{user.email}}</p>
+                                        <!--<small class="text-muted">Donec id elit non mi porta.</small>-->
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

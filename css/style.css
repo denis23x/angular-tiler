@@ -77,6 +77,9 @@ body::-webkit-scrollbar-thumb {
 i {
     transition: all 0.2s;
 }
+.main-view {
+    margin-top: 41px;
+}
 /* Header */
 .header-input {
     background: none;
@@ -229,6 +232,33 @@ i {
 
 
 
+
+
+
+
+
+
+
+/* Collections page */
+.collections-page-header {
+    font-size: 2rem;
+    font-weight: 200;
+}
+.collections-title-input {
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+.collections-selected {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+
+
+
+
+
 /* Create post page */
 .create-page-header {
     font-size: 2rem;
@@ -301,7 +331,7 @@ i {
 
 /* Users page */
 .users-avatar {
-    width: 100px;
+    width: 50px;
 }
 
 /*.blur {*/

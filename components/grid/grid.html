@@ -17,7 +17,7 @@
                             <img class="card-img-top" ng-src="{{post.preview}}" alt="{{post.title}}">
                             <span class="grid-author"><i class="mdi mdi-account-circle mr-2" aria-hidden="true"></i>{{post.user.name}}</span>
                             <div class="grid-tags">
-                                <span class="grid-tags-item" ng-repeat="tag in post.tags">{{tag}}</span>
+                                <span class="grid-tags-item" ng-repeat="tag in post.tags track by $index">{{tag}}</span>
                             </div>
                         </div>
                         <div class="card-body p-2">
@@ -28,12 +28,12 @@
                                 <div class="col-7 pr-0">
                                     <small><i class="mdi mdi-clock" aria-hidden="true"></i> {{post.created}}</small>
                                 </div>
-                                <div class="col pl-0 text-right">
-                                    <small class="mr-2">
+                                <div class="col pl-0 text-right no-select">
+                                    <small class="mr-2" ng-click="grid.setLike(post.id, 1)">
                                         <i class="mdi mdi-thumb-up-outline" aria-hidden="true"></i>
                                         {{post.likes.length !== 0 ? post.likes.length : ''}}
                                     </small>
-                                    <small class="mr-2">
+                                    <small class="mr-2" ng-click="grid.setLike(post.id, 0)">
                                         <i class="mdi mdi-thumb-down-outline" aria-hidden="true"></i>
                                         {{post.dislikes.length !== 0 ? post.dislikes.length : ''}}
                                     </small>

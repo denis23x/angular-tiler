@@ -23,6 +23,9 @@
         grid.lastPage = false;
         grid.sortingType = '-created_at';
 
+        //  Get user data
+        grid.userData = JSON.parse(localStorage.getItem('user-data'));
+
         $scope.$watch(grid.content, function() {
             grid.content.data.forEach(function(post) {
                 post.created = moment.utc(post.created_at).startOf('minute').from();
@@ -82,6 +85,41 @@
                     nextPage++;
                 });
             }
+        };
+
+        grid.setLike = function (id, status) {
+            var currentUser = {
+                user_id: grid.userData.id,
+                user: grid.userData
+            };
+
+            var currentPost = grid.posts.find(function (val) {
+                return val.id === id;
+            });
+
+            var commonArr = [
+                currentPost.dislikes,
+                currentPost.likes
+            ];
+
+            function hasId(val) {
+                return val.user_id === currentUser.user_id;
+            }
+
+            commonArr.forEach(function (val, key) {
+                if ((val.some(hasId) && key === status) || (val.some(hasId) && key !== status)) {
+                    commonArr[key] = commonArr[key].filter(function (val) {
+                        return val.user_id !== currentUser.user_id;
+                    });
+                } else if (!val.some(hasId) && key === status) {
+                    commonArr[key].push(currentUser);
+                }
+            });
+
+            currentPost.dislikes = commonArr[0];
+            currentPost.likes = commonArr[1];
+
+            APIService.likePost({post_id: id, status: status});
         };
 
         grid.setText = function (text) {

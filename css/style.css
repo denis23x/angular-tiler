@@ -31,6 +31,9 @@
     width: 25px;
     height: 25px;
 }
+.no-select {
+    user-select: none;
+}
 /* Mixins */
 .default-input {
     border-radius: .25rem;
@@ -192,7 +195,7 @@ i {
     padding: 1rem 0;
 }
 .about-dev-icons img {
-    max-height: 55px;
+    height: 60px;
     padding: 0.25rem;
 }
 
@@ -285,6 +288,7 @@ i {
     font-size: 1rem;
     font-weight: 400;
 }
+.create-category-list-fixed,
 .create-collection-list-fixed {
     max-height: 9rem;
     overflow-y: auto;
@@ -327,8 +331,28 @@ i {
     text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
     color: #e9ecef;
 }
-
-
+tags-input .tags {
+    box-shadow: none !important;
+    border: 0 !important;
+    padding: 0 !important;
+}
+tags-input .tags .tag-item {
+    background: none !important;
+    border: 0 !important;
+    cursor: pointer;
+}
+tags-input .tags .tag-item:hover .remove-button {
+    opacity: 1;
+}
+tags-input .tags .tag-item .remove-button {
+    margin: 0 !important;
+    opacity: 0.25;
+    font-size: 14px !important;
+}
+tags-input .tags .input.invalid-tag {
+    color: #dc3545 !important;
+    opacity: 0.75;
+}
 /* Users page */
 .users-avatar {
     width: 50px;

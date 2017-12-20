@@ -23,6 +23,9 @@
             loadPost: function (id) {
                 return CommonService.get(EnvironmentService.apiRoot() + 'posts/' + id);
             },
+            likePost: function (data) {
+                return CommonService.put(EnvironmentService.apiRoot() + 'posts/' + data.post_id + '/likes', data);
+            },
             loadDefaultAvatars: function () {
                 return CommonService.get(EnvironmentService.currentSite() + 'json/default-avatars.json');
             },

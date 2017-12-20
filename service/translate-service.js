@@ -48,7 +48,10 @@
                         clickCollections    : ' здесь ',
                         firstCollections    : 'что бы создать первую коллекцию',
                         linkPreview         : 'Вставить ссылку',
-                        filePreview         : 'Выбрать файл'
+                        filePreview         : 'Выбрать файл',
+                        tagsAdd             : 'Добавить теги',
+                        tagsPlaceholder     : 'Добавьте теги чтобы ваш пост было легче найти',
+                        tagsAllowed         : 'Можно добавить не более 10 тегов'
                     },
                     header: {
                         logoDesc    : 'tiler',
@@ -212,7 +215,10 @@
                         clickCollections    : ' here ',
                         firstCollections    : 'to create the first collection',
                         linkPreview         : 'Insert link',
-                        filePreview         : 'Select file'
+                        filePreview         : 'Select file',
+                        tagsAdd             : 'Add tags',
+                        tagsPlaceholder     : 'You can add tags to make your post easier to find',
+                        tagsAllowed         : 'Allowed to enter no more than 10 tags'
                     },
                     header: {
                         logoDesc    : 'tiler',

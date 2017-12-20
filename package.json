@@ -19,10 +19,11 @@
     "angulargrid": "^0.6.5",
     "animate.css": "^3.5.2",
     "bootstrap": "^4.0.0-beta",
-    "html2canvas": "^0.5.0-beta4",
+    "html2canvas": "^1.0.0-alpha.4",
     "jquery": "^3.2.1",
     "mdi": "^2.0.46",
     "moment": "^2.18.1",
+    "ng-tags-input": "^3.2.0",
     "oclazyload": "^1.1.0",
     "popper.js": "^1.12.5",
     "summernote": "^0.8.8"

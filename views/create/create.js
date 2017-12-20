@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    angular.module('app', ['summernote'])
+    angular.module('app', ['summernote', 'ngTagsInput'])
         .controller('CreateController', CreateController);
 
     CreateController.$inject = ['$rootScope', 'APIService', '$http', '$q', '$state'];
@@ -27,6 +27,8 @@
                 '<p><i>Code at GitHub: <a href="https://github.com/DAMAGEx1/tiler" target="_blank">Here</a></i></p>',
             collections: [],
             categories: [],
+            tags: ['tiler', 'dev', 'qwerty'],
+            published: 1,
             preview: ''
         };
 
@@ -36,6 +38,8 @@
             base64Error: '',
             base64File: '',
             plainText: '',
+            tagsLimit: 10,
+            tags: ['tiler', 'dev', 'qwerty'],
             formSubmitted: false,
             randomColor: '#' + Math.floor(Math.random() * 16777215).toString(16)
         };
@@ -53,12 +57,13 @@
             }
 
             if (create.form.preview === '') {
-                html2canvas(element.get(0), {
-                    allowTaint: true,
-                    onrendered: function (canvas) {
-                        create.form.preview = canvas.toDataURL("image/jpeg");
-                        sendForm ();
-                    }
+                html2canvas(element.get(0),{
+                    logging: false,
+                    scale: 2,
+                    x: element.get(0).getBoundingClientRect().left + 2,
+                }).then(function (response) {
+                    create.form.preview = response.toDataURL("image/jpeg");
+                    sendForm ();
                 });
             } else {
                 sendForm ();
@@ -101,7 +106,6 @@
                     break
             }
         };
-
 
 
 

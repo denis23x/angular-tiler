@@ -31,11 +31,11 @@
                 <div class="col-12 px-3">
                     <div class="row align-items-center" ng-init="collections.selectedCollection = ('collections.all' | translate)">
                         <div class="col-sm-auto pr-0">
-                            <div class="mr-1 my-2 d-inline-block" ng-hide="collections.selectedActive && collections.renameActive" translate="collections.nowShowing">Now showing:</div>
-                            <div class="mr-1 my-2 d-inline-block" ng-show="collections.selectedActive && collections.renameActive">
+                            <div class="mr-1 my-3 d-inline-block" ng-hide="collections.selectedActive && collections.renameActive" translate="collections.nowShowing">Now showing:</div>
+                            <div class="mr-1 my-3 d-inline-block" ng-show="collections.selectedActive && collections.renameActive">
                                 <span translate="collections.rename">Rename</span><span>:</span>
                             </div>
-                            <div class="my-2 d-inline-block text-primary" ng-hide="collections.renameActive">{{collections.selectedCollection}}</div>
+                            <div class="my-3 d-inline-block text-primary" ng-hide="collections.renameActive">{{collections.selectedCollection}}</div>
                             <form name="collectionRenameForm" ng-submit="collections.renameCollection(collectionRenameForm.$valid)" class="d-inline-block" ng-show="collections.renameActive">
                                 <input type="text" class="form-control collections-rename-input" ng-class="{'is-invalid' : collectionRenameForm.rename.$invalid && collectionRenameForm.rename.$dirty || collections.renameFormSubmitted && collectionRenameForm.rename.$invalid || collections.collectionRename.length > 18 || collections.renameFormSubmitted && collections.renameExist}" ng-model="collections.collectionRename" ng-change="collections.renameExist = false" aria-label="rename" name="rename" minlength="3" required>
                                 <button type="submit" hidden></button>

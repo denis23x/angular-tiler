@@ -101,6 +101,8 @@
                             'node_modules/angular-summernote/dist/angular-summernote.min.js',
                             'node_modules/html2canvas/dist/html2canvas.js',
                             'css/summernote-skin.css',
+                            'node_modules/ng-tags-input/build/ng-tags-input.min.js',
+                            'node_modules/ng-tags-input/build/ng-tags-input.min.css',
                             'views/create/create.js'
                         ], {serie: true});
                     }]

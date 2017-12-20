@@ -32,6 +32,43 @@
                     <div class="col-12 px-3">
                         <div class="row">
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4 my-3">
+                                <div class="mt-3">
+                                    <button type="button" class="btn btn-link lead d-flex">
+                                        <i class="mdi mdi-vector-arrange-below mr-2" aria-hidden="true"></i>
+                                        <a href="#" translate="create.selectCategory">Select category</a>
+                                    </button>
+                                    <div class="mt-0">
+                                        <hr class="dropdown-divider">
+                                        <div class="create-category-list-fixed">
+                                            <div ng-repeat="category in create.categories | orderBy:'name'">
+                                                <a class="create-collection-item" ng-class="{'select': create.form.categories.indexOf(category.id) !== -1}" href="#" ng-click="create.selectItems(category.id, 'category')">
+                                                    <i class="mdi mdi-check transition-none mr-1" ng-show="create.form.categories.indexOf(category.id) !== -1" aria-hidden="true"></i>{{category.name}}
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="selected-items text-secondary px-3 pt-3" ng-show="create.form.categories.length !== 0">
+                                            <small><span translate="create.selected">Selected: </span>{{create.form.categories.length}}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-8 my-3">
+                                <div class="mt-3">
+                                    <button type="button" class="btn btn-link lead d-flex">
+                                        <i class="mdi mdi-pound mr-2" aria-hidden="true"></i>
+                                        <a href="#" translate="create.tagsAdd">Add tags</a>
+                                    </button>
+                                    <div class="mt-0">
+                                        <tags-input placeholder="{{ 'create.tagsPlaceholder' | translate }}" ng-model="create.utils.tags" on-tag-added="create.utils.tags.length > create.utils.tagsLimit ? create.utils.tags.splice(-1,1) : create.form.tags.push($tag.text)" on-tag-removed="create.form.tags.splice(create.form.tags.indexOf($tag.text), 1);" replace-spaces-with-dashes="false" enable-editing-last-tag="true" template="custom-template" min-length="3" max-length="12"></tags-input>
+                                        <div ng-show="create.utils.tags.length === create.utils.tagsLimit" class="invalid-feedback d-block px-2" translate="create.tagsAllowed">Allowed to enter no more than 10 tags</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 px-3">
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4 my-3">
                                 <button type="button" class="btn btn-link lead d-flex">
                                     <i class="mdi mdi-vector-arrange-below mr-2" aria-hidden="true"></i>
                                     <a ui-sref="collections" translate="create.collections">Collections</a>
@@ -44,22 +81,18 @@
                                         <span translate="create.firstCollections">to create the first collection</span>
                                     </div>
                                     <div ng-show="create.collections.length > 0" class="create-collection-list-fixed">
-                                        <a class="create-default-item" ng-class="{'select': create.form.collections.length === 0}" href="#">
+                                        <a class="create-default-item" ng-class="{'select': create.form.collections.length === 0}" href="#" ng-click="create.form.collections = []">
                                             <i class="mdi mdi-check transition-none mr-1" ng-show="create.form.collections.length === 0" aria-hidden="true"></i>
-                                            <span translate="create.default">Without collection</span>
+                                            <span translate="create.default">Default</span>
                                         </a>
                                         <div ng-repeat="collection in create.collections | orderBy:'name'">
                                             <a class="create-collection-item" ng-class="{'select': create.form.collections.indexOf(collection.id) !== -1}" href="#" ng-click="create.selectItems(collection.id, 'collection')">
-                                                <i class="mdi mdi-check transition-none mr-1" ng-show="create.form.collections.indexOf(collection.id) !== -1" aria-hidden="true"></i>
-                                                {{collection.name}}
+                                                <i class="mdi mdi-check transition-none mr-1" ng-show="create.form.collections.indexOf(collection.id) !== -1" aria-hidden="true"></i>{{collection.name}}
                                             </a>
                                         </div>
                                     </div>
                                     <div class="selected-items text-secondary px-3 pt-3" ng-show="create.form.collections.length !== 0">
-                                        <small>
-                                            <span translate="create.selected">Selected: </span>
-                                            {{create.form.collections.length}}
-                                        </small>
+                                        <small><span translate="create.selected">Selected: </span>{{create.form.collections.length}}</small>
                                     </div>
                                 </div>
                             </div>
@@ -68,7 +101,7 @@
                                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3">
                                         <div class="base64-image-wrapper-create img-thumbnail">
                                             <div class="base64-image-wrapper d-block">
-                                                <div class="create-preview-name" ng-show="!create.form.preview"  ng-style="{'background' : create.utils.randomColor}" ng-click="create.changeColor()">
+                                                <div class="create-preview-name" ng-show="!create.form.preview"  ng-style="{'background' : create.utils.randomColor.length === 6 ? create.changeColor() : create.utils.randomColor}" ng-click="create.changeColor()">
                                                     <div class="create-preview-name-wrapper">{{create.userData.name[0]}}{{create.userData.surname ? create.userData.surname[0] : ''}}</div>
                                                 </div>
                                                 <img class="d-inline-block img-responsive" ng-show="create.form.preview" ng-src="{{create.form.preview}}" alt="{{create.form.title}}">
@@ -123,28 +156,28 @@
                             </div>
                         </div>
                         <hr>
-                        <div class="row">
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                <div class="lead" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                    <strong>Дополнительно</strong>
-                                </div>
-                                <div class="collapse" id="collapseExample">
-                                    <div class="mt-3">
-                                        <button class="btn btn-link" type="button" translate="create.selectCategory">
-                                            Select category
-                                        </button>
-                                        <!--<a class="nav-link"><span class="create-category-title mr-2" translate="create.selectCategory"></span></a>-->
-                                        <!--<div ng-show="create.collections.length > 0" class="dropdown-divider"></div>-->
-                                        <div ng-show="create.categories" ng-repeat="category in create.categories">
-                                            <a class="create-category-item" ng-class="{'select': create.form.category_id.indexOf(category.id) !== -1}" href="#" ng-click="create.selectItems(category.id, 'category')">
-                                            <i class="mdi mdi-check transition-none mr-1" ng-show="create.form.category_id.indexOf(category.id) !== -1" aria-hidden="true"></i>
-                                            {{category.name}}
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <!--<div class="row">-->
+                            <!--<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">-->
+                                <!--<div class="lead" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">-->
+                                    <!--<strong>Дополнительно</strong>-->
+                                <!--</div>-->
+                                <!--<div class="collapse" id="collapseExample">-->
+                                    <!--<div class="mt-3">-->
+                                        <!--<button class="btn btn-link" type="button" translate="create.selectCategory">-->
+                                            <!--Select category-->
+                                        <!--</button>-->
+                                        <!--&lt;!&ndash;<a class="nav-link"><span class="create-category-title mr-2" translate="create.selectCategory"></span></a>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<div ng-show="create.collections.length > 0" class="dropdown-divider"></div>&ndash;&gt;-->
+                                        <!--<div ng-show="create.categories" ng-repeat="category in create.categories">-->
+                                            <!--<a class="create-category-item" ng-class="{'select': create.form.categories.indexOf(category.id) !== -1}" href="#" ng-click="create.selectItems(category.id, 'category')">-->
+                                            <!--<i class="mdi mdi-check transition-none mr-1" ng-show="create.form.categories.indexOf(category.id) !== -1" aria-hidden="true"></i>-->
+                                            <!--{{category.name}}-->
+                                            <!--</a>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
                     </div>
                     <div class="col-12 mt-5">
                         <div class="row px-3">
@@ -171,4 +204,12 @@
             </div>
         </div>
     </div>
+    <script type="text/ng-template" id="custom-template">
+        <div class="tag-template">
+            <span>{{$getDisplayText()}}</span>
+            <a class="remove-button" ng-click="$removeTag()">
+                <i class="mdi mdi-window-close"></i>
+            </a>
+        </div>
+    </script>
 </div>

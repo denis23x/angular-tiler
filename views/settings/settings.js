@@ -3,8 +3,8 @@
     angular.module('app')
         .controller('SettingsController', SettingsController);
 
-    SettingsController.$inject = ['$translate', '$timeout', 'AuthService'];
-    function SettingsController($translate, $timeout, AuthService) {
+    SettingsController.$inject = ['$translate', '$timeout', 'AuthService', 'APIService'];
+    function SettingsController($translate, $timeout, AuthService, APIService) {
         var settings = this;
 
         settings.utils = {
@@ -15,12 +15,21 @@
             base64File: ''
         };
 
+        settings.userOptions = {
+            currentLanguage: settings.currentLang,
+        };
+
         settings.update = JSON.parse(localStorage.getItem('user-data'));
 
         settings.availableLang = $translate.getAvailableLanguageKeys();
         settings.currentLang = $translate.use();
 
         settings.changeLanguage = function () {
+            console.log(settings.currentLang);
+            // APIService.userOptions(settings.update.id, settings.userOptions).then(function (response) {
+            //     console.log(response);
+            // });
+
             $translate.use(settings.currentLang);
         };
 

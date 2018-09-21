@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-xl fixed-top navbar-dark bg-primary py-0 px-3">
+<nav class="navbar navbar-expand-xl fixed-top navbar-dark navbar-gradient py-0 px-3">
     <a class="navbar-brand" href="#" ui-sref="home" ui-sref-opts="{reload: true}"><i class="mdi mdi-folder-open mr-2" aria-hidden="true"></i><span translate="header.logoDesc">tiler</span></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -6,7 +6,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto navbar-section" ng-show="'home' | includedByState">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle hidden-after" material-ripple href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="mr-2" translate="header.sort">Сортировка</span><i class="mdi mdi-chevron-down" aria-hidden="true"></i></a>
+                <a class="nav-link dropdown-toggle hidden-after" material-ripple href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="mr-2" translate="header.sort">Sorting</span><i class="mdi mdi-chevron-down" aria-hidden="true"></i></a>
                 <div class="dropdown-menu dropdown-menu-left mt-0">
                     <a class="dropdown-item header-dropdown-item" ng-class="{'select': header.activeSorting === '-created_at' }" href="#" ng-click="header.sortingPosts('-created_at'); header.activeSorting = '-created_at';" translate="header.newest">newest</a>
                     <a class="dropdown-item header-dropdown-item" ng-class="{'select': header.activeSorting === 'created_at' }" href="#" ng-click="header.sortingPosts('created_at'); header.activeSorting = 'created_at';" translate="header.oldest">oldest</a>
@@ -58,34 +58,39 @@
         <ul class="navbar-nav ml-auto" ng-show="header.userData">
             <li class="nav-item">
                 <a class="nav-link" material-ripple href="#" ui-sref="create">
+                    <span class="mr-2" translate="header.add"> Add</span>
                     <i class="mdi mdi-plus" aria-hidden="true"></i>
-                    <span translate="header.add"> Add</span>
                 </a>
             </li>
-            <li class="nav-item"><a class="nav-link" material-ripple href="#" ui-sref="profile" translate="header.myProfile">My profile</a></li>
+            <!--<li class="nav-item"><a class="nav-link" material-ripple href="#" ui-sref="profile" translate="header.myProfile">My profile</a></li>-->
             <li class="nav-item"><a class="nav-link" material-ripple href="#" ui-sref="collections" translate="header.collections">Collections</a></li>
             <li class="nav-item mr-4"><a class="nav-link" material-ripple href="#" ui-sref="users" translate="header.users">Users</a></li>
-            <li class="nav-item mr-4 dropdown">
-                <a class="nav-link dropdown-toggle d-inline-block py-0 hidden-after" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="d-inline-block align-text-bottom mr-2 header-user-avatar" ng-src="{{header.userData.avatar}}" alt="{{header.userData.name}}">
+            <li class="nav-item mr-4 dropdown lh-1">
+                <a class="nav-link d-inline-block py-0" ui-sref="profile">
+                    <img class="d-inline-block align-text-bottom mr-3 header-user-avatar" ng-src="{{header.userData.avatar}}" alt="{{header.userData.name}}">
                     <ul class="header-user-list">
-                        <li>{{header.userData.name}} {{header.userData.surname}}</li>
-                        <li>{{header.userData.email}}</li>
+                        <li class="header-user-list-username">{{header.userData.name}} {{header.userData.surname}}</li>
+                        <!--<li>{{header.userData.email}}</li>-->
                     </ul>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right mt-0">
-                    <a class="dropdown-item header-dropdown-item" href="#" ui-sref="home" translate="header.home">Home</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item header-dropdown-item" href="#" ui-sref="profile" translate="header.myProfile">My profile</a>
-                    <a class="dropdown-item header-dropdown-item" href="#" ui-sref="collections" translate="header.collections">Collections</a>
-                    <a class="dropdown-item header-dropdown-item" href="#" ui-sref="users" translate="header.users">Users</a>
+
+            </li>
+            <li class="nav-item">
+                <a class="nav-link dropdown-toggle hidden-after p-0" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="mdi mdi-power mdi-24px" aria-hidden="true"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right text-right dropdown-menu-right mt-0">
+                    <!--<a class="dropdown-item header-dropdown-item" href="#" ui-sref="home" translate="header.home">Home</a>-->
+                    <!--<div class="dropdown-divider"></div>-->
+                    <!--<a class="dropdown-item header-dropdown-item" href="#" ui-sref="profile" translate="header.myProfile">My profile</a>-->
+                    <!--<a class="dropdown-item header-dropdown-item" href="#" ui-sref="collections" translate="header.collections">Collections</a>-->
+                    <!--<a class="dropdown-item header-dropdown-item" href="#" ui-sref="users" translate="header.users">Users</a>-->
                     <a class="dropdown-item header-dropdown-item" href="#" ui-sref="settings" translate="header.settings">Settings</a>
                     <a class="dropdown-item header-dropdown-item" href="#" ui-sref="about" translate="header.about">About</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item header-dropdown-item" href="#" ng-click="header.logOut()" translate="header.logOut">Log out</a>
                 </div>
             </li>
-            <li class="nav-item"><a class="nav-link p-0" href="#" data-toggle="dropdown"><i class="mdi mdi-dots-horizontal mdi-24px" aria-hidden="true"></i></a></li>
         </ul>
     </div>
 </nav>

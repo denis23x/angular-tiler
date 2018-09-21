@@ -55,6 +55,16 @@
                         service.loadCollections(JSON.parse(localStorage.getItem('user-data')).id);
                     })
             },
+            userOptions: function (id, options) {
+                return CommonService.put(EnvironmentService.apiRoot() + 'users/' + id + '/options', options)
+                    .then(function (response) {
+                        console.log(response);
+                        return response;
+                    })
+                    .catch(function(response) {
+                        return response;
+                    });
+            },
             loadUsers: function () {
                 return CommonService.get(EnvironmentService.apiRoot() + 'users')
                     .then(function (response) {

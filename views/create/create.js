@@ -10,24 +10,37 @@
         create.userData = JSON.parse(localStorage.getItem('user-data'));
         create.collections = JSON.parse(localStorage.getItem('user-collections'));
 
-        create.form = {
+            create.form = {
             user_id: create.userData.id,
-            title: 'Default text',
-            text:
-                '<p><span class="text-success" onclick="$(\'#summernote\').summernote(\'code\', \'\');">Click here to clear</span></p>' +
-                '<p></p>' +
-                '<p><span style="font-size: 1rem;">Tiler editor a super cool WYSIWYG Text Editor directive for AngularJS</span></p>' +
-                '<hr>' +
-                '<p><span style="font-size: 1rem;">Features:</span></p>' +
-                '<ul>' +
-                '<li>Type <b>@</b> for link user <a class="user-call-link" href="http://tiler/users/1">@Admin</a></li>' +
-                '<li>Type <b>:</b> for Emodji <img src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f638.png?v7" class="img-emoji"></li>' +
-                '<li>Paste links, images and videos by<b> Ctrl+V</b></li>' +
-                '</ul>' +
-                '<p><i>Code at GitHub: <a href="https://github.com/DAMAGEx1/tiler" target="_blank">Here</a></i></p>',
+            title: '',
+            // title: 'Default text',
+            // text: '',
+            // text:
+            //     '<p><span class="text-success" onclick="$(\'#summernote\').summernote(\'code\', \'\');">Click here to clear</span></p>' +
+            //     '<p></p>' +
+            //     '<p><span style="font-size: 1rem;">Tiler editor a super cool WYSIWYG Text Editor directive for AngularJS</span></p>' +
+            //     '<hr>' +
+            //     '<p><span style="font-size: 1rem;">Features:</span></p>' +
+            //     '<ul>' +
+            //     '<li>Type <b>@</b> for link user <a class="user-call-link" href="http://tiler/users/1">@Admin</a></li>' +
+            //     '<li>Type <b>:</b> for Emodji <img src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f638.png?v7" class="img-emoji"></li>' +
+            //     '<li>Paste links, images and videos by<b> Ctrl+V</b></li>' +
+            //     '</ul>' +
+            //     '<p><i>Code at GitHub: <a href="https://github.com/DAMAGEx1/tiler" target="_blank">Here</a></i></p>',
+            text: `
+<ul style="font-weight: 200; list-style-type: none; padding-left: 1rem; color: rgba(200, 200, 200, 1);">
+<li><br></li>
+<li><span>Enter<span style="font-weight: bolder; font-size: 16px; color: rgb(156, 156, 148);"> @ </span>and start typing for mark user <a class="user-call-link" href="http://tiler/users/1">@Admin</a></span></li>
+<li><span>Enter<span style="font-weight: bolder; font-size: 16px; color: rgb(156, 156, 148);"> : </span>and start typing to get Emodji <img src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f638.png?v7" class="img-emoji"></span></li>
+<li><span>Enter<span style="font-weight: bolder; font-size: 16px; color: rgb(156, 156, 148);"> # </span> for the <a class="user-call-link" href="http://tiler/users/1"> #tag </a></span></li>
+<li><br></li>
+<li><span>Paste media content by<span style="font-weight: bolder; color: rgb(156, 156, 148);"> Ctrl+V</span></span></li>
+<li><br></li>
+</ul>
+`,
             collections: [],
             categories: [],
-            tags: ['tiler', 'dev', 'qwerty'],
+            tags: [],
             published: 1,
             preview: ''
         };
@@ -39,7 +52,8 @@
             base64File: '',
             plainText: '',
             tagsLimit: 10,
-            tags: ['tiler', 'dev', 'qwerty'],
+            tagsError: '',
+            tags: [],
             formSubmitted: false,
             randomColor: '#' + Math.floor(Math.random() * 16777215).toString(16)
         };
@@ -53,6 +67,8 @@
                     APIService.createPost(create.form).then(function () {
                         $state.go('home');
                     });
+                } else {
+                    angular.element('html, body').animate({scrollTop: 0}, 200);
                 }
             }
 
@@ -60,7 +76,7 @@
                 html2canvas(element.get(0),{
                     logging: false,
                     scale: 2,
-                    x: element.get(0).getBoundingClientRect().left + 2,
+                    // x: element.get(0).getBoundingClientRect().left + 2,
                 }).then(function (response) {
                     create.form.preview = response.toDataURL("image/jpeg");
                     sendForm ();
@@ -107,7 +123,7 @@
             }
         };
 
-
+        angular.element('[data-toggle="tooltip"]').tooltip();
 
 
 
@@ -319,16 +335,21 @@
         };
 
         create.options = {
-            height: 300,
-            minHeight: 200,
+            // height: 300,
+            minHeight: 100,
+            // airMode: true,
+            disableResizeEditor: true,
             dialogsFade: true,
             placeholder: 'Write your best story',
             theme: 'cosmo',
             styleTags: ['blockquote', 'pre', 'h1', 'h6'],
             toolbar: [
-                ['media', ['fileButton', 'link', 'style']],
-                ['font', ['fontStyleButton', 'clear']],
-                ['other', ['paragraphButton', 'table', 'codeview']]
+                // ['fontsize', ['fontsize']],
+                // ['color', ['color']],
+                ['media', ['fileButton', 'link', 'fontStyleButton']],
+                // ['font', ['fontStyleButton', 'clear']],
+                // ['other', ['paragraphButton', 'table', 'codeview']]
+                // ['other', ['codeview']]
             ],
             buttons: {
                 fontStyleButton: fontStyleButton,

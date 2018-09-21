@@ -34,11 +34,17 @@ strong {
 .close:focus, .close:hover {
     opacity: 1 !important;
 }
+.dropdown-menu {
+    min-width: 0px;
+}
 .dropdown-toggle {
     cursor: pointer;
 }
 
 /* Form input fixes */
+.navbar-nav {
+    text-transform: uppercase;
+}
 .navbar-brand > i {
     color: white;
     font-size: 1.25rem;

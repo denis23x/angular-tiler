@@ -3,7 +3,7 @@
     angular
         .module('app').component('modalComponent', {
         templateUrl: ['$stateParams', function ($stateParams) {
-            return 'components/modal/templates/' + $stateParams.type + ".html";
+            return 'components/modal/templates/' + $stateParams.type + '.html';
         }],
         bindings: {
             post: '<',

@@ -7,6 +7,9 @@
         return {
             russianLanguage: function () {
                 var dictionary = {
+                    scroll: {
+                      up: 'Вверх',
+                    },
                     collections: {
                         title:              'Коллекции',
                         description:        'Здесь вы можете создать новую коллекцию и сохранить в ней свои посты',
@@ -25,16 +28,19 @@
                     },
                     create: {
                         createTitle         : 'Создать пост',
-                        createTitleInput    : 'Добавить заголовок',
+                        createTitleInput    : 'Заголовок',
                         selectCategory      : 'Выбрать категорию',
-                        collections         : 'Коллекции',
-                        categories          : 'Категории',
+                        collections         : 'коллекции',
+                        categories          : 'категории',
+                        location            : 'Расположение',
+                        shared              : 'Общие категории',
+                        private             : 'Частные коллекции',
                         changeColor         : 'Сменить цвет',
                         selectColor         : 'Выбрать цвет',
                         removeImage         : 'Удалить изображение',
                         default             : 'По умолчанию',
                         selected            : 'Выбрано: ',
-                        postPreview         : 'Миниатюра поста',
+                        postPreview         : 'Изображение поста',
                         postPublish         : 'Публикация сообщения',
                         postPublishDesc     : 'создавая публичное сообщение вы соглашаетесь',
                         postPublishDescLink : 'с правилами сайта',
@@ -49,9 +55,12 @@
                         firstCollections    : 'что бы создать первую коллекцию',
                         linkPreview         : 'Вставить ссылку',
                         filePreview         : 'Выбрать файл',
-                        tagsAdd             : 'Добавить теги',
+                        tagsAdd             : '# Добавить теги',
                         tagsPlaceholder     : 'Добавьте теги чтобы ваш пост было легче найти',
-                        tagsAllowed         : 'Можно добавить не более 10 тегов'
+                        tagsAllowed         : 'Можно добавить не более 10 тегов',
+                        tagErrorMin         : 'Минимальная длина 2',
+                        tagErrorMax         : 'Максимальная длина 20',
+                        tagRemove           : 'Убрать',
                     },
                     header: {
                         logoDesc    : 'tiler',
@@ -131,7 +140,7 @@
                         header          : 'Настройки аккаунта',
                         tabGeneral      : 'Общее',
                         tabPrivacy      : 'Конфиденциальность',
-                        titleAvatar     : 'Аватар пользователя',
+                        titleAvatar     : 'Ваш аватар',
                         titleRegion     : 'Регион',
                         titleLanguage   : 'Язык интерфейса',
                         titleName       : 'Имя',
@@ -140,7 +149,7 @@
                         titlePassword   : 'Пароль',
                         titleConfirmPass: 'Подтверждение пароля',
                         titleApply      : 'Применить настройки',
-                        descAvatar      : 'Изменить изображение пользователя',
+                        descAvatar      : 'Изменить изображение',
                         descRegion      : 'Изменяет результаты поиска по регионам',
                         descLanguage    : 'Можно определить язык сайта',
                         descName        : 'Изменить имя пользователя учетной записи',
@@ -174,6 +183,9 @@
             },
             englishLanguage: function () {
                 var dictionary = {
+                    scroll: {
+                        up: 'Scroll up',
+                    },
                     collections: {
                         title:              'Collections',
                         description:        'Here you can create a new collection and save in it your posts',
@@ -192,10 +204,13 @@
                     },
                     create: {
                         createTitle         : 'Create post',
-                        createTitleInput    : 'Type title',
+                        createTitleInput    : 'Title',
                         selectCategory      : 'Select category',
-                        collections         : 'Collections',
-                        categories          : 'Main',
+                        collections         : 'collections',
+                        categories          : 'categories',
+                        location            : 'Location',
+                        shared              : 'Shared categories',
+                        private             : 'Private collections',
                         changeColor         : 'Change color',
                         selectColor         : 'Select color',
                         removeImage         : 'Remove image',
@@ -205,7 +220,7 @@
                         postPublish         : 'Posting a message',
                         postPublishDesc     : 'creating a public message, you agree with the',
                         postPublishDescLink : 'site rules',
-                        postPublic          : 'Public',
+                        postPublic          : 'Publish',
                         descPreview         : 'The image will be the main one for the post',
                         minimumTitle        : 'Minimum length of 6 characters',
                         maximumTitle        : 'Maximum length of 36 characters',
@@ -216,9 +231,12 @@
                         firstCollections    : 'to create the first collection',
                         linkPreview         : 'Insert link',
                         filePreview         : 'Select file',
-                        tagsAdd             : 'Add tags',
+                        tagsAdd             : '# Add tags',
                         tagsPlaceholder     : 'You can add tags to make your post easier to find',
-                        tagsAllowed         : 'Allowed to enter no more than 10 tags'
+                        tagsAllowed         : 'Allowed to enter no more than 10 tags',
+                        tagErrorMin         : 'Minimum length 2',
+                        tagErrorMax         : 'Maximum length 20',
+                        tagRemove           : 'Remove',
                     },
                     header: {
                         logoDesc    : 'tiler',
@@ -234,7 +252,7 @@
                         searchBy    : 'Search by title',
                         sort        : 'Sorting',
                         inCategory  : 'Category',
-                        add         : 'Add',
+                        add         : 'Create post',
                         signIn      : 'Sign In',
                         home        : 'Home',
                         myProfile   : 'My profile',

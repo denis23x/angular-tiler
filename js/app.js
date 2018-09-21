@@ -10,11 +10,30 @@
     ])
     .config(MainConfig)
     .run(MainRun)
-    .controller('MainController', MainController);
+    .controller('MainController', MainController)
+    .factory('cacheInterceptor', ['$cacheFactory', function($cacheFactory) {
+        var http_ttl_cache = {};
+        return {
+            request: function(config) {
+                var N;
+                if (config.timeToLive) {
+                    config.cache = true;
+                    N = config.timeToLive;
+                    delete config.timeToLive;
+                    if (new Date().getTime() - (http_ttl_cache[config.url] || 0) > N) {
+                        $cacheFactory.get('$http').remove(config.url);
+                        http_ttl_cache[config.url] = new Date().getTime();
+                    }
+                }
+                return config;
+            }
+        };
+    }]);
 
-    MainConfig.$inject = ['$sceDelegateProvider', 'RouterServiceProvider', '$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', 'TranslateServiceProvider'];
-    function MainConfig($sceDelegateProvider, RouterServiceProvider, $stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, TranslateServiceProvider) {
+    MainConfig.$inject = ['$sceDelegateProvider', 'RouterServiceProvider', '$stateProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', 'TranslateServiceProvider', '$httpProvider'];
+    function MainConfig($sceDelegateProvider, RouterServiceProvider, $stateProvider, $locationProvider, $urlRouterProvider, $translateProvider, TranslateServiceProvider, $httpProvider) {
         $urlRouterProvider.otherwise('/');
+        $httpProvider.interceptors.push('cacheInterceptor');
         $locationProvider.html5Mode({
             enabled: true,
             requireBase: true

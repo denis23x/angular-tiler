@@ -18,8 +18,8 @@
             nextPage = 2,
             defaultContent;
 
-        grid.gridWidth = 250;
-        grid.gutterSize = 10;
+        grid.gridWidth = 175;
+        grid.gutterSize = 20;
         grid.lastPage = false;
         grid.sortingType = '-created_at';
 
@@ -128,7 +128,7 @@
                 nodes = doc.firstChild.lastChild.childNodes,
                 tmp = '';
 
-            for (var i = 0; i < 6; i++) {
+            for (var i = 0; i < 3; i++) {
                 if (nodes[i] !== undefined && nodes[i].innerHTML !== undefined) {
                     if (nodes[i].textContent !== '' && nodes[i].outerHTML.indexOf('img-fluid') === -1 || nodes[i].outerHTML.indexOf('img-emoji') !== -1) {
                         tmp = tmp + (nodes[i].outerHTML);

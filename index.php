@@ -36,6 +36,7 @@
 <body ng-app="app" class="pr-0">
     <div ng-controller="MainController as main">
         <header-component></header-component>
+        <scroll-component></scroll-component>
         <div ui-view class="main-view"></div>
     </div>
 </body>
@@ -52,6 +53,7 @@
 <script src="components/header/header.js"></script>
 <script src="components/grid/grid.js"></script>
 <script src="components/modal/modal.js"></script>
+<script src="components/scroll/scroll.js"></script>
 
 <script src="directives/material-ripple-directive.js"></script>
 <script src="directives/image-base64-directive.js"></script>

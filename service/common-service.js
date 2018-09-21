@@ -30,7 +30,7 @@
             get: function(url) {
                 var deferred = $q.defer();
 
-                $http.get(url).then(function(data) {
+                $http.get(url, {cache:true, timeToLive: 60*60*1000}).then(function(data) {
                     deferred.resolve(data.data);
                 }, function (reason) {
                     deferred.reject(reason);

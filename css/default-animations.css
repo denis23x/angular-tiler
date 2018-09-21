@@ -50,6 +50,12 @@
 .base64-image-wrapper.ng-leave {
     display: none;
 }
+.scroll-vertical-wrap.ng-hide-remove {
+    animation: fadeInLeft 0.3s;
+}
+.scroll-vertical-wrap.ng-hide-add {
+    animation: fadeOutLeft 0.3s;
+}
 input::-webkit-input-placeholder       {opacity: 1; transition: opacity 0.3s ease;}
 input::-moz-placeholder                {opacity: 1; transition: opacity 0.3s ease;}
 input:-moz-placeholder                 {opacity: 1; transition: opacity 0.3s ease;}
